@@ -1,4 +1,4 @@
-<div class="kmh-hero-banner" style="position: relative; background: linear-gradient(135deg, #0F172A 0%, #1E293B 60%, #0F172A 100%); color: #FFFFFF; padding: clamp(4rem, 8vw, 8rem) 0; overflow: hidden;">
+<div class="kmh-hero-banner" style="position: relative; background: {{ section.settings.background_color | default: 'linear-gradient(135deg, #0F172A 0%, #1E293B 60%, #0F172A 100%)' }}; color: #FFFFFF; padding: clamp(4rem, 8vw, 8rem) 0; overflow: hidden;">
   <!-- Ambient Gold Glow particle effect -->
   <div style="position: absolute; top: -10%; right: 10%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(212, 175, 55, 0.18) 0%, rgba(0,0,0,0) 70%); border-radius: 50%; pointer-events: none; filter: blur(50px);"></div>
   <div style="position: absolute; bottom: -20%; left: -10%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, rgba(0,0,0,0) 70%); border-radius: 50%; pointer-events: none; filter: blur(60px);"></div>
@@ -8,9 +8,11 @@
       
       <!-- Text & Call to Action -->
       <div>
-        <span style="display: inline-block; padding: 6px 16px; background: rgba(212, 175, 55, 0.15); border: 1px solid rgba(212, 175, 55, 0.4); color: var(--kmh-gold); border-radius: 999px; font-weight: 700; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 1.5rem;">
-          {{ section.settings.eyebrow | default: "KitchenMixHaven Official Catalog" }}
-        </span>
+        {% if section.settings.eyebrow != blank %}
+          <span style="display: inline-block; padding: 6px 16px; background: rgba(212, 175, 55, 0.15); border: 1px solid rgba(212, 175, 55, 0.4); color: var(--kmh-gold); border-radius: 999px; font-weight: 700; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 1.5rem;">
+            {{ section.settings.eyebrow }}
+          </span>
+        {% endif %}
 
         <h1 style="font-family: var(--font-heading); color: #FFFFFF; font-size: clamp(2.8rem, 5vw, 4.5rem); line-height: 1.1; margin-bottom: 1.5rem;">
           {{ section.settings.headline | default: "Precision Stand & Hand Mixers for Every Kitchen." }}
@@ -21,28 +23,41 @@
         </p>
 
         <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
-          <a href="{{ section.settings.primary_cta_link | default: '/collections/all' }}" class="kmh-btn kmh-btn-gold">
-            {{ section.settings.primary_cta_text | default: "Shop All Mixers" }} &rarr;
-          </a>
-          <a href="{{ section.settings.secondary_cta_link | default: '/pages/compare' }}" class="kmh-btn" style="background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.3); color: #FFFFFF;">
-            {{ section.settings.secondary_cta_text | default: "Compare 5.3Qt vs 4.5Qt" }}
-          </a>
+          {% if section.settings.primary_cta_text != blank %}
+            <a href="{{ section.settings.primary_cta_link | default: '/collections/all' }}" class="kmh-btn kmh-btn-gold">
+              {{ section.settings.primary_cta_text }} &rarr;
+            </a>
+          {% endif %}
+          {% if section.settings.secondary_cta_text != blank %}
+            <a href="{{ section.settings.secondary_cta_link | default: '/pages/compare' }}" class="kmh-btn" style="background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.3); color: #FFFFFF;">
+              {{ section.settings.secondary_cta_text }}
+            </a>
+          {% endif %}
         </div>
 
         <!-- Trust Badges Under Hero -->
         <div style="display: flex; align-items: center; gap: 2rem; margin-top: 3rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem;">
-          <div>
-            <div style="font-size: 1.4rem; font-weight: 700; color: var(--kmh-gold); font-family: var(--font-heading);">12-Speed</div>
-            <div style="font-size: 0.75rem; color: #94A3B8; text-transform: uppercase;">Tilt-Head Control</div>
-          </div>
-          <div>
-            <div style="font-size: 1.4rem; font-weight: 700; color: var(--kmh-gold); font-family: var(--font-heading);">3.2Qt to 5.3Qt</div>
-            <div style="font-size: 0.75rem; color: #94A3B8; text-transform: uppercase;">Capacity Range</div>
-          </div>
-          <div>
-            <div style="font-size: 1.4rem; font-weight: 700; color: var(--kmh-gold); font-family: var(--font-heading);">Stainless</div>
-            <div style="font-size: 0.75rem; color: #94A3B8; text-transform: uppercase;">Steel Bowls</div>
-          </div>
+          {% if section.blocks.size > 0 %}
+            {% for block in section.blocks %}
+              <div {{ block.shopify_attributes }}>
+                <div style="font-size: 1.4rem; font-weight: 700; color: var(--kmh-gold); font-family: var(--font-heading);">{{ block.settings.stat }}</div>
+                <div style="font-size: 0.75rem; color: #94A3B8; text-transform: uppercase;">{{ block.settings.label }}</div>
+              </div>
+            {% endfor %}
+          {% else %}
+            <div>
+              <div style="font-size: 1.4rem; font-weight: 700; color: var(--kmh-gold); font-family: var(--font-heading);">12-Speed</div>
+              <div style="font-size: 0.75rem; color: #94A3B8; text-transform: uppercase;">Tilt-Head Control</div>
+            </div>
+            <div>
+              <div style="font-size: 1.4rem; font-weight: 700; color: var(--kmh-gold); font-family: var(--font-heading);">3.2Qt to 5.3Qt</div>
+              <div style="font-size: 0.75rem; color: #94A3B8; text-transform: uppercase;">Capacity Range</div>
+            </div>
+            <div>
+              <div style="font-size: 1.4rem; font-weight: 700; color: var(--kmh-gold); font-family: var(--font-heading);">Stainless</div>
+              <div style="font-size: 0.75rem; color: #94A3B8; text-transform: uppercase;">Steel Bowls</div>
+            </div>
+          {% endif %}
         </div>
       </div>
 
@@ -51,25 +66,24 @@
         <div style="background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.03)); border: 1px solid rgba(255,255,255,0.18); backdrop-filter: blur(15px); border-radius: 20px; padding: 2rem; box-shadow: 0 30px 60px rgba(0,0,0,0.4); text-align: center;">
           <div style="position: relative; width: 100%; padding-top: 85%; overflow: hidden; border-radius: 14px; background: rgba(0,0,0,0.2); margin-bottom: 1.5rem;">
             {% if section.settings.hero_image %}
-              <img src="{{ section.settings.hero_image | image_url: width: 800 }}" alt="Hero Appliance" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+              <img src="{{ section.settings.hero_image | image_url: width: 800 }}" alt="{{ section.settings.card_title | escape }}" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
             {% else %}
-              <!-- SVG Stylized Mixer Showcase -->
               <div style="position: absolute; inset:0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: radial-gradient(circle, rgba(212,175,55,0.2), transparent 70%);">
                 <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="var(--kmh-gold)" stroke-width="1.2">
                   <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
                 </svg>
-                <div style="margin-top: 1rem; font-weight: 700; letter-spacing: 0.08em; color: #FFFFFF; font-family: var(--font-heading); font-size: 1.1rem;">MARTHA STEWART 5.3QT</div>
-                <div style="font-size: 0.8rem; color: var(--kmh-gold); margin-top: 4px;">12-Speed Tilt-Head Electric Mixer</div>
+                <div style="margin-top: 1rem; font-weight: 700; letter-spacing: 0.08em; color: #FFFFFF; font-family: var(--font-heading); font-size: 1.1rem;">{{ section.settings.card_title | default: 'MARTHA STEWART 5.3QT' }}</div>
+                <div style="font-size: 0.8rem; color: var(--kmh-gold); margin-top: 4px;">{{ section.settings.card_subtitle | default: '12-Speed Tilt-Head Electric Mixer' }}</div>
               </div>
             {% endif %}
           </div>
 
           <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 0.5rem; border-top: 1px solid rgba(255,255,255,0.1);">
             <div style="text-align: left;">
-              <div style="font-size: 0.75rem; color: var(--kmh-gold); text-transform: uppercase; font-weight: 700;">Featured Active Model</div>
-              <div style="font-family: var(--font-heading); font-size: 1.1rem; color: #FFFFFF;">5 Variants In Stock</div>
+              <div style="font-size: 0.75rem; color: var(--kmh-gold); text-transform: uppercase; font-weight: 700;">{{ section.settings.card_badge | default: 'Featured Active Model' }}</div>
+              <div style="font-family: var(--font-heading); font-size: 1.1rem; color: #FFFFFF;">{{ section.settings.card_note | default: '5 Variants In Stock' }}</div>
             </div>
-            <a href="/collections/all" class="kmh-btn kmh-btn-gold kmh-btn-sm">Shop Now &rarr;</a>
+            <a href="{{ section.settings.primary_cta_link | default: '/collections/all' }}" class="kmh-btn kmh-btn-gold kmh-btn-sm">Shop Now &rarr;</a>
           </div>
         </div>
       </div>
@@ -82,17 +96,39 @@
 {
   "name": "Hero Banner",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "KitchenMixHaven Official Catalog" },
-    { "type": "text", "id": "headline", "label": "Headline", "default": "Precision Stand & Hand Mixers for Every Kitchen." },
-    { "type": "textarea", "id": "subheadline", "label": "Subheadline", "default": "Explore Martha Stewart 5.3Qt 12-Speed mixers, KitchenAid Classic Series 4.5Qt Onyx Black, Hamilton Beach 6-Speed Hand Mixers, and custom finishes in Gunmetal, Champagne Bronze, and Slate Blue." },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow Badge", "default": "KitchenMixHaven Official Catalog" },
+    { "type": "text", "id": "headline", "label": "Main Headline", "default": "Precision Stand & Hand Mixers for Every Kitchen." },
+    { "type": "textarea", "id": "subheadline", "label": "Subheadline Text", "default": "Explore Martha Stewart 5.3Qt 12-Speed mixers, KitchenAid Classic Series 4.5Qt Onyx Black, Hamilton Beach 6-Speed Hand Mixers, and custom finishes in Gunmetal, Champagne Bronze, and Slate Blue." },
     { "type": "text", "id": "primary_cta_text", "label": "Primary Button Text", "default": "Shop All Mixers" },
-    { "type": "url", "id": "primary_cta_link", "label": "Primary Button Link" },
+    { "type": "url", "id": "primary_cta_link", "label": "Primary Button Link", "default": "/collections/all" },
     { "type": "text", "id": "secondary_cta_text", "label": "Secondary Button Text", "default": "Compare 5.3Qt vs 4.5Qt" },
-    { "type": "url", "id": "secondary_cta_link", "label": "Secondary Button Link" },
-    { "type": "image_picker", "id": "hero_image", "label": "Hero Image" }
+    { "type": "url", "id": "secondary_cta_link", "label": "Secondary Button Link", "default": "/pages/compare" },
+    { "type": "image_picker", "id": "hero_image", "label": "Showcase Card Image (Optional)" },
+    { "type": "text", "id": "card_title", "label": "Card Showcase Title", "default": "MARTHA STEWART 5.3QT" },
+    { "type": "text", "id": "card_subtitle", "label": "Card Subtitle", "default": "12-Speed Tilt-Head Electric Mixer" },
+    { "type": "text", "id": "card_badge", "label": "Card Badge Text", "default": "Featured Active Model" },
+    { "type": "text", "id": "card_note", "label": "Card Note Text", "default": "5 Variants In Stock" },
+    { "type": "color", "id": "background_color", "label": "Background Color", "default": "#0F172A" }
+  ],
+  "blocks": [
+    {
+      "type": "trust_stat",
+      "name": "Trust Metric",
+      "settings": [
+        { "type": "text", "id": "stat", "label": "Stat Number / Text", "default": "12-Speed" },
+        { "type": "text", "id": "label", "label": "Stat Label", "default": "Tilt-Head Control" }
+      ]
+    }
   ],
   "presets": [
-    { "name": "Hero Banner" }
+    {
+      "name": "Hero Banner",
+      "blocks": [
+        { "type": "trust_stat", "settings": { "stat": "12-Speed", "label": "Tilt-Head Control" } },
+        { "type": "trust_stat", "settings": { "stat": "3.2Qt to 5.3Qt", "label": "Capacity Range" } },
+        { "type": "trust_stat", "settings": { "stat": "Stainless", "label": "Steel Bowls" } }
+      ]
+    }
   ]
 }
 {% endschema %}

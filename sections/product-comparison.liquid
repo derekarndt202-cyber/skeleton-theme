@@ -1,10 +1,14 @@
-<div class="kmh-section-padding">
+<div class="kmh-section-padding" style="background-color: {{ section.settings.background_color | default: 'transparent' }};">
   <div class="kmh-container">
     
     <div class="kmh-section-header">
-      <span class="kmh-subtitle">Store Appliance Comparison</span>
-      <h2 class="kmh-title">Capacity & Speed Comparison Matrix</h2>
-      <p class="kmh-description">Compare motor speed levels, bowl capacity, and finish options across our primary catalog mixers.</p>
+      {% if section.settings.eyebrow != blank %}
+        <span class="kmh-subtitle">{{ section.settings.eyebrow }}</span>
+      {% endif %}
+      <h2 class="kmh-title">{{ section.settings.heading | default: "Capacity & Speed Comparison Matrix" }}</h2>
+      {% if section.settings.description != blank %}
+        <p class="kmh-description">{{ section.settings.description }}</p>
+      {% endif %}
     </div>
 
     <div style="overflow-x: auto; background: #FFFFFF; border-radius: var(--radius-card); border: 1px solid var(--kmh-border); box-shadow: var(--kmh-shadow-subtle);">
@@ -12,62 +16,90 @@
         <thead>
           <tr style="border-bottom: 2px solid var(--kmh-border); background: var(--kmh-bg-light);">
             <th style="padding: 1.5rem; width: 22%; font-family: var(--font-heading); font-size: 1.1rem; color: var(--kmh-navy);">Model Features</th>
-            <th style="padding: 1.5rem; text-align: center; width: 26%;">
-              <div style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 700; color: var(--kmh-navy);">Martha Stewart 5.3Qt</div>
-              <span class="kmh-badge kmh-badge--bestseller" style="margin-top: 4px;">12-Speed &bull; 5 Variants</span>
-            </th>
-            <th style="padding: 1.5rem; text-align: center; width: 26%;">
-              <div style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 700; color: var(--kmh-navy);">KitchenAid Classic 4.5Qt</div>
-              <span class="kmh-badge kmh-badge--new" style="margin-top: 4px;">K45SS Onyx Black</span>
-            </th>
-            <th style="padding: 1.5rem; text-align: center; width: 26%;">
-              <div style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 700; color: var(--kmh-navy);">Kitchen in the box 3.2Qt</div>
-              <span class="kmh-badge kmh-badge--sale" style="margin-top: 4px;">Portable &bull; 10 Variants</span>
-            </th>
+            
+            {% if section.blocks.size > 0 %}
+              {% for block in section.blocks %}
+                <th style="padding: 1.5rem; text-align: center; width: 26%;" {{ block.shopify_attributes }}>
+                  <div style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 700; color: var(--kmh-navy);">{{ block.settings.title }}</div>
+                  {% if block.settings.badge != blank %}
+                    <span class="kmh-badge kmh-badge--bestseller" style="margin-top: 4px;">{{ block.settings.badge }}</span>
+                  {% endif %}
+                </th>
+              {% endfor %}
+            {% else %}
+              <th style="padding: 1.5rem; text-align: center; width: 26%;">
+                <div style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 700; color: var(--kmh-navy);">Martha Stewart 5.3Qt</div>
+                <span class="kmh-badge kmh-badge--bestseller" style="margin-top: 4px;">12-Speed &bull; 5 Variants</span>
+              </th>
+              <th style="padding: 1.5rem; text-align: center; width: 26%;">
+                <div style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 700; color: var(--kmh-navy);">KitchenAid Classic 4.5Qt</div>
+                <span class="kmh-badge kmh-badge--new" style="margin-top: 4px;">K45SS Onyx Black</span>
+              </th>
+              <th style="padding: 1.5rem; text-align: center; width: 26%;">
+                <div style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 700; color: var(--kmh-navy);">Kitchen in the box 3.2Qt</div>
+                <span class="kmh-badge kmh-badge--sale" style="margin-top: 4px;">Portable &bull; 10 Variants</span>
+              </th>
+            {% endif %}
           </tr>
         </thead>
         <tbody>
           <tr style="border-bottom: 1px solid var(--kmh-border);">
             <td style="padding: 1.2rem 1.5rem; font-weight: 600;">Bowl Volume</td>
-            <td style="padding: 1.2rem 1.5rem; text-align: center; font-weight: 700; color: var(--kmh-gold);">5.3 Quarts Stainless Steel</td>
-            <td style="padding: 1.2rem 1.5rem; text-align: center;">4.5 Quarts Stainless Steel</td>
-            <td style="padding: 1.2rem 1.5rem; text-align: center;">3.2 Quarts Compact Bowl</td>
+            {% if section.blocks.size > 0 %}
+              {% for block in section.blocks %}
+                <td style="padding: 1.2rem 1.5rem; text-align: center; font-weight: 700; color: var(--kmh-gold);">{{ block.settings.capacity_spec }}</td>
+              {% endfor %}
+            {% else %}
+              <td style="padding: 1.2rem 1.5rem; text-align: center; font-weight: 700; color: var(--kmh-gold);">5.3 Quarts Stainless Steel</td>
+              <td style="padding: 1.2rem 1.5rem; text-align: center;">4.5 Quarts Stainless Steel</td>
+              <td style="padding: 1.2rem 1.5rem; text-align: center;">3.2 Quarts Compact Bowl</td>
+            {% endif %}
           </tr>
           <tr style="border-bottom: 1px solid var(--kmh-border);">
             <td style="padding: 1.2rem 1.5rem; font-weight: 600;">Speed Control</td>
-            <td style="padding: 1.2rem 1.5rem; text-align: center; font-weight: 700; color: var(--kmh-success);">12 Precision Speeds</td>
-            <td style="padding: 1.2rem 1.5rem; text-align: center;">10 Speeds Planetary</td>
-            <td style="padding: 1.2rem 1.5rem; text-align: center;">6 Speeds Portable</td>
+            {% if section.blocks.size > 0 %}
+              {% for block in section.blocks %}
+                <td style="padding: 1.2rem 1.5rem; text-align: center;">{{ block.settings.speed_spec }}</td>
+              {% endfor %}
+            {% else %}
+              <td style="padding: 1.2rem 1.5rem; text-align: center; font-weight: 700; color: var(--kmh-success);">12 Precision Speeds</td>
+              <td style="padding: 1.2rem 1.5rem; text-align: center;">10 Speeds Planetary</td>
+              <td style="padding: 1.2rem 1.5rem; text-align: center;">6 Speeds Portable</td>
+            {% endif %}
           </tr>
           <tr style="border-bottom: 1px solid var(--kmh-border);">
             <td style="padding: 1.2rem 1.5rem; font-weight: 600;">Head Style</td>
-            <td style="padding: 1.2rem 1.5rem; text-align: center;">Tilt-Head Lock System</td>
-            <td style="padding: 1.2rem 1.5rem; text-align: center;">Tilt-Head Classic</td>
-            <td style="padding: 1.2rem 1.5rem; text-align: center;">Compact Quick-Tilt</td>
-          </tr>
-          <tr style="border-bottom: 1px solid var(--kmh-border);">
-            <td style="padding: 1.2rem 1.5rem; font-weight: 600;">Variant Finishes Available</td>
-            <td style="padding: 1.2rem 1.5rem; text-align: center; font-weight: 700;">5 Color Variants</td>
-            <td style="padding: 1.2rem 1.5rem; text-align: center;">Signature Onyx Black</td>
-            <td style="padding: 1.2rem 1.5rem; text-align: center; font-weight: 700;">10 Color Variants</td>
-          </tr>
-          <tr style="border-bottom: 1px solid var(--kmh-border);">
-            <td style="padding: 1.2rem 1.5rem; font-weight: 600;">Vendor</td>
-            <td style="padding: 1.2rem 1.5rem; text-align: center;">kitchenmixhaven</td>
-            <td style="padding: 1.2rem 1.5rem; text-align: center;">kitchenmixhaven</td>
-            <td style="padding: 1.2rem 1.5rem; text-align: center;">kitchenmixhaven</td>
+            {% if section.blocks.size > 0 %}
+              {% for block in section.blocks %}
+                <td style="padding: 1.2rem 1.5rem; text-align: center;">{{ block.settings.head_spec }}</td>
+              {% endfor %}
+            {% else %}
+              <td style="padding: 1.2rem 1.5rem; text-align: center;">Tilt-Head Lock System</td>
+              <td style="padding: 1.2rem 1.5rem; text-align: center;">Tilt-Head Classic</td>
+              <td style="padding: 1.2rem 1.5rem; text-align: center;">Compact Quick-Tilt</td>
+            {% endif %}
           </tr>
           <tr>
             <td style="padding: 1.5rem;"></td>
-            <td style="padding: 1.5rem; text-align: center;">
-              <button class="kmh-btn kmh-btn-gold kmh-btn-sm" style="width: 100%;" onclick="KMH_OpenCart()">Select Martha Stewart 5.3Qt</button>
-            </td>
-            <td style="padding: 1.5rem; text-align: center;">
-              <button class="kmh-btn kmh-btn-primary kmh-btn-sm" style="width: 100%;" onclick="KMH_OpenCart()">Select KitchenAid 4.5Qt</button>
-            </td>
-            <td style="padding: 1.5rem; text-align: center;">
-              <button class="kmh-btn kmh-btn-secondary kmh-btn-sm" style="width: 100%;" onclick="KMH_OpenCart()">Select 3.2Qt Portable</button>
-            </td>
+            {% if section.blocks.size > 0 %}
+              {% for block in section.blocks %}
+                <td style="padding: 1.5rem; text-align: center;">
+                  <a href="{{ block.settings.link | default: '/collections/all' }}" class="kmh-btn kmh-btn-gold kmh-btn-sm" style="width: 100%;">
+                    {{ block.settings.button_text | default: 'Select Model' }}
+                  </a>
+                </td>
+              {% endfor %}
+            {% else %}
+              <td style="padding: 1.5rem; text-align: center;">
+                <button class="kmh-btn kmh-btn-gold kmh-btn-sm" style="width: 100%;" onclick="KMH_OpenCart()">Select Martha Stewart 5.3Qt</button>
+              </td>
+              <td style="padding: 1.5rem; text-align: center;">
+                <button class="kmh-btn kmh-btn-primary kmh-btn-sm" style="width: 100%;" onclick="KMH_OpenCart()">Select KitchenAid 4.5Qt</button>
+              </td>
+              <td style="padding: 1.5rem; text-align: center;">
+                <button class="kmh-btn kmh-btn-secondary kmh-btn-sm" style="width: 100%;" onclick="KMH_OpenCart()">Select 3.2Qt Portable</button>
+              </td>
+            {% endif %}
           </tr>
         </tbody>
       </table>
@@ -79,9 +111,36 @@
 {% schema %}
 {
   "name": "Product Comparison",
-  "settings": [],
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Section Subtitle", "default": "Store Appliance Comparison" },
+    { "type": "text", "id": "heading", "label": "Section Heading", "default": "Capacity & Speed Comparison Matrix" },
+    { "type": "textarea", "id": "description", "label": "Section Description", "default": "Compare motor speed levels, bowl capacity, and finish options across our primary catalog mixers." },
+    { "type": "color", "id": "background_color", "label": "Background Color", "default": "#FFFFFF" }
+  ],
+  "blocks": [
+    {
+      "type": "comparison_column",
+      "name": "Comparison Column",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Model Name", "default": "Martha Stewart 5.3Qt" },
+        { "type": "text", "id": "badge", "label": "Badge Label", "default": "12-Speed • 5 Variants" },
+        { "type": "text", "id": "capacity_spec", "label": "Capacity Spec", "default": "5.3 Quarts Stainless Steel" },
+        { "type": "text", "id": "speed_spec", "label": "Speed Control Spec", "default": "12 Precision Speeds" },
+        { "type": "text", "id": "head_spec", "label": "Head Style Spec", "default": "Tilt-Head Lock System" },
+        { "type": "text", "id": "button_text", "label": "Button Label", "default": "Select Model" },
+        { "type": "url", "id": "link", "label": "Button Link" }
+      ]
+    }
+  ],
   "presets": [
-    { "name": "Product Comparison" }
+    {
+      "name": "Product Comparison",
+      "blocks": [
+        { "type": "comparison_column", "settings": { "title": "Martha Stewart 5.3Qt", "badge": "12-Speed • 5 Variants", "capacity_spec": "5.3 Quarts Stainless", "speed_spec": "12 Speeds" } },
+        { "type": "comparison_column", "settings": { "title": "KitchenAid Classic 4.5Qt", "badge": "K45SS Onyx Black", "capacity_spec": "4.5 Quarts Stainless", "speed_spec": "10 Speeds" } },
+        { "type": "comparison_column", "settings": { "title": "Kitchen in the box 3.2Qt", "badge": "Portable • 10 Variants", "capacity_spec": "3.2 Quarts Compact", "speed_spec": "6 Speeds" } }
+      ]
+    }
   ]
 }
 {% endschema %}

@@ -1,17 +1,35 @@
-<div style="padding: 3.5rem 0; background: #FFFFFF; border-bottom: 1px solid var(--kmh-border);">
+<div style="padding: 3.5rem 0; background: {{ section.settings.background_color | default: '#FFFFFF' }}; border-bottom: 1px solid var(--kmh-border);">
   <div class="kmh-container">
     
-    <p style="text-align: center; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--kmh-gold); margin-bottom: 2rem;">
-      Authorized Luxury Retail Partner For
-    </p>
+    {% if section.settings.eyebrow != blank %}
+      <p style="text-align: center; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--kmh-gold); margin-bottom: 2rem;">
+        {{ section.settings.eyebrow }}
+      </p>
+    {% endif %}
 
     <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: clamp(2rem, 5vw, 4rem);">
-      {% assign brands = "KitchenAid|Ninja|Breville|Cuisinart|Hamilton Beach|Instant|Beautiful" | split: "|" %}
-      {% for brand in brands %}
-        <div style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 700; color: #64748B; letter-spacing: 0.05em; opacity: 0.8; transition: var(--kmh-transition); cursor: pointer;" onmouseover="this.style.opacity=1; this.style.color='var(--kmh-navy)';" onmouseout="this.style.opacity=0.8; this.style.color='#64748B';">
-          {{ brand }}
-        </div>
-      {% endfor %}
+      
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+          <a href="{{ block.settings.link | default: '/collections/all' }}" style="display: block;" {{ block.shopify_attributes }}>
+            {% if block.settings.logo != blank %}
+              <img src="{{ block.settings.logo | image_url: width: 240 }}" alt="{{ block.settings.name | escape }}" style="max-height: 45px; object-fit: contain; filter: grayscale(100%); transition: var(--kmh-transition);" onmouseover="this.style.filter='none';" onmouseout="this.style.filter='grayscale(100%)';">
+            {% else %}
+              <div style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 700; color: #64748B; letter-spacing: 0.05em; opacity: 0.8; transition: var(--kmh-transition); cursor: pointer;" onmouseover="this.style.opacity=1; this.style.color='var(--kmh-navy)';" onmouseout="this.style.opacity=0.8; this.style.color='#64748B';">
+                {{ block.settings.name }}
+              </div>
+            {% endif %}
+          </a>
+        {% endfor %}
+      {% else %}
+        {% assign brands = "KitchenAid|Ninja|Breville|Cuisinart|Hamilton Beach|Instant|Beautiful" | split: "|" %}
+        {% for brand in brands %}
+          <div style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 700; color: #64748B; letter-spacing: 0.05em; opacity: 0.8; transition: var(--kmh-transition); cursor: pointer;" onmouseover="this.style.opacity=1; this.style.color='var(--kmh-navy)';" onmouseout="this.style.opacity=0.8; this.style.color='#64748B';">
+            {{ brand }}
+          </div>
+        {% endfor %}
+      {% endif %}
+
     </div>
 
   </div>
@@ -20,9 +38,32 @@
 {% schema %}
 {
   "name": "Featured Brands",
-  "settings": [],
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Section Subtitle", "default": "Authorized Luxury Retail Partner For" },
+    { "type": "color", "id": "background_color", "label": "Background Color", "default": "#FFFFFF" }
+  ],
+  "blocks": [
+    {
+      "type": "brand",
+      "name": "Brand Partner",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Brand Name", "default": "KitchenAid" },
+        { "type": "image_picker", "id": "logo", "label": "Brand Logo Image (Optional)" },
+        { "type": "url", "id": "link", "label": "Brand Collection Link" }
+      ]
+    }
+  ],
   "presets": [
-    { "name": "Featured Brands" }
+    {
+      "name": "Featured Brands",
+      "blocks": [
+        { "type": "brand", "settings": { "name": "KitchenAid" } },
+        { "type": "brand", "settings": { "name": "Breville" } },
+        { "type": "brand", "settings": { "name": "Ninja" } },
+        { "type": "brand", "settings": { "name": "Cuisinart" } },
+        { "type": "brand", "settings": { "name": "Hamilton Beach" } }
+      ]
+    }
   ]
 }
 {% endschema %}

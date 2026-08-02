@@ -1,33 +1,59 @@
-<div class="kmh-section-padding" style="background-color: var(--kmh-bg-light);">
+<div class="kmh-section-padding" style="background-color: {{ section.settings.background_color | default: 'var(--kmh-bg-light)' }};">
   <div class="kmh-container">
     
     <div class="kmh-section-header">
-      <span class="kmh-subtitle">Curated Categories</span>
-      <h2 class="kmh-title">Explore Kitchen Appliances</h2>
-      <p class="kmh-description">From high-torque dough mixing to precise barista espresso extraction.</p>
+      {% if section.settings.eyebrow != blank %}
+        <span class="kmh-subtitle">{{ section.settings.eyebrow }}</span>
+      {% endif %}
+      <h2 class="kmh-title">{{ section.settings.heading | default: "Explore Kitchen Appliances" }}</h2>
+      {% if section.settings.description != blank %}
+        <p class="kmh-description">{{ section.settings.description }}</p>
+      {% endif %}
     </div>
 
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
       
-      {% assign categories = "Stand Mixers|Blenders|Coffee & Espresso|Dual Air Fryers|Food Processors|Artisan Toasters|Precision Kettles|Kitchen Gadgets" | split: "|" %}
-      {% assign icons = "⚙️|🌪️|☕|🔥|🔪|🍞|🫖|💡" | split: "|" %}
-      {% assign descriptions = "High-torque Planetary Action|1500W High Speed Extraction|19-Bar Italian Pump Pressure|Rapid Air Circulation 360°|Quad-Blade Precision Chopping|Extra Wide Slot Toasting|PID Temperature Control|Professional Accessories" | split: "|" %}
-
-      {% for cat in categories %}
-        {% assign idx = forloop.index0 %}
-        <div class="kmh-card" style="padding: 2rem 1.5rem; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: space-between; min-height: 240px; border: 1px solid var(--kmh-border);">
-          <div>
-            <div style="font-size: 2.8rem; margin-bottom: 1rem; height: 60px; width: 60px; border-radius: 50%; background: rgba(212, 175, 55, 0.1); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.2rem;">
-              {{ icons[idx] }}
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+          <div class="kmh-card" style="padding: 2rem 1.5rem; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: space-between; min-height: 240px; border: 1px solid var(--kmh-border);" {{ block.shopify_attributes }}>
+            <div>
+              <div style="font-size: 2.8rem; margin-bottom: 1rem; height: 60px; width: 60px; border-radius: 50%; background: rgba(212, 175, 55, 0.1); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.2rem;">
+                {% if block.settings.image != blank %}
+                  <img src="{{ block.settings.image | image_url: width: 120 }}" alt="{{ block.settings.title | escape }}" style="width: 40px; height: 40px; object-fit: contain;">
+                {% else %}
+                  {{ block.settings.icon | default: "⚙️" }}
+                {% endif %}
+              </div>
+              <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--kmh-navy);">{{ block.settings.title }}</h3>
+              <p style="font-size: 0.85rem; color: #64748B; margin-bottom: 1.5rem;">{{ block.settings.description }}</p>
             </div>
-            <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--kmh-navy);">{{ cat }}</h3>
-            <p style="font-size: 0.85rem; color: #64748B; margin-bottom: 1.5rem;">{{ descriptions[idx] }}</p>
+            <a href="{{ block.settings.link | default: '/collections/all' }}" class="kmh-btn kmh-btn-secondary kmh-btn-sm" style="width: 100%;">
+              {{ block.settings.button_text | default: 'Explore' }} &rarr;
+            </a>
           </div>
-          <a href="/collections/all" class="kmh-btn kmh-btn-secondary kmh-btn-sm" style="width: 100%;">
-            Explore {{ cat }} &rarr;
-          </a>
-        </div>
-      {% endfor %}
+        {% endfor %}
+      {% else %}
+        <!-- Default Presets -->
+        {% assign categories = "Stand Mixers|Blenders|Coffee & Espresso|Dual Air Fryers|Food Processors|Artisan Toasters|Precision Kettles|Kitchen Gadgets" | split: "|" %}
+        {% assign icons = "⚙️|🌪️|☕|🔥|🔪|🍞|🫖|💡" | split: "|" %}
+        {% assign descriptions = "High-torque Planetary Action|1500W High Speed Extraction|19-Bar Italian Pump Pressure|Rapid Air Circulation 360°|Quad-Blade Precision Chopping|Extra Wide Slot Toasting|PID Temperature Control|Professional Accessories" | split: "|" %}
+
+        {% for cat in categories %}
+          {% assign idx = forloop.index0 %}
+          <div class="kmh-card" style="padding: 2rem 1.5rem; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: space-between; min-height: 240px; border: 1px solid var(--kmh-border);">
+            <div>
+              <div style="font-size: 2.8rem; margin-bottom: 1rem; height: 60px; width: 60px; border-radius: 50%; background: rgba(212, 175, 55, 0.1); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.2rem;">
+                {{ icons[idx] }}
+              </div>
+              <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--kmh-navy);">{{ cat }}</h3>
+              <p style="font-size: 0.85rem; color: #64748B; margin-bottom: 1.5rem;">{{ descriptions[idx] }}</p>
+            </div>
+            <a href="/collections/all" class="kmh-btn kmh-btn-secondary kmh-btn-sm" style="width: 100%;">
+              Explore {{ cat }} &rarr;
+            </a>
+          </div>
+        {% endfor %}
+      {% endif %}
 
     </div>
 
@@ -37,9 +63,36 @@
 {% schema %}
 {
   "name": "Featured Categories",
-  "settings": [],
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Section Eyebrow", "default": "Curated Categories" },
+    { "type": "text", "id": "heading", "label": "Section Heading", "default": "Explore Kitchen Appliances" },
+    { "type": "textarea", "id": "description", "label": "Section Description", "default": "From high-torque dough mixing to precise barista espresso extraction." },
+    { "type": "color", "id": "background_color", "label": "Background Color", "default": "#F8FAFC" }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category Card",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icon Emoji", "default": "⚙️" },
+        { "type": "image_picker", "id": "image", "label": "Category Image (Optional)" },
+        { "type": "text", "id": "title", "label": "Category Title", "default": "Stand Mixers" },
+        { "type": "textarea", "id": "description", "label": "Short Description", "default": "High-torque planetary mixing action." },
+        { "type": "text", "id": "button_text", "label": "Button Label", "default": "Explore" },
+        { "type": "url", "id": "link", "label": "Category Link" }
+      ]
+    }
+  ],
   "presets": [
-    { "name": "Featured Categories" }
+    {
+      "name": "Featured Categories",
+      "blocks": [
+        { "type": "category", "settings": { "icon": "⚙️", "title": "Stand Mixers", "description": "High-torque Planetary Action" } },
+        { "type": "category", "settings": { "icon": "🌪️", "title": "Blenders", "description": "1500W High Speed Extraction" } },
+        { "type": "category", "settings": { "icon": "☕", "title": "Coffee & Espresso", "description": "19-Bar Italian Pump Pressure" } },
+        { "type": "category", "settings": { "icon": "🔥", "title": "Dual Air Fryers", "description": "Rapid Air Circulation 360°" } }
+      ]
+    }
   ]
 }
 {% endschema %}

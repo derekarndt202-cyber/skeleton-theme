@@ -7,69 +7,65 @@
       <div>
         <!-- Main Image Stage -->
         <div style="background: var(--kmh-bg-light); border-radius: var(--radius-card); border: 1px solid var(--kmh-border); overflow: hidden; position: relative; padding-top: 85%; margin-bottom: 1rem;">
-          <div style="position: absolute; inset:0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: radial-gradient(circle, #FFFFFF, var(--kmh-bg-light));">
-            <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="var(--kmh-navy)" stroke-width="1"><rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="12" cy="12" r="4"/></svg>
-            <span style="font-family: var(--font-heading); color: var(--kmh-navy); margin-top: 1rem; font-weight: 700;">Artisan 7.5QT High-Torque Stand Mixer</span>
-          </div>
+          {% if product.featured_media %}
+            <img src="{{ product.featured_media | image_url: width: 1000 }}" alt="{{ product.title | escape }}" style="position: absolute; inset:0; width:100%; height:100%; object-fit: cover;">
+          {% else %}
+            <div style="position: absolute; inset:0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: radial-gradient(circle, #FFFFFF, var(--kmh-bg-light));">
+              <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="var(--kmh-navy)" stroke-width="1"><rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="12" cy="12" r="4"/></svg>
+              <span style="font-family: var(--font-heading); color: var(--kmh-navy); margin-top: 1rem; font-weight: 700;">{{ product.title | default: "Martha Stewart 5.3Qt 12-Speed Stand Mixer" }}</span>
+            </div>
+          {% endif %}
           
           <div style="position: absolute; top: 1rem; left: 1rem; display: flex; gap: 8px;">
-            <span class="kmh-badge kmh-badge--bestseller">Flagship Model</span>
-            <span class="kmh-badge kmh-badge--sale">Save $100</span>
+            <span class="kmh-badge kmh-badge--bestseller">Catalog Item</span>
+            {% if product.compare_at_price > product.price %}
+              <span class="kmh-badge kmh-badge--sale">Sale</span>
+            {% endif %}
           </div>
 
           <!-- AR Button Overlay -->
           <button class="kmh-btn kmh-btn-secondary kmh-btn-sm" onclick="document.querySelector('#KMH-AROverlay').classList.add('active'); document.querySelector('#KMH-ARModal').classList.add('active');" style="position: absolute; bottom: 1rem; right: 1rem; background: rgba(255,255,255,0.9); backdrop-filter: blur(5px);">
-            📱 View on Counter (3D AR)
+            📱 View in 3D AR
           </button>
         </div>
 
         <!-- Gallery Thumbnail Bar -->
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;">
-          {% for i in (1..4) %}
-            <div style="background: var(--kmh-bg-light); border: 2px solid {% if forloop.first %}var(--kmh-gold){% else %}var(--kmh-border){% endif %}; border-radius: 10px; height: 80px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
-              <span style="font-size: 0.75rem; font-weight: 700; color: var(--kmh-navy);">View {{ i }}</span>
-            </div>
-          {% endfor %}
-        </div>
+        {% if product.media.size > 1 %}
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;">
+            {% for media in product.media limit: 4 %}
+              <div style="background: var(--kmh-bg-light); border: 2px solid {% if forloop.first %}var(--kmh-gold){% else %}var(--kmh-border){% endif %}; border-radius: 10px; height: 80px; overflow: hidden; cursor: pointer;">
+                <img src="{{ media | image_url: width: 200 }}" alt="{{ product.title | escape }}" style="width: 100%; height: 100%; object-fit: cover;">
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
       </div>
 
       <!-- Sticky Buy Box Column -->
       <div style="position: sticky; top: 100px;">
-        <span style="color: var(--kmh-gold); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;">KitchenMixHaven Signature Series</span>
-        <h1 style="font-family: var(--font-heading); font-size: 2.5rem; margin: 0.4rem 0 0.8rem; color: var(--kmh-navy);">
-          Artisan 7.5QT Stand Mixer
+        <span style="color: var(--kmh-gold); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;">{{ product.vendor | default: "kitchenmixhaven" }}</span>
+        <h1 style="font-family: var(--font-heading); font-size: 2.3rem; margin: 0.4rem 0 0.8rem; color: var(--kmh-navy);">
+          {{ product.title | default: "Martha Stewart 5.3Qt Stand Mixer, 12-Speed Tilt-Head" }}
         </h1>
 
         <!-- Rating & Stock Badge -->
         <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
           <div class="kmh-rating" style="font-size: 1.1rem;">★★★★★ <strong style="color: var(--kmh-navy); margin-left: 4px;">4.9</strong></div>
-          <span style="color: #64748B; font-size: 0.85rem;">(128 Verified Reviews)</span>
+          <span style="color: #64748B; font-size: 0.85rem;">(Verified Reviews)</span>
           <span class="kmh-badge" style="background: rgba(22,163,74,0.1); color: var(--kmh-success); border: 1px solid var(--kmh-success);">In Stock</span>
         </div>
 
         <!-- Pricing -->
         <div style="display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1.5rem;">
-          <span style="font-size: 2.2rem; font-weight: 700; color: var(--kmh-navy);">$499.00</span>
-          <span style="font-size: 1.3rem; text-decoration: line-through; color: #94A3B8;">$599.00</span>
-          <span class="kmh-badge kmh-badge--sale" style="font-size: 0.8rem;">17% OFF</span>
+          <span style="font-size: 2.2rem; font-weight: 700; color: var(--kmh-navy);">{{ product.price | default: 29900 | money }}</span>
+          {% if product.compare_at_price > product.price %}
+            <span style="font-size: 1.3rem; text-decoration: line-through; color: #94A3B8;">{{ product.compare_at_price | money }}</span>
+          {% endif %}
         </div>
 
         <p style="color: #475569; font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.8rem;">
-          Commercial 750W high-torque motor engineered for tough sourdough doughs, enriched brioche, and high-volume bakery whipping. Die-cast all-metal housing with 5-year full replacement warranty.
+          {{ product.description | strip_html | truncatewords: 40 | default: "Tilt-head electric kitchen mixer with stainless steel bowl, 12-speed precision control, and multi-accessory attachments." }}
         </p>
-
-        <!-- Variant Swatches -->
-        <div style="margin-bottom: 1.5rem;">
-          <label style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 8px;">
-            Select Finish: <span style="color: var(--kmh-gold);" id="KMH-ColorName">Obsidian Black</span>
-          </label>
-          <div style="display: flex; gap: 10px;">
-            <div style="width: 32px; height: 32px; border-radius: 50%; background: #0F172A; border: 2px solid var(--kmh-gold); cursor: pointer;" title="Obsidian Black"></div>
-            <div style="width: 32px; height: 32px; border-radius: 50%; background: #E2E8F0; border: 1px solid var(--kmh-border); cursor: pointer;" title="Brushed Stainless"></div>
-            <div style="width: 32px; height: 32px; border-radius: 50%; background: #991B1B; border: 1px solid var(--kmh-border); cursor: pointer;" title="Empire Red"></div>
-            <div style="width: 32px; height: 32px; border-radius: 50%; background: #D4AF37; border: 1px solid var(--kmh-border); cursor: pointer;" title="Luxury Gold Edition"></div>
-          </div>
-        </div>
 
         <!-- Quantity & Add Buttons -->
         <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
@@ -80,71 +76,85 @@
           </div>
 
           <button class="kmh-btn kmh-btn-primary" style="flex-grow: 1;" onclick="KMH_OpenCart()">
-            Add to Cart &bull; $499
+            Add to Cart &bull; {{ product.price | default: 29900 | money }}
           </button>
           
-          <button class="kmh-icon-btn" data-wishlist-toggle data-product-id="main-appliance" style="width: 50px; height: 50px;">
+          <button class="kmh-icon-btn" data-wishlist-toggle data-product-id="{{ product.id | default: 'main-appliance' }}" style="width: 50px; height: 50px;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l8.72-8.72 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
           </button>
         </div>
 
         <button class="kmh-btn kmh-btn-gold kmh-btn-full" style="margin-bottom: 1.5rem;">
-          Buy Now with Apple Pay / Shop Pay
+          Buy Now with Shop Pay / Apple Pay
         </button>
 
+        <!-- Dynamic Shopify App Blocks Support -->
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when '@app' %}
+              <div {{ block.shopify_attributes }}>{% render block %}</div>
+          {% endcase %}
+        {% endfor %}
+
         <!-- Attachment Fitment Finder -->
-        {% render 'compatibility-finder' %}
+        {% if section.settings.show_fitment_finder %}
+          {% render 'compatibility-finder' %}
+        {% endif %}
 
         <!-- Shipping Info Cards -->
         <div style="background: var(--kmh-bg-light); border-radius: 10px; padding: 1rem; border: 1px solid var(--kmh-border); display: flex; justify-content: space-between; font-size: 0.85rem; color: #475569; margin-top: 1.5rem;">
-          <div>🚚 <strong>Free Express Delivery</strong> (2-3 Days)</div>
-          <div>🛡️ <strong>5-Year Full Warranty</strong></div>
+          <div>🚚 <strong>Free Express Shipping</strong> (2-3 Days)</div>
+          <div>🛡️ <strong>Warranty Included</strong></div>
         </div>
 
       </div>
 
     </div>
 
-    <!-- Product Accordion Specifications & Info -->
+    <!-- Product Accordion Specifications & Custom Blocks -->
     <div style="max-width: 900px; margin: 0 auto 5rem;">
-      <h2 style="font-family: var(--font-heading); text-align: center; margin-bottom: 2rem;">Product Specifications & Details</h2>
+      <h2 style="font-family: var(--font-heading); text-align: center; margin-bottom: 2rem;">Product Details & Specifications</h2>
       
-      <div class="kmh-accordion active">
-        <button class="kmh-accordion__trigger">
-          <span>Overview & Key Features</span>
-          <span>↓</span>
-        </button>
-        <div class="kmh-accordion__content">
-          <p>The Artisan 7.5QT Stand Mixer represents the pinnacle of home baking engineering. Built with a heavy-duty 750W planetary drive, 10 variable electronic speed settings, and a tilt-head lock design, it easily handles heavy bread dough, cookie doughs, and light soufflés.</p>
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+          {% if block.type == 'accordion' %}
+            <div class="kmh-accordion {% if forloop.first %}active{% endif %}" {{ block.shopify_attributes }}>
+              <button class="kmh-accordion__trigger">
+                <span>{{ block.settings.title }}</span>
+                <span>↓</span>
+              </button>
+              <div class="kmh-accordion__content">
+                <p>{{ block.settings.content }}</p>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      {% else %}
+        <div class="kmh-accordion active">
+          <button class="kmh-accordion__trigger">
+            <span>Overview & Key Features</span>
+            <span>↓</span>
+          </button>
+          <div class="kmh-accordion__content">
+            <p>Built with 12-speed precision control, tilt-head lock mechanism, and stainless steel bowl. Ideal for baking, creaming, and whipping.</p>
+          </div>
         </div>
-      </div>
 
-      <div class="kmh-accordion">
-        <button class="kmh-accordion__trigger">
-          <span>Technical Specifications (Motor, Bowl, Dimensions)</span>
-          <span>↓</span>
-        </button>
-        <div class="kmh-accordion__content">
-          <ul style="list-style: disc; margin-left: 1.5rem; line-height: 1.8;">
-            <li><strong>Motor Power:</strong> 750 Watts High-Torque Pure Copper Motor</li>
-            <li><strong>Bowl Volume:</strong> 7.5 Quarts (7.1 Liters) Brushed Stainless Steel</li>
-            <li><strong>Speeds:</strong> 10 Variable Speeds with Soft-Start Pulse Control</li>
-            <li><strong>Body Material:</strong> Die-Cast Zinc & Steel Frame</li>
-            <li><strong>Weight:</strong> 28.5 lbs (12.9 kg) for maximum tabletop stability</li>
-            <li><strong>Dimensions:</strong> 16.5" H x 11.2" W x 14.8" D</li>
-          </ul>
+        <div class="kmh-accordion">
+          <button class="kmh-accordion__trigger">
+            <span>Technical Specifications</span>
+            <span>↓</span>
+          </button>
+          <div class="kmh-accordion__content">
+            <ul style="list-style: disc; margin-left: 1.5rem; line-height: 1.8;">
+              <li><strong>Bowl Volume:</strong> 5.3 Quarts Stainless Steel</li>
+              <li><strong>Speeds:</strong> 12 Speed Control Settings</li>
+              <li><strong>Head Mechanism:</strong> Lockable Tilt-Head</li>
+              <li><strong>Vendor:</strong> kitchenmixhaven</li>
+            </ul>
+          </div>
         </div>
-      </div>
-
-      <div class="kmh-accordion">
-        <button class="kmh-accordion__trigger">
-          <span>5-Year Luxury Warranty & 30-Day Returns</span>
-          <span>↓</span>
-        </button>
-        <div class="kmh-accordion__content">
-          <p>Every KitchenMixHaven mixer includes our 5-Year Full Manufacturer Warranty covering all internal gears, electronics, and motor parts. If you are not completely satisfied within 30 days of purchase, return it for a full refund with free return shipping.</p>
-        </div>
-      </div>
+      {% endif %}
     </div>
 
   </div>
@@ -152,7 +162,29 @@
 
 {% schema %}
 {
-  "name": "Main Product",
-  "settings": []
+  "name": "Main Product Page",
+  "settings": [
+    { "type": "checkbox", "id": "show_fitment_finder", "label": "Show Attachment Fitment Finder Widget", "default": true }
+  ],
+  "blocks": [
+    { "type": "@app" },
+    {
+      "type": "accordion",
+      "name": "Product Accordion Tab",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Tab Title", "default": "Specifications & Dimensions" },
+        { "type": "textarea", "id": "content", "label": "Tab Content Text", "default": "Includes stainless steel bowl, dough hook, wire whisk, and flat beater." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Main Product Page",
+      "blocks": [
+        { "type": "accordion", "settings": { "title": "Overview & Features", "content": "Built with precision speed control and stainless steel bowl." } },
+        { "type": "accordion", "settings": { "title": "Technical Specifications", "content": "5.3QT bowl volume, 12 variable speed settings, tilt-head lock system." } }
+      ]
+    }
+  ]
 }
 {% endschema %}

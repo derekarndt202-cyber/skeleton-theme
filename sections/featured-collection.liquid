@@ -1,72 +1,142 @@
-<div class="kmh-section-padding">
+{% liquid
+  assign featured_collection = section.settings.collection
+  assign products_limit = section.settings.products_to_show | default: 8
+%}
+
+<div class="kmh-section-padding" style="background-color: {{ section.settings.background_color | default: 'transparent' }};">
   <div class="kmh-container">
     
     <div style="display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem;">
       <div>
-        <span class="kmh-subtitle">KitchenMixHaven Collection</span>
-        <h2 class="kmh-title" style="margin-bottom: 0;">Featured Stand & Hand Mixers</h2>
+        {% if section.settings.eyebrow != blank %}
+          <span class="kmh-subtitle">{{ section.settings.eyebrow }}</span>
+        {% endif %}
+        <h2 class="kmh-title" style="margin-bottom: 0;">{{ section.settings.heading | default: "Featured Stand & Hand Mixers" }}</h2>
       </div>
-      <a href="/collections/all" class="kmh-btn kmh-btn-secondary">View All Active Products &rarr;</a>
+      {% if section.settings.button_label != blank %}
+        <a href="{{ section.settings.button_link | default: '/collections/all' }}" class="kmh-btn kmh-btn-secondary">
+          {{ section.settings.button_label }} &rarr;
+        </a>
+      {% endif %}
     </div>
 
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
       
-      {% assign prod_titles = "Martha Stewart 5.3Qt Stand Mixer, 12-Speed Tilt-Head|Hamilton Beach 6-Speed Hand Mixer 250W|KitchenAid Classic Series 4.5Qt Onyx Black|Electric Stand Mixer 5.3Qt 6-Speed Stainless|Kitchen in the box 3.2Qt Portable Stand Mixer|Gunmetal Stand Mixer with Stainless Steel Bowl|Champagne Bronze Stand Mixer Metallic Finish|Slate Blue Stand Mixer with Precision Control" | split: "|" %}
-      {% assign prod_variants = "5 Color Finishes In Stock|2 Color Variants Available|Classic Onyx Black K45SS|Stainless Steel Bowl Included|10 Color Variants Available|Designer Gunmetal Metallic|Designer Champagne Bronze|Designer Slate Blue Finish" | split: "|" %}
-      {% assign prod_badges = "Bestseller|Compact Hand|Top Rated|Active|In Stock|Designer Series|Designer Series|Precision Series" | split: "|" %}
-
-      {% for title in prod_titles %}
-        {% assign idx = forloop.index0 %}
-        <div class="kmh-card kmh-product-card">
-          <div class="kmh-product-card__image-wrapper">
-            <div style="width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: radial-gradient(circle, var(--kmh-bg-light), #E2E8F0); padding: 1rem; text-align: center;">
-              <svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="var(--kmh-navy)" stroke-width="1.2">
-                <rect x="4" y="4" width="16" height="16" rx="4"/>
-                <circle cx="12" cy="12" r="4"/>
-              </svg>
-              <div style="font-size: 0.75rem; font-weight: 700; color: var(--kmh-navy); margin-top: 8px;">kitchenmixhaven</div>
-            </div>
-            
-            <div class="kmh-product-card__badges">
-              {% if prod_badges[idx] == 'Bestseller' %}
-                <span class="kmh-badge kmh-badge--bestseller">Top Seller</span>
-              {% elsif prod_badges[idx] == 'Designer Series' %}
-                <span class="kmh-badge kmh-badge--sale">Designer Finish</span>
+      {% if featured_collection != blank and featured_collection.products.size > 0 %}
+        {% for product in featured_collection.products limit: products_limit %}
+          <div class="kmh-card kmh-product-card">
+            <div class="kmh-product-card__image-wrapper">
+              {% if product.featured_media %}
+                <img class="kmh-product-card__image" src="{{ product.featured_media | image_url: width: 600 }}" alt="{{ product.title | escape }}" loading="lazy">
               {% else %}
-                <span class="kmh-badge kmh-badge--new">{{ prod_badges[idx] }}</span>
+                <div style="width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: radial-gradient(circle, var(--kmh-bg-light), #E2E8F0); padding: 1rem; text-align: center;">
+                  <svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="var(--kmh-navy)" stroke-width="1.2"><rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="12" cy="12" r="4"/></svg>
+                </div>
               {% endif %}
+
+              <div class="kmh-product-card__badges">
+                {% if product.compare_at_price > product.price %}
+                  <span class="kmh-badge kmh-badge--sale">Sale</span>
+                {% else %}
+                  <span class="kmh-badge kmh-badge--bestseller">In Stock</span>
+                {% endif %}
+              </div>
+
+              <div class="kmh-product-card__actions">
+                <button class="kmh-icon-btn" data-wishlist-toggle data-product-id="{{ product.id }}" aria-label="Add to Wishlist">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l8.72-8.72 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+                </button>
+                <button class="kmh-icon-btn" data-quickview data-title="{{ product.title | escape }}" data-price="{{ product.price | money }}" data-image="{{ product.featured_media | image_url: width: 600 }}" aria-label="Quick View">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+              </div>
             </div>
 
-            <div class="kmh-product-card__actions">
-              <button class="kmh-icon-btn" data-wishlist-toggle data-product-id="catalog-{{ idx }}" aria-label="Add to Wishlist">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l8.72-8.72 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
-              </button>
-              <button class="kmh-icon-btn" data-quickview data-title="{{ title }}" data-price="In Stock" aria-label="Quick View">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            <div class="kmh-product-card__content">
+              {% if section.settings.show_vendor %}
+                <span class="kmh-product-card__brand">{{ product.vendor | default: 'kitchenmixhaven' }}</span>
+              {% endif %}
+              <h3 class="kmh-product-card__title">
+                <a href="{{ product.url }}">{{ product.title }}</a>
+              </h3>
+
+              <div class="kmh-product-card__price-row">
+                <span class="kmh-price">{{ product.price | money }}</span>
+                {% if product.compare_at_price > product.price %}
+                  <span class="kmh-price--compare">{{ product.compare_at_price | money }}</span>
+                {% endif %}
+              </div>
+
+              <button class="kmh-btn kmh-btn-primary kmh-btn-sm" style="margin-top: 1rem; width: 100%;" onclick="KMH_OpenCart()">
+                Add to Cart
               </button>
             </div>
           </div>
+        {% endfor %}
 
-          <div class="kmh-product-card__content">
-            <span class="kmh-product-card__brand">kitchenmixhaven</span>
-            <h3 class="kmh-product-card__title">
-              <a href="/products/appliance">{{ title }}</a>
-            </h3>
+      {% else %}
+        <!-- Default Catalog Preset Items -->
+        {% assign prod_titles = "Martha Stewart 5.3Qt Stand Mixer, 12-Speed Tilt-Head|Hamilton Beach 6-Speed Hand Mixer 250W|KitchenAid Classic Series 4.5Qt Onyx Black|Electric Stand Mixer 5.3Qt 6-Speed Stainless|Kitchen in the box 3.2Qt Portable Stand Mixer|Gunmetal Stand Mixer with Stainless Steel Bowl|Champagne Bronze Stand Mixer Metallic Finish|Slate Blue Stand Mixer with Precision Control" | split: "|" %}
+        {% assign prod_variants = "5 Color Finishes In Stock|2 Color Variants Available|Classic Onyx Black K45SS|Stainless Steel Bowl Included|10 Color Variants Available|Designer Gunmetal Metallic|Designer Champagne Bronze|Designer Slate Blue Finish" | split: "|" %}
+        {% assign prod_badges = "Top Seller|Compact Hand|Top Rated|Active|In Stock|Designer Series|Designer Series|Precision Series" | split: "|" %}
 
-            <div style="font-size: 0.8rem; color: #64748B; margin-bottom: 8px;">
-              {{ prod_variants[idx] }}
+        {% for title in prod_titles limit: products_limit %}
+          {% assign idx = forloop.index0 %}
+          <div class="kmh-card kmh-product-card">
+            <div class="kmh-product-card__image-wrapper">
+              <div style="width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: radial-gradient(circle, var(--kmh-bg-light), #E2E8F0); padding: 1rem; text-align: center;">
+                <svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="var(--kmh-navy)" stroke-width="1.2">
+                  <rect x="4" y="4" width="16" height="16" rx="4"/>
+                  <circle cx="12" cy="12" r="4"/>
+                </svg>
+                <div style="font-size: 0.75rem; font-weight: 700; color: var(--kmh-navy); margin-top: 8px;">kitchenmixhaven</div>
+              </div>
+              
+              <div class="kmh-product-card__badges">
+                {% if prod_badges[idx] == 'Top Seller' %}
+                  <span class="kmh-badge kmh-badge--bestseller">Top Seller</span>
+                {% elsif prod_badges[idx] == 'Designer Series' %}
+                  <span class="kmh-badge kmh-badge--sale">Designer Finish</span>
+                {% else %}
+                  <span class="kmh-badge kmh-badge--new">{{ prod_badges[idx] }}</span>
+                {% endif %}
+              </div>
+
+              <div class="kmh-product-card__actions">
+                <button class="kmh-icon-btn" data-wishlist-toggle data-product-id="catalog-{{ idx }}" aria-label="Add to Wishlist">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l8.72-8.72 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+                </button>
+                <button class="kmh-icon-btn" data-quickview data-title="{{ title }}" data-price="In Stock" aria-label="Quick View">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+              </div>
             </div>
 
-            <div class="kmh-rating">
-              ★★★★★ <span style="color: #64748B; font-size: 0.75rem;">(Verified Active)</span>
-            </div>
+            <div class="kmh-product-card__content">
+              {% if section.settings.show_vendor %}
+                <span class="kmh-product-card__brand">kitchenmixhaven</span>
+              {% endif %}
+              <h3 class="kmh-product-card__title">
+                <a href="/products/appliance">{{ title }}</a>
+              </h3>
 
-            <button class="kmh-btn kmh-btn-primary kmh-btn-sm" style="margin-top: 1rem; width: 100%;" onclick="KMH_OpenCart()">
-              View & Add to Cart
-            </button>
+              <div style="font-size: 0.8rem; color: #64748B; margin-bottom: 8px;">
+                {{ prod_variants[idx] }}
+              </div>
+
+              {% if section.settings.show_rating %}
+                <div class="kmh-rating">
+                  ★★★★★ <span style="color: #64748B; font-size: 0.75rem;">(Verified Active)</span>
+                </div>
+              {% endif %}
+
+              <button class="kmh-btn kmh-btn-primary kmh-btn-sm" style="margin-top: 1rem; width: 100%;" onclick="KMH_OpenCart()">
+                View & Add to Cart
+              </button>
+            </div>
           </div>
-        </div>
-      {% endfor %}
+        {% endfor %}
+      {% endif %}
 
     </div>
 
@@ -76,7 +146,17 @@
 {% schema %}
 {
   "name": "Featured Collection",
-  "settings": [],
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Section Eyebrow", "default": "KitchenMixHaven Collection" },
+    { "type": "text", "id": "heading", "label": "Section Heading", "default": "Featured Stand & Hand Mixers" },
+    { "type": "collection", "id": "collection", "label": "Select Collection to Display" },
+    { "type": "range", "id": "products_to_show", "min": 2, "max": 12, "step": 1, "label": "Number of Products to Show", "default": 8 },
+    { "type": "checkbox", "id": "show_vendor", "label": "Show Vendor Name", "default": true },
+    { "type": "checkbox", "id": "show_rating", "label": "Show Product Ratings", "default": true },
+    { "type": "text", "id": "button_label", "label": "Button Label", "default": "View All Active Products" },
+    { "type": "url", "id": "button_link", "label": "Button Link", "default": "/collections/all" },
+    { "type": "color", "id": "background_color", "label": "Background Color", "default": "#FFFFFF" }
+  ],
   "presets": [
     { "name": "Featured Collection" }
   ]

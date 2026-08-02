@@ -1,18 +1,20 @@
-<div style="position: relative; background: linear-gradient(135deg, #0F172A 0%, #111827 100%); color: #FFFFFF; padding: clamp(4rem, 8vw, 7rem) 0; overflow: hidden; text-align: center; border-top: 1px solid rgba(212, 175, 55, 0.3);">
+<div style="position: relative; background: {{ section.settings.background_color | default: 'linear-gradient(135deg, #0F172A 0%, #111827 100%)' }}; color: #FFFFFF; padding: clamp(4rem, 8vw, 7rem) 0; overflow: hidden; text-align: center; border-top: 1px solid rgba(212, 175, 55, 0.3);">
   
   <div class="kmh-container" style="max-width: 700px; position: relative; z-index: 2;">
-    <span style="color: var(--kmh-gold); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em;">VIP Culinary Access</span>
+    {% if section.settings.eyebrow != blank %}
+      <span style="color: var(--kmh-gold); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em;">{{ section.settings.eyebrow }}</span>
+    {% endif %}
     <h2 style="font-family: var(--font-heading); color: #FFFFFF; font-size: clamp(2rem, 4vw, 3.2rem); margin: 0.5rem 0 1rem;">
-      Elevate Your Kitchen Today.
+      {{ section.settings.heading | default: "Elevate Your Kitchen Today." }}
     </h2>
     <p style="color: #94A3B8; font-size: 1.05rem; line-height: 1.7; margin-bottom: 2rem;">
-      Sign up to receive private invitations to limited-edition colorway releases, masterclass recipe guides, and $50 off your first mixer purchase.
+      {{ section.settings.description | default: "Sign up to receive private invitations to limited-edition colorway releases, masterclass recipe guides, and $50 off your first mixer purchase." }}
     </p>
 
     <form onsubmit="event.preventDefault(); alert('Subscribed! Welcome to KitchenMixHaven.');" style="display: flex; flex-wrap: wrap; gap: 10px; max-width: 520px; margin: 0 auto;">
       <input type="email" placeholder="Enter your email address..." required style="flex: 1 1 280px; padding: 1rem 1.25rem; border-radius: var(--radius-button); border: 1px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.08); color: #FFFFFF; font-size: 0.95rem; outline: none;">
       <button type="submit" class="kmh-btn kmh-btn-gold" style="flex: 0 0 auto;">
-        Unlock $50 Off &rarr;
+        {{ section.settings.button_label | default: "Unlock $50 Off" }} &rarr;
       </button>
     </form>
     
@@ -23,7 +25,13 @@
 {% schema %}
 {
   "name": "Newsletter",
-  "settings": [],
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Section Eyebrow", "default": "VIP Culinary Access" },
+    { "type": "text", "id": "heading", "label": "Section Heading", "default": "Elevate Your Kitchen Today." },
+    { "type": "textarea", "id": "description", "label": "Section Description", "default": "Sign up to receive private invitations to limited-edition colorway releases, masterclass recipe guides, and $50 off your first mixer purchase." },
+    { "type": "text", "id": "button_label", "label": "Button Label", "default": "Unlock $50 Off" },
+    { "type": "color", "id": "background_color", "label": "Background Color", "default": "#0F172A" }
+  ],
   "presets": [
     { "name": "Newsletter" }
   ]
