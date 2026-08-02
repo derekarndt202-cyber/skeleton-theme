@@ -1,0 +1,78 @@
+<section class="kmh-favorite-collections" style="--kmh-accent: {{ section.settings.accent_color }}; --kmh-card: {{ section.settings.card_color }};">
+  <div class="kmh-section-heading">
+    <p>{{ section.settings.eyebrow }}</p>
+    <h2>{{ section.settings.heading }}</h2>
+    <div>{{ section.settings.text }}</div>
+  </div>
+
+  <div class="kmh-collection-grid">
+    {% if section.settings.collections != blank %}
+      {% for collection in section.settings.collections limit: section.settings.collections_to_show %}
+        <a class="kmh-collection-card" href="{{ collection.url }}">
+          {% if collection.featured_image %}
+            {{ collection.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: collection.title }}
+          {% else %}
+            <div class="kmh-collection-card__placeholder">{{ collection.title | slice: 0, 1 }}</div>
+          {% endif %}
+          <span>{{ collection.title }}</span>
+          {% if collection.description != blank %}<small>{{ collection.description | strip_html | truncatewords: 12 }}</small>{% endif %}
+        </a>
+      {% endfor %}
+    {% else %}
+      {% for block in section.blocks %}
+        <a class="kmh-collection-card" href="{{ block.settings.link }}" {{ block.shopify_attributes }}>
+          <div class="kmh-collection-card__placeholder">{{ block.settings.icon }}</div>
+          <span>{{ block.settings.title }}</span>
+          <small>{{ block.settings.text }}</small>
+        </a>
+      {% endfor %}
+    {% endif %}
+  </div>
+</section>
+
+{% stylesheet %}
+  .kmh-favorite-collections { padding: 4rem 0; }
+  .kmh-favorite-collections .kmh-section-heading { max-width: 760px; margin-bottom: 1.5rem; }
+  .kmh-favorite-collections .kmh-section-heading p { color: var(--kmh-accent); font-size: .78rem; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; margin-bottom: .75rem; }
+  .kmh-favorite-collections .kmh-section-heading h2 { font-size: clamp(2rem, 5vw, 4.25rem); line-height: .95; margin-bottom: 1rem; }
+  .kmh-favorite-collections .kmh-section-heading div { line-height: 1.7; color: rgba(32,25,21,.72); }
+  .kmh-collection-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+  .kmh-collection-card { display: grid; gap: .7rem; padding: 1rem; border-radius: 1.35rem; background: var(--kmh-card); border: 1px solid rgba(32,25,21,.1); color: #201915; text-decoration: none; box-shadow: 0 18px 50px rgba(32,25,21,.08); transition: transform .2s ease; }
+  .kmh-collection-card:hover { transform: translateY(-4px); }
+  .kmh-collection-card img, .kmh-collection-card__placeholder { aspect-ratio: 1.15; width: 100%; object-fit: cover; border-radius: 1rem; background: linear-gradient(135deg, #fff, color-mix(in srgb, var(--kmh-accent), white 78%)); display: grid; place-items: center; font-size: 2.4rem; font-weight: 900; color: var(--kmh-accent); }
+  .kmh-collection-card span { font-size: 1.1rem; font-weight: 900; }
+  .kmh-collection-card small { line-height: 1.5; color: rgba(32,25,21,.68); }
+  @media (max-width: 980px) { .kmh-collection-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 620px) { .kmh-collection-grid { grid-template-columns: 1fr; } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "KMH favorite collections",
+  "settings": [
+    { "type": "color", "id": "accent_color", "label": "Accent color", "default": "#ff6a3d" },
+    { "type": "color", "id": "card_color", "label": "Card color", "default": "#fff7ef" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Favorite collections" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Shop the mixer paths customers love." },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Feature your best collections for stand mixers, hand mixers, attachments, bowls, and gift-ready kitchen tools.</p>" },
+    { "type": "collection_list", "id": "collections", "label": "Collections" },
+    { "type": "range", "id": "collections_to_show", "label": "Collections to show", "min": 2, "max": 8, "step": 1, "default": 4 }
+  ],
+  "blocks": [
+    { "type": "fallback", "name": "Fallback card", "settings": [
+      { "type": "text", "id": "icon", "label": "Icon", "default": "🍞" },
+      { "type": "text", "id": "title", "label": "Title", "default": "Stand mixers" },
+      { "type": "textarea", "id": "text", "label": "Text", "default": "Countertop systems for dough, batter, and daily prep." },
+      { "type": "url", "id": "link", "label": "Link", "default": "/collections/all" }
+    ] }
+  ],
+  "presets": [
+    { "name": "KMH favorite collections", "blocks": [
+      { "type": "fallback", "settings": { "icon": "🍞", "title": "Stand mixers", "text": "Countertop systems for dough, batter, and daily prep." } },
+      { "type": "fallback", "settings": { "icon": "⚡", "title": "Hand mixers", "text": "Lightweight power for quick batters, creams, and sauces." } },
+      { "type": "fallback", "settings": { "icon": "⚙️", "title": "Attachments", "text": "Pasta, grinder, slicer, bowl, and prep expansions." } },
+      { "type": "fallback", "settings": { "icon": "🎁", "title": "Gifts", "text": "Mixer-ready picks for bakers and home cooks." } }
+    ] }
+  ]
+}
+{% endschema %}
