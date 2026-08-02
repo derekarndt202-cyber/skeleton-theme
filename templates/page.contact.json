@@ -1,0 +1,24 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "contact-kitchenmixhaven",
+      "blocks": {
+        "fast": { "type": "info", "settings": { "icon": "⚡", "heading": "Fast guidance", "text": "Ask about stand mixers, hand mixers, bowl capacity, motor power, and attachment fit." } },
+        "recipe": { "type": "info", "settings": { "icon": "🧁", "heading": "Recipe-ready advice", "text": "Tell us whether you bake bread, cakes, cookies, sauces, or weekly prep meals." } },
+        "support": { "type": "info", "settings": { "icon": "📦", "heading": "Order support", "text": "Need help with an order or return? Send your order number and we’ll help." } }
+      },
+      "block_order": ["fast", "recipe", "support"],
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}
