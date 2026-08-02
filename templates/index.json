@@ -9,12 +9,47 @@
  */
 {
   "sections": {
-    "main": {
-      "type": "hello-world",
+    "hero_hub": {
+      "type": "kitchenmixhaven-home",
+      "blocks": {
+        "dough": { "type": "hub_tile", "settings": { "icon": "🍞", "title": "Dough lab", "description": "High-torque systems for breads, pizza, and enriched dough.", "link": "/collections/all" } },
+        "bake": { "type": "hub_tile", "settings": { "icon": "🧁", "title": "Bake station", "description": "Creaming, whipping, and mixing paths for cakes and cookies.", "link": "/collections/all" } },
+        "prep": { "type": "hub_tile", "settings": { "icon": "🥗", "title": "Prep cockpit", "description": "Compact helpers for sauces, salads, and fast weeknight prep.", "link": "/collections/all" } },
+        "attachments": { "type": "hub_tile", "settings": { "icon": "⚙️", "title": "Attachment deck", "description": "Pasta, grinder, slicer, and specialty add-ons explained.", "link": "/collections/all" } },
+        "capacity": { "type": "guide_step", "settings": { "title": "Choose capacity", "text": "Pick compact bowls for small kitchens, or larger bowls if you batch bake or prep weekly." } },
+        "motor": { "type": "guide_step", "settings": { "title": "Match the motor", "text": "Prioritize torque and stability for dense dough, and speed range for meringues or creams." } },
+        "attachments_step": { "type": "guide_step", "settings": { "title": "Plan attachments", "text": "Think beyond today: pasta, slicers, grinders, and extra bowls can expand one mixer." } },
+        "footprint": { "type": "guide_step", "settings": { "title": "Check footprint", "text": "Measure counter clearance, storage height, bowl access, and outlet placement before checkout." } }
+      },
+      "block_order": ["dough", "bake", "prep", "attachments", "capacity", "motor", "attachments_step", "footprint"],
+      "settings": {}
+    },
+    "favorite_collections": {
+      "type": "kmh-favorite-collections",
+      "blocks": {
+        "stand": { "type": "fallback", "settings": { "icon": "🍞", "title": "Stand mixers", "text": "Countertop systems for dough, batter, and daily prep.", "link": "/collections/all" } },
+        "hand": { "type": "fallback", "settings": { "icon": "⚡", "title": "Hand mixers", "text": "Lightweight power for quick batters, creams, and sauces.", "link": "/collections/all" } },
+        "attachments": { "type": "fallback", "settings": { "icon": "⚙️", "title": "Attachments", "text": "Pasta, grinder, slicer, bowl, and prep expansions.", "link": "/collections/all" } },
+        "gifts": { "type": "fallback", "settings": { "icon": "🎁", "title": "Gifts", "text": "Mixer-ready picks for bakers and home cooks.", "link": "/collections/all" } }
+      },
+      "block_order": ["stand", "hand", "attachments", "gifts"],
+      "settings": {}
+    },
+    "favorite_products": {
+      "type": "kmh-favorite-products",
+      "settings": {}
+    },
+    "faq": {
+      "type": "kmh-faq",
+      "blocks": {
+        "bread": { "type": "question", "settings": { "question": "Which mixer is best for bread dough?", "answer": "<p>Look for a stable stand mixer with enough bowl capacity and torque for dense dough. If you bake often, prioritize durability and attachments.</p>" } },
+        "stand_hand": { "type": "question", "settings": { "question": "Do I need a stand mixer or hand mixer?", "answer": "<p>Choose a hand mixer for quick, light jobs. Choose a stand mixer for frequent baking, heavy dough, larger batches, and hands-free mixing.</p>" } },
+        "attachments": { "type": "question", "settings": { "question": "How do attachments change what a mixer can do?", "answer": "<p>Attachments can turn a mixer into a pasta roller, grinder, slicer, or prep station. Check compatibility before buying.</p>" } },
+        "edit": { "type": "question", "settings": { "question": "Can I edit this FAQ in Shopify?", "answer": "<p>Yes. Add, remove, reorder, or rewrite each question from the Shopify theme editor.</p>" } }
+      },
+      "block_order": ["bread", "stand_hand", "attachments", "edit"],
       "settings": {}
     }
   },
-  "order": [
-    "main"
-  ]
+  "order": ["hero_hub", "favorite_collections", "favorite_products", "faq"]
 }

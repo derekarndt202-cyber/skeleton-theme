@@ -1,0 +1,100 @@
+<section class="kmh-contact" style="--contact-accent: {{ section.settings.accent_color }}; --contact-surface: {{ section.settings.surface_color }};">
+  <div class="kmh-contact__hero">
+    <p class="kmh-contact__eyebrow">{{ section.settings.eyebrow }}</p>
+    <h1>{{ section.settings.heading }}</h1>
+    <div>{{ section.settings.text }}</div>
+  </div>
+
+  <div class="kmh-contact__grid">
+    <div class="kmh-contact__card">
+      <h2>{{ section.settings.form_heading }}</h2>
+      {% form 'contact' %}
+        {% if form.posted_successfully? %}
+          <p class="kmh-contact__success">{{ section.settings.success_message }}</p>
+        {% endif %}
+
+        {{ form.errors | default_errors }}
+
+        <label for="ContactFormName-{{ section.id }}">Name</label>
+        <input id="ContactFormName-{{ section.id }}" type="text" name="contact[name]" value="{{ form.name }}" autocomplete="name">
+
+        <label for="ContactFormEmail-{{ section.id }}">Email</label>
+        <input id="ContactFormEmail-{{ section.id }}" type="email" name="contact[email]" value="{{ form.email }}" autocomplete="email" required>
+
+        <label for="ContactFormTopic-{{ section.id }}">What can we help with?</label>
+        <select id="ContactFormTopic-{{ section.id }}" name="contact[topic]">
+          <option value="Mixer recommendation">Mixer recommendation</option>
+          <option value="Attachment compatibility">Attachment compatibility</option>
+          <option value="Order support">Order support</option>
+          <option value="General question">General question</option>
+        </select>
+
+        <label for="ContactFormMessage-{{ section.id }}">Message</label>
+        <textarea id="ContactFormMessage-{{ section.id }}" name="contact[body]" rows="7" required>{{ form.body }}</textarea>
+
+        <button type="submit">Send message</button>
+      {% endform %}
+    </div>
+
+    <aside class="kmh-contact__sidebar">
+      {% for block in section.blocks %}
+        <div class="kmh-contact__info" {{ block.shopify_attributes }}>
+          <span>{{ block.settings.icon }}</span>
+          <h3>{{ block.settings.heading }}</h3>
+          <p>{{ block.settings.text }}</p>
+        </div>
+      {% endfor %}
+    </aside>
+  </div>
+</section>
+
+{% stylesheet %}
+  .kmh-contact { padding: 4rem 0; color: #201915; }
+  .kmh-contact__hero { max-width: 760px; margin-bottom: 2.5rem; }
+  .kmh-contact__eyebrow { color: var(--contact-accent); font-size: .8rem; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; margin-bottom: .8rem; }
+  .kmh-contact__hero h1 { font-size: clamp(2.5rem, 7vw, 5rem); line-height: .95; margin-bottom: 1rem; }
+  .kmh-contact__hero div { font-size: 1.1rem; line-height: 1.7; }
+  .kmh-contact__grid { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 1.5rem; align-items: start; }
+  .kmh-contact__card, .kmh-contact__info { background: var(--contact-surface); border: 1px solid rgba(32, 25, 21, .1); border-radius: 1.4rem; box-shadow: 0 18px 50px rgba(32, 25, 21, .08); }
+  .kmh-contact__card { padding: clamp(1.25rem, 4vw, 2rem); }
+  .kmh-contact__card form { display: grid; gap: .85rem; margin-top: 1rem; }
+  .kmh-contact__card label { font-weight: 800; }
+  .kmh-contact__card input, .kmh-contact__card select, .kmh-contact__card textarea { width: 100%; border: 1px solid rgba(32, 25, 21, .18); border-radius: .9rem; padding: .9rem 1rem; background: #fff; color: inherit; }
+  .kmh-contact__card button { justify-self: start; border: 0; border-radius: 999px; background: var(--contact-accent); color: #fff; padding: 1rem 1.35rem; font-weight: 900; cursor: pointer; }
+  .kmh-contact__success { padding: .9rem 1rem; border-radius: .9rem; background: #e7f7ec; color: #145c2a; font-weight: 800; }
+  .kmh-contact__sidebar { display: grid; gap: 1rem; }
+  .kmh-contact__info { padding: 1.25rem; }
+  .kmh-contact__info span { display: inline-grid; place-items: center; width: 2.8rem; height: 2.8rem; border-radius: 50%; background: #fff; font-size: 1.35rem; margin-bottom: .9rem; }
+  .kmh-contact__info h3 { margin-bottom: .4rem; }
+  .kmh-contact__info p { line-height: 1.6; }
+  @media (max-width: 900px) { .kmh-contact__grid { grid-template-columns: 1fr; } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "KitchenMixHaven contact",
+  "settings": [
+    { "type": "color", "id": "accent_color", "label": "Accent color", "default": "#6c5cff" },
+    { "type": "color", "id": "surface_color", "label": "Card background", "default": "#f6f3ff" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Contact KitchenMixHaven" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Need help choosing your mixer setup?" },
+    { "type": "richtext", "id": "text", "label": "Intro text", "default": "<p>Tell us what you cook, bake, or prep most often. We’ll help match you with the right mixer, bowl size, wattage, and attachments.</p>" },
+    { "type": "text", "id": "form_heading", "label": "Form heading", "default": "Send us a note" },
+    { "type": "text", "id": "success_message", "label": "Success message", "default": "Thanks! The KitchenMixHaven team will get back to you soon." }
+  ],
+  "blocks": [
+    { "type": "info", "name": "Info card", "settings": [
+      { "type": "text", "id": "icon", "label": "Icon", "default": "⚡" },
+      { "type": "text", "id": "heading", "label": "Heading", "default": "Fast guidance" },
+      { "type": "textarea", "id": "text", "label": "Text", "default": "Ask about stand mixers, hand mixers, bowl capacity, motor power, and attachment fit." }
+    ] }
+  ],
+  "presets": [
+    { "name": "KitchenMixHaven contact", "blocks": [
+      { "type": "info", "settings": { "icon": "⚡", "heading": "Fast guidance", "text": "Ask about stand mixers, hand mixers, bowl capacity, motor power, and attachment fit." } },
+      { "type": "info", "settings": { "icon": "🧁", "heading": "Recipe-ready advice", "text": "Tell us whether you bake bread, cakes, cookies, sauces, or weekly prep meals." } },
+      { "type": "info", "settings": { "icon": "📦", "heading": "Order support", "text": "Need help with an order or return? Send your order number and we’ll help." } }
+    ] }
+  ]
+}
+{% endschema %}
