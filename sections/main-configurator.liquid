@@ -2,9 +2,9 @@
   <div class="kmh-container">
     
     <div class="kmh-section-header">
-      <span class="kmh-subtitle">Customization Studio</span>
-      <h1 class="kmh-title">Build Your Dream Mixer</h1>
-      <p class="kmh-description">Select custom housing finishes, bowl materials, and specialty attachments with real-time price updates.</p>
+      <span class="kmh-subtitle">KitchenMixHaven Studio</span>
+      <h1 class="kmh-title">Custom Mixer Finish & Capacity Studio</h1>
+      <p class="kmh-description">Customize designer metallic finishes (Gunmetal, Champagne Bronze, Slate Blue, Onyx Black) and bowl capacity options.</p>
     </div>
 
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3.5rem; align-items: start;">
@@ -16,13 +16,13 @@
             <rect x="4" y="4" width="16" height="16" rx="4"/>
             <circle cx="12" cy="12" r="4"/>
           </svg>
-          <span class="kmh-badge kmh-badge--bestseller" style="position: absolute; top: 12px; left: 12px;">Custom Build</span>
+          <span class="kmh-badge kmh-badge--bestseller" style="position: absolute; top: 12px; left: 12px;">Active Catalog Build</span>
         </div>
 
-        <h3 style="font-family: var(--font-heading); font-size: 1.6rem;" id="KMH-ConfigSummaryTitle">Artisan 7.5QT Custom Edition</h3>
-        <div style="color: #64748B; font-size: 0.9rem; margin-bottom: 1rem;" id="KMH-ConfigSummarySpecs">Obsidian Black finish &bull; Polished Stainless Bowl</div>
+        <h3 style="font-family: var(--font-heading); font-size: 1.6rem;" id="KMH-ConfigSummaryTitle">Stand Mixer Precision Edition</h3>
+        <div style="color: #64748B; font-size: 0.9rem; margin-bottom: 1rem;" id="KMH-ConfigSummarySpecs">Gunmetal finish &bull; 5.3Qt Stainless Steel Bowl</div>
         
-        <div style="font-size: 2.2rem; font-weight: 700; color: var(--kmh-navy); margin-bottom: 1.5rem;" id="KMH-ConfigPrice">$499.00</div>
+        <div style="font-size: 1.8rem; font-weight: 700; color: var(--kmh-navy); margin-bottom: 1.5rem;" id="KMH-ConfigPrice">Vendor: kitchenmixhaven</div>
 
         <button class="kmh-btn kmh-btn-gold kmh-btn-full" onclick="KMH_OpenCart()">
           Add Custom System to Cart
@@ -32,64 +32,60 @@
       <!-- Configurator Options Column -->
       <div style="display: flex; flex-direction: column; gap: 2rem;">
         
-        <!-- Step 1: Base Finish -->
+        <!-- Step 1: Designer Metallic Finish -->
         <div class="kmh-card" style="padding: 1.8rem;">
           <span style="color: var(--kmh-gold); font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;">Step 1</span>
-          <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin: 4px 0 1rem;">Choose Base Finish</h3>
+          <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin: 4px 0 1rem;">Choose Designer Metallic Finish</h3>
           
           <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
-            <button class="kmh-btn kmh-btn-secondary" style="justify-content: flex-start;" onclick="updateConfig('Obsidian Black', 0)">
-              <span style="width: 16px; height: 16px; border-radius: 50%; background: #0F172A; display: inline-block;"></span> Obsidian Black
+            <button class="kmh-btn kmh-btn-secondary" style="justify-content: flex-start;" onclick="updateConfig('Gunmetal Metallic', 'Stainless Steel Bowl')">
+              <span style="width: 16px; height: 16px; border-radius: 50%; background: #475569; display: inline-block;"></span> Gunmetal Metallic
             </button>
-            <button class="kmh-btn kmh-btn-secondary" style="justify-content: flex-start;" onclick="updateConfig('Brushed Stainless', 30)">
-              <span style="width: 16px; height: 16px; border-radius: 50%; background: #CBD5E1; display: inline-block;"></span> Stainless (+$30)
+            <button class="kmh-btn kmh-btn-secondary" style="justify-content: flex-start;" onclick="updateConfig('Champagne Bronze', 'Metallic Finish')">
+              <span style="width: 16px; height: 16px; border-radius: 50%; background: #D4AF37; display: inline-block;"></span> Champagne Bronze
             </button>
-            <button class="kmh-btn kmh-btn-secondary" style="justify-content: flex-start;" onclick="updateConfig('Empire Red', 0)">
-              <span style="width: 16px; height: 16px; border-radius: 50%; background: #991B1B; display: inline-block;"></span> Empire Red
+            <button class="kmh-btn kmh-btn-secondary" style="justify-content: flex-start;" onclick="updateConfig('Slate Blue', 'Precision Control')">
+              <span style="width: 16px; height: 16px; border-radius: 50%; background: #334155; display: inline-block;"></span> Slate Blue
             </button>
-            <button class="kmh-btn kmh-btn-secondary" style="justify-content: flex-start;" onclick="updateConfig('Luxury Gold', 50)">
-              <span style="width: 16px; height: 16px; border-radius: 50%; background: #D4AF37; display: inline-block;"></span> Luxury Gold (+$50)
+            <button class="kmh-btn kmh-btn-secondary" style="justify-content: flex-start;" onclick="updateConfig('Onyx Black', 'KitchenAid Classic Series')">
+              <span style="width: 16px; height: 16px; border-radius: 50%; background: #0F172A; display: inline-block;"></span> Onyx Black
             </button>
           </div>
         </div>
 
-        <!-- Step 2: Bowl Style -->
+        <!-- Step 2: Capacity & Speed Tier -->
         <div class="kmh-card" style="padding: 1.8rem;">
           <span style="color: var(--kmh-gold); font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;">Step 2</span>
-          <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin: 4px 0 1rem;">Select Bowl Material</h3>
+          <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin: 4px 0 1rem;">Select Model Capacity & Speed Tier</h3>
           
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
             <label style="border: 1px solid var(--kmh-border); border-radius: 8px; padding: 1rem; display: block; cursor: pointer;">
-              <input type="radio" name="bowl" checked onclick="updateBowl('Polished Stainless 7.5QT', 0)">
-              <strong>Polished Stainless</strong>
-              <div style="font-size: 0.8rem; color: #64748B;">Included</div>
+              <input type="radio" name="capacity" checked onclick="updateCapacity('Martha Stewart 5.3Qt 12-Speed')">
+              <strong>Martha Stewart 5.3Qt</strong>
+              <div style="font-size: 0.8rem; color: #64748B;">12-Speed Tilt-Head (5 Variants)</div>
             </label>
             <label style="border: 1px solid var(--kmh-border); border-radius: 8px; padding: 1rem; display: block; cursor: pointer;">
-              <input type="radio" name="bowl" onclick="updateBowl('Hammered Copper 7.5QT', 45)">
-              <strong>Hammered Copper</strong>
-              <div style="font-size: 0.8rem; color: var(--kmh-gold);">+$45</div>
+              <input type="radio" name="capacity" onclick="updateCapacity('KitchenAid Classic 4.5Qt')">
+              <strong>KitchenAid Classic 4.5Qt</strong>
+              <div style="font-size: 0.8rem; color: #64748B;">K45SS Series (Onyx Black)</div>
             </label>
             <label style="border: 1px solid var(--kmh-border); border-radius: 8px; padding: 1rem; display: block; cursor: pointer;">
-              <input type="radio" name="bowl" onclick="updateBowl('Matte White Ceramic', 35)">
-              <strong>Matte Ceramic</strong>
-              <div style="font-size: 0.8rem; color: var(--kmh-gold);">+$35</div>
+              <input type="radio" name="capacity" onclick="updateCapacity('Kitchen in the box 3.2Qt')">
+              <strong>Kitchen in the box 3.2Qt</strong>
+              <div style="font-size: 0.8rem; color: #64748B;">6-Speed Portable (10 Variants)</div>
             </label>
           </div>
         </div>
 
-        <!-- Step 3: Add Attachments -->
+        <!-- Step 3: Hand Mixer Companion -->
         <div class="kmh-card" style="padding: 1.8rem;">
           <span style="color: var(--kmh-gold); font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;">Step 3</span>
-          <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin: 4px 0 1rem;">Include Specialty Attachments</h3>
+          <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin: 4px 0 1rem;">Add Companion Hand Mixer</h3>
           
           <div style="display: flex; flex-direction: column; gap: 10px;">
             <label style="display: flex; align-items: center; justify-content: space-between; border: 1px solid var(--kmh-border); border-radius: 8px; padding: 0.8rem 1rem;">
-              <span><input type="checkbox" onchange="toggleAttachment(89)"> 3-Piece Italian Pasta Roller & Cutter Set</span>
-              <strong>+$89</strong>
-            </label>
-            <label style="display: flex; align-items: center; justify-content: space-between; border: 1px solid var(--kmh-border); border-radius: 8px; padding: 0.8rem 1rem;">
-              <span><input type="checkbox" onchange="toggleAttachment(65)"> Heavy-Duty Stainless Meat Grinder</span>
-              <strong>+$65</strong>
+              <span><input type="checkbox"> Hamilton Beach 6-Speed Hand Mixer with QuickBurst (250W)</span>
+              <strong>In Stock (2 Variants)</strong>
             </label>
           </div>
         </div>
@@ -102,38 +98,21 @@
 </div>
 
 <script>
-  let basePrice = 499;
-  let finishExtra = 0;
-  let bowlExtra = 0;
-  let attachmentExtra = 0;
-  let currentFinish = 'Obsidian Black';
-  let currentBowl = 'Polished Stainless 7.5QT';
+  let currentFinish = 'Gunmetal Metallic';
+  let currentCapacity = '5.3Qt Stainless Steel Bowl';
 
-  function renderPrice() {
-    const total = basePrice + finishExtra + bowlExtra + attachmentExtra;
-    document.querySelector('#KMH-ConfigPrice').textContent = '$' + total.toFixed(2);
-    document.querySelector('#KMH-ConfigSummarySpecs').textContent = `${currentFinish} finish • ${currentBowl}`;
+  function renderSummary() {
+    document.querySelector('#KMH-ConfigSummarySpecs').textContent = `${currentFinish} finish • ${currentCapacity}`;
   }
 
-  function updateConfig(finish, price) {
+  function updateConfig(finish, details) {
     currentFinish = finish;
-    finishExtra = price;
-    renderPrice();
+    renderSummary();
   }
 
-  function updateBowl(bowl, price) {
-    currentBowl = bowl;
-    bowlExtra = price;
-    renderPrice();
-  }
-
-  function toggleAttachment(price) {
-    if (event.target.checked) {
-      attachmentExtra += price;
-    } else {
-      attachmentExtra -= price;
-    }
-    renderPrice();
+  function updateCapacity(capacity) {
+    currentCapacity = capacity;
+    renderSummary();
   }
 </script>
 

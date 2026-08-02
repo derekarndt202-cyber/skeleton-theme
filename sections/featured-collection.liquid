@@ -3,69 +3,66 @@
     
     <div style="display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem;">
       <div>
-        <span class="kmh-subtitle">Flagship Lineup</span>
-        <h2 class="kmh-title" style="margin-bottom: 0;">Featured Appliances</h2>
+        <span class="kmh-subtitle">KitchenMixHaven Collection</span>
+        <h2 class="kmh-title" style="margin-bottom: 0;">Featured Stand & Hand Mixers</h2>
       </div>
-      <a href="/collections/all" class="kmh-btn kmh-btn-secondary">View All Products &rarr;</a>
+      <a href="/collections/all" class="kmh-btn kmh-btn-secondary">View All Active Products &rarr;</a>
     </div>
 
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
       
-      {% assign dummy_titles = "Artisan 7.5QT Stand Mixer|Pro-Blend 1800W Commercial Blender|Barista Touch Espresso System|XL Dual Basket Air Fryer 10QT|Precision Multi Food Processor|Countertop Smart Convection Oven" | split: "|" %}
-      {% assign dummy_prices = "$499.00|$279.00|$699.00|$219.00|$189.00|$349.00" | split: "|" %}
-      {% assign dummy_compares = "$599.00|$329.00|$799.00|$249.00||$399.00" | split: "|" %}
-      {% assign dummy_badges = "Best Seller|New|Sale|Best Seller|New|Sale" | split: "|" %}
+      {% assign prod_titles = "Martha Stewart 5.3Qt Stand Mixer, 12-Speed Tilt-Head|Hamilton Beach 6-Speed Hand Mixer 250W|KitchenAid Classic Series 4.5Qt Onyx Black|Electric Stand Mixer 5.3Qt 6-Speed Stainless|Kitchen in the box 3.2Qt Portable Stand Mixer|Gunmetal Stand Mixer with Stainless Steel Bowl|Champagne Bronze Stand Mixer Metallic Finish|Slate Blue Stand Mixer with Precision Control" | split: "|" %}
+      {% assign prod_variants = "5 Color Finishes In Stock|2 Color Variants Available|Classic Onyx Black K45SS|Stainless Steel Bowl Included|10 Color Variants Available|Designer Gunmetal Metallic|Designer Champagne Bronze|Designer Slate Blue Finish" | split: "|" %}
+      {% assign prod_badges = "Bestseller|Compact Hand|Top Rated|Active|In Stock|Designer Series|Designer Series|Precision Series" | split: "|" %}
 
-      {% for title in dummy_titles %}
+      {% for title in prod_titles %}
         {% assign idx = forloop.index0 %}
         <div class="kmh-card kmh-product-card">
           <div class="kmh-product-card__image-wrapper">
-            <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle, var(--kmh-bg-light), #E2E8F0);">
-              <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--kmh-navy)" stroke-width="1">
+            <div style="width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: radial-gradient(circle, var(--kmh-bg-light), #E2E8F0); padding: 1rem; text-align: center;">
+              <svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="var(--kmh-navy)" stroke-width="1.2">
                 <rect x="4" y="4" width="16" height="16" rx="4"/>
                 <circle cx="12" cy="12" r="4"/>
               </svg>
+              <div style="font-size: 0.75rem; font-weight: 700; color: var(--kmh-navy); margin-top: 8px;">kitchenmixhaven</div>
             </div>
             
             <div class="kmh-product-card__badges">
-              {% if dummy_badges[idx] == 'Sale' %}
-                <span class="kmh-badge kmh-badge--sale">Sale</span>
-              {% elsif dummy_badges[idx] == 'New' %}
-                <span class="kmh-badge kmh-badge--new">New</span>
+              {% if prod_badges[idx] == 'Bestseller' %}
+                <span class="kmh-badge kmh-badge--bestseller">Top Seller</span>
+              {% elsif prod_badges[idx] == 'Designer Series' %}
+                <span class="kmh-badge kmh-badge--sale">Designer Finish</span>
               {% else %}
-                <span class="kmh-badge kmh-badge--bestseller">Top Rated</span>
+                <span class="kmh-badge kmh-badge--new">{{ prod_badges[idx] }}</span>
               {% endif %}
             </div>
 
             <div class="kmh-product-card__actions">
-              <button class="kmh-icon-btn" data-wishlist-toggle data-product-id="prod-{{ idx }}" aria-label="Add to Wishlist">
+              <button class="kmh-icon-btn" data-wishlist-toggle data-product-id="catalog-{{ idx }}" aria-label="Add to Wishlist">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l8.72-8.72 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
               </button>
-              <button class="kmh-icon-btn" data-quickview data-title="{{ title }}" data-price="{{ dummy_prices[idx] }}" aria-label="Quick View">
+              <button class="kmh-icon-btn" data-quickview data-title="{{ title }}" data-price="In Stock" aria-label="Quick View">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
               </button>
             </div>
           </div>
 
           <div class="kmh-product-card__content">
-            <span class="kmh-product-card__brand">KitchenMixHaven</span>
+            <span class="kmh-product-card__brand">kitchenmixhaven</span>
             <h3 class="kmh-product-card__title">
               <a href="/products/appliance">{{ title }}</a>
             </h3>
 
-            <div class="kmh-rating">
-              ★★★★★ <span style="color: #64748B; font-size: 0.75rem;">(48 reviews)</span>
+            <div style="font-size: 0.8rem; color: #64748B; margin-bottom: 8px;">
+              {{ prod_variants[idx] }}
             </div>
 
-            <div class="kmh-product-card__price-row">
-              <span class="kmh-price">{{ dummy_prices[idx] }}</span>
-              {% if dummy_compares[idx] != blank %}
-                <span class="kmh-price--compare">{{ dummy_compares[idx] }}</span>
-              {% endif %}
+            <div class="kmh-rating">
+              ★★★★★ <span style="color: #64748B; font-size: 0.75rem;">(Verified Active)</span>
             </div>
 
             <button class="kmh-btn kmh-btn-primary kmh-btn-sm" style="margin-top: 1rem; width: 100%;" onclick="KMH_OpenCart()">
-              Quick Add +
+              View & Add to Cart
             </button>
           </div>
         </div>
@@ -79,9 +76,7 @@
 {% schema %}
 {
   "name": "Featured Collection",
-  "settings": [
-    { "type": "collection", "id": "collection", "label": "Collection" }
-  ],
+  "settings": [],
   "presets": [
     { "name": "Featured Collection" }
   ]

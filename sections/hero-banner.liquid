@@ -9,39 +9,39 @@
       <!-- Text & Call to Action -->
       <div>
         <span style="display: inline-block; padding: 6px 16px; background: rgba(212, 175, 55, 0.15); border: 1px solid rgba(212, 175, 55, 0.4); color: var(--kmh-gold); border-radius: 999px; font-weight: 700; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 1.5rem;">
-          {{ section.settings.eyebrow | default: "Engineered for Excellence" }}
+          {{ section.settings.eyebrow | default: "KitchenMixHaven Official Catalog" }}
         </span>
 
         <h1 style="font-family: var(--font-heading); color: #FFFFFF; font-size: clamp(2.8rem, 5vw, 4.5rem); line-height: 1.1; margin-bottom: 1.5rem;">
-          {{ section.settings.headline | default: "Master the Art of Culinary Precision." }}
+          {{ section.settings.headline | default: "Precision Stand & Hand Mixers for Every Kitchen." }}
         </h1>
 
         <p style="color: #CBD5E1; font-size: 1.15rem; line-height: 1.7; max-width: 540px; margin-bottom: 2.2rem;">
-          {{ section.settings.subheadline | default: "Explore commercial-grade stand mixers, high-precision espresso machines, and high-performance appliances designed for your dream kitchen." }}
+          {{ section.settings.subheadline | default: "Explore Martha Stewart 5.3Qt 12-Speed mixers, KitchenAid Classic Series 4.5Qt Onyx Black, Hamilton Beach 6-Speed Hand Mixers, and custom finishes in Gunmetal, Champagne Bronze, and Slate Blue." }}
         </p>
 
         <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
           <a href="{{ section.settings.primary_cta_link | default: '/collections/all' }}" class="kmh-btn kmh-btn-gold">
-            {{ section.settings.primary_cta_text | default: "Shop Stand Mixers" }} &rarr;
+            {{ section.settings.primary_cta_text | default: "Shop All Mixers" }} &rarr;
           </a>
           <a href="{{ section.settings.secondary_cta_link | default: '/pages/compare' }}" class="kmh-btn" style="background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.3); color: #FFFFFF;">
-            {{ section.settings.secondary_cta_text | default: "Compare Specs" }}
+            {{ section.settings.secondary_cta_text | default: "Compare 5.3Qt vs 4.5Qt" }}
           </a>
         </div>
 
         <!-- Trust Badges Under Hero -->
         <div style="display: flex; align-items: center; gap: 2rem; margin-top: 3rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem;">
           <div>
-            <div style="font-size: 1.4rem; font-weight: 700; color: var(--kmh-gold); font-family: var(--font-heading);">100%</div>
-            <div style="font-size: 0.75rem; color: #94A3B8; text-transform: uppercase;">Die-Cast Steel</div>
+            <div style="font-size: 1.4rem; font-weight: 700; color: var(--kmh-gold); font-family: var(--font-heading);">12-Speed</div>
+            <div style="font-size: 0.75rem; color: #94A3B8; text-transform: uppercase;">Tilt-Head Control</div>
           </div>
           <div>
-            <div style="font-size: 1.4rem; font-weight: 700; color: var(--kmh-gold); font-family: var(--font-heading);">5-Year</div>
-            <div style="font-size: 0.75rem; color: #94A3B8; text-transform: uppercase;">Full Warranty</div>
+            <div style="font-size: 1.4rem; font-weight: 700; color: var(--kmh-gold); font-family: var(--font-heading);">3.2Qt to 5.3Qt</div>
+            <div style="font-size: 0.75rem; color: #94A3B8; text-transform: uppercase;">Capacity Range</div>
           </div>
           <div>
-            <div style="font-size: 1.4rem; font-weight: 700; color: var(--kmh-gold); font-family: var(--font-heading);">Free</div>
-            <div style="font-size: 0.75rem; color: #94A3B8; text-transform: uppercase;">Express Delivery</div>
+            <div style="font-size: 1.4rem; font-weight: 700; color: var(--kmh-gold); font-family: var(--font-heading);">Stainless</div>
+            <div style="font-size: 0.75rem; color: #94A3B8; text-transform: uppercase;">Steel Bowls</div>
           </div>
         </div>
       </div>
@@ -53,22 +53,23 @@
             {% if section.settings.hero_image %}
               <img src="{{ section.settings.hero_image | image_url: width: 800 }}" alt="Hero Appliance" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
             {% else %}
-              <!-- SVG Stylized Appliance Mockup -->
+              <!-- SVG Stylized Mixer Showcase -->
               <div style="position: absolute; inset:0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: radial-gradient(circle, rgba(212,175,55,0.2), transparent 70%);">
-                <svg width="140" height="140" viewBox="0 0 24 24" fill="none" stroke="var(--kmh-gold)" stroke-width="1.2">
+                <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="var(--kmh-gold)" stroke-width="1.2">
                   <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
                 </svg>
-                <div style="margin-top: 1rem; font-weight: 700; letter-spacing: 0.1em; color: #FFFFFF; font-family: var(--font-heading); font-size: 1.2rem;">PRO STAND MIXER 7.5QT</div>
+                <div style="margin-top: 1rem; font-weight: 700; letter-spacing: 0.08em; color: #FFFFFF; font-family: var(--font-heading); font-size: 1.1rem;">MARTHA STEWART 5.3QT</div>
+                <div style="font-size: 0.8rem; color: var(--kmh-gold); margin-top: 4px;">12-Speed Tilt-Head Electric Mixer</div>
               </div>
             {% endif %}
           </div>
 
           <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 0.5rem; border-top: 1px solid rgba(255,255,255,0.1);">
             <div style="text-align: left;">
-              <div style="font-size: 0.75rem; color: var(--kmh-gold); text-transform: uppercase; font-weight: 700;">Featured Flagship</div>
-              <div style="font-family: var(--font-heading); font-size: 1.2rem; color: #FFFFFF;">Artisan Series 750W</div>
+              <div style="font-size: 0.75rem; color: var(--kmh-gold); text-transform: uppercase; font-weight: 700;">Featured Active Model</div>
+              <div style="font-family: var(--font-heading); font-size: 1.1rem; color: #FFFFFF;">5 Variants In Stock</div>
             </div>
-            <div style="font-size: 1.4rem; font-weight: 700; color: #FFFFFF;">$549</div>
+            <a href="/collections/all" class="kmh-btn kmh-btn-gold kmh-btn-sm">Shop Now &rarr;</a>
           </div>
         </div>
       </div>
@@ -81,12 +82,12 @@
 {
   "name": "Hero Banner",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Engineered for Excellence" },
-    { "type": "text", "id": "headline", "label": "Headline", "default": "Master the Art of Culinary Precision." },
-    { "type": "textarea", "id": "subheadline", "label": "Subheadline", "default": "Explore commercial-grade stand mixers, high-precision espresso machines, and high-performance appliances designed for your dream kitchen." },
-    { "type": "text", "id": "primary_cta_text", "label": "Primary Button Text", "default": "Shop Stand Mixers" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "KitchenMixHaven Official Catalog" },
+    { "type": "text", "id": "headline", "label": "Headline", "default": "Precision Stand & Hand Mixers for Every Kitchen." },
+    { "type": "textarea", "id": "subheadline", "label": "Subheadline", "default": "Explore Martha Stewart 5.3Qt 12-Speed mixers, KitchenAid Classic Series 4.5Qt Onyx Black, Hamilton Beach 6-Speed Hand Mixers, and custom finishes in Gunmetal, Champagne Bronze, and Slate Blue." },
+    { "type": "text", "id": "primary_cta_text", "label": "Primary Button Text", "default": "Shop All Mixers" },
     { "type": "url", "id": "primary_cta_link", "label": "Primary Button Link" },
-    { "type": "text", "id": "secondary_cta_text", "label": "Secondary Button Text", "default": "Compare Specs" },
+    { "type": "text", "id": "secondary_cta_text", "label": "Secondary Button Text", "default": "Compare 5.3Qt vs 4.5Qt" },
     { "type": "url", "id": "secondary_cta_link", "label": "Secondary Button Link" },
     { "type": "image_picker", "id": "hero_image", "label": "Hero Image" }
   ],
