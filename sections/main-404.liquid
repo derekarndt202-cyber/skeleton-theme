@@ -1,0 +1,36 @@
+<div class="kmh-section-padding" style="text-align: center;">
+  <div class="kmh-container" style="max-width: 600px;">
+    
+    <div style="font-size: 6rem; font-family: var(--font-heading); color: var(--kmh-gold); line-height: 1;">
+      404
+    </div>
+    
+    <h1 style="font-family: var(--font-heading); font-size: 2.2rem; margin: 1rem 0; color: var(--kmh-navy);">
+      Page Not Found
+    </h1>
+    
+    <p style="color: #64748B; font-size: 1rem; margin-bottom: 2rem;">
+      The culinary page or appliance model you are looking for has been relocated or is currently out of stock.
+    </p>
+
+    <div style="margin-bottom: 2.5rem;">
+      <form onsubmit="event.preventDefault(); document.querySelector('#KMH-SearchInput').focus();" style="display: flex; gap: 8px;">
+        <input type="text" placeholder="Search appliances or recipes..." style="flex-grow: 1; padding: 0.8rem 1rem; border-radius: 8px; border: 1px solid var(--kmh-border); outline: none;">
+        <button type="button" class="kmh-btn kmh-btn-gold kmh-btn-sm" data-search-trigger>Search</button>
+      </form>
+    </div>
+
+    <div style="display: flex; justify-content: center; gap: 1rem;">
+      <a href="/" class="kmh-btn kmh-btn-primary">Return to Homepage</a>
+      <a href="/collections/all" class="kmh-btn kmh-btn-secondary">Explore Catalog</a>
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Main 404",
+  "settings": []
+}
+{% endschema %}

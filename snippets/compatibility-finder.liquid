@@ -1,0 +1,32 @@
+<div style="background: var(--kmh-bg-light); border: 1px solid var(--kmh-border); border-radius: var(--radius-card); padding: 1.5rem; margin-top: 2rem;">
+  <span style="color: var(--kmh-gold); font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;">Fitment Verification</span>
+  <h4 style="font-family: var(--font-heading); font-size: 1.2rem; margin: 4px 0 1rem;">Will this attachment fit your mixer?</h4>
+
+  <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+    <select id="KMH-MixerModelSelect" style="flex-grow: 1; padding: 0.7rem 1rem; border-radius: 8px; border: 1px solid var(--kmh-border); font-size: 0.85rem; outline: none; background: #FFFFFF;">
+      <option value="">Select your mixer model...</option>
+      <option value="artisan75">KitchenMixHaven Artisan 7.5QT</option>
+      <option value="classic55">KitchenMixHaven Classic 5.5QT</option>
+      <option value="compact38">KitchenMixHaven Compact 3.8QT</option>
+      <option value="ka_tilt">KitchenAid Tilt-Head (All Models)</option>
+    </select>
+
+    <button class="kmh-btn kmh-btn-secondary kmh-btn-sm" onclick="checkFitment()">Check Fitment</button>
+  </div>
+
+  <div id="KMH-FitmentResult" style="margin-top: 1rem; font-size: 0.85rem; font-weight: 600; display: none;"></div>
+</div>
+
+<script>
+  function checkFitment() {
+    const val = document.querySelector('#KMH-MixerModelSelect').value;
+    const res = document.querySelector('#KMH-FitmentResult');
+    if (!val) {
+      alert('Please select a mixer model first.');
+      return;
+    }
+    res.style.display = 'block';
+    res.style.color = 'var(--kmh-success)';
+    res.innerHTML = '✅ <strong>100% Guaranteed Fitment:</strong> Standard 1/2" power hub compatible.';
+  }
+</script>

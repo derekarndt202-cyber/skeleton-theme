@@ -1,0 +1,106 @@
+<div class="kmh-recipe-page kmh-section-padding">
+  <div class="kmh-container">
+    
+    <!-- Hero Metadata -->
+    <div style="text-align: center; max-width: 800px; margin: 0 auto 3rem;">
+      <span class="kmh-badge kmh-badge--sale" style="background: var(--kmh-gold); color: var(--kmh-navy); margin-bottom: 1rem;">
+        Chef Tested &bull; Intermediate
+      </span>
+      <h1 style="font-family: var(--font-heading); font-size: clamp(2.5rem, 5vw, 3.8rem); margin-bottom: 1rem; color: var(--kmh-navy);">
+        Master Sourdough Boule (78% Hydration)
+      </h1>
+      <p style="font-size: 1.1rem; color: #64748B; margin-bottom: 1.5rem;">
+        Achieve an open, airy crumb and blistering caramelized crust using high-torque planetary mixer kneading.
+      </p>
+
+      <div style="display: flex; justify-content: center; gap: 2rem; border-top: 1px solid var(--kmh-border); border-bottom: 1px solid var(--kmh-border); padding: 1rem 0; font-size: 0.9rem; color: var(--kmh-navy); font-weight: 600;">
+        <div>⏱ <strong>Prep:</strong> 45 Mins</div>
+        <div>🔥 <strong>Bake:</strong> 40 Mins</div>
+        <div>🌾 <strong>Yield:</strong> 2 Boules</div>
+      </div>
+    </div>
+
+    <!-- Capacity Warning Banner -->
+    <div id="KMH-CapacityAlert" style="display: none; background: rgba(212,175,55,0.15); border: 1px solid var(--kmh-gold); color: var(--kmh-navy); padding: 1rem 1.5rem; border-radius: 10px; margin-bottom: 2rem; text-align: center;"></div>
+
+    <!-- Recipe Layout Grid -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3.5rem; margin-bottom: 5rem;">
+      
+      <!-- Ingredients Card with Smart Yield Multiplier -->
+      <div style="background: var(--kmh-bg-light); padding: 2rem; border-radius: var(--radius-card); border: 1px solid var(--kmh-border); height: fit-content;">
+        
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.2rem; border-bottom: 2px solid var(--kmh-gold); padding-bottom: 0.5rem;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.5rem; margin: 0;">
+            Ingredients
+          </h3>
+
+          <!-- Yield Scaler Controls -->
+          <div style="display: flex; gap: 4px;">
+            <button class="kmh-btn kmh-btn-secondary kmh-btn-sm active" data-recipe-multiplier="1" style="padding: 4px 10px;">1x</button>
+            <button class="kmh-btn kmh-btn-secondary kmh-btn-sm" data-recipe-multiplier="2" style="padding: 4px 10px;">2x</button>
+            <button class="kmh-btn kmh-btn-secondary kmh-btn-sm" data-recipe-multiplier="4" style="padding: 4px 10px;">4x</button>
+          </div>
+        </div>
+
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 0.95rem; color: var(--kmh-navy);">
+          <li style="display: flex; align-items: center; justify-content: space-between;">
+            <span><input type="checkbox"> High-Protein Bread Flour</span>
+            <strong data-ingredient-base="1000" data-ingredient-unit="g">1000g</strong>
+          </li>
+          <li style="display: flex; align-items: center; justify-content: space-between;">
+            <span><input type="checkbox"> Filtered Water (90°F)</span>
+            <strong data-ingredient-base="780" data-ingredient-unit="g">780g</strong>
+          </li>
+          <li style="display: flex; align-items: center; justify-content: space-between;">
+            <span><input type="checkbox"> Active Sourdough Starter</span>
+            <strong data-ingredient-base="200" data-ingredient-unit="g">200g</strong>
+          </li>
+          <li style="display: flex; align-items: center; justify-content: space-between;">
+            <span><input type="checkbox"> Fine Sea Salt</span>
+            <strong data-ingredient-base="22" data-ingredient-unit="g">22g</strong>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Step-by-Step Instructions -->
+      <div>
+        <h3 style="font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 1.5rem;">Step-by-Step Instructions</h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+          <div style="display: flex; gap: 1rem; background: #FFFFFF; padding: 1.5rem; border-radius: 12px; border: 1px solid var(--kmh-border);">
+            <span style="width: 36px; height: 36px; border-radius: 50%; background: var(--kmh-navy); color: var(--kmh-gold); font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">1</span>
+            <div>
+              <h4 style="font-family: var(--font-heading); margin-bottom: 4px;">Autolyse & Dough Mixing</h4>
+              <p style="font-size: 0.9rem; color: #475569;">Attach dough hook to your KitchenMixHaven Artisan 7.5QT mixer. Combine flour and 750g water on Speed 1 for 3 minutes until no dry flour remains. Rest 45 minutes.</p>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 1rem; background: #FFFFFF; padding: 1.5rem; border-radius: 12px; border: 1px solid var(--kmh-border);">
+            <span style="width: 36px; height: 36px; border-radius: 50%; background: var(--kmh-navy); color: var(--kmh-gold); font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">2</span>
+            <div>
+              <h4 style="font-family: var(--font-heading); margin-bottom: 4px;">High-Torque Kneading</h4>
+              <p style="font-size: 0.9rem; color: #475569;">Add active starter and fine sea salt. Knead on Speed 2 for 6 minutes until dough pulls cleanly away from bowl walls and achieves windowpane matrix.</p>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 1rem; background: #FFFFFF; padding: 1.5rem; border-radius: 12px; border: 1px solid var(--kmh-border);">
+            <span style="width: 36px; height: 36px; border-radius: 50%; background: var(--kmh-navy); color: var(--kmh-gold); font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">3</span>
+            <div>
+              <h4 style="font-family: var(--font-heading); margin-bottom: 4px;">Bulk Fermentation & Bake</h4>
+              <p style="font-size: 0.9rem; color: #475569;">Perform 3 coil folds over 3 hours. Shape into rounds, cold proof overnight for 14 hours, and bake in preheated Dutch oven at 475°F with lid on for 20 mins, lid off 20 mins.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Article Recipe",
+  "settings": []
+}
+{% endschema %}

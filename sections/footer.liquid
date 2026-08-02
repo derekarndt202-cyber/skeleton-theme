@@ -1,40 +1,75 @@
-<footer class="site-footer">
-  <div class="site-footer__brand">
-    <h2>{{ section.settings.heading }}</h2>
-    <p>{{ section.settings.text }}</p>
-  </div>
-  <div class="site-footer__links">
-    {% for link in section.settings.menu.links %}
-      {{ link.title | link_to: link.url }}
-    {% endfor %}
-  </div>
-  <div class="site-footer__bottom">
-    <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name | link_to: routes.root_url }}</span>
-    {% if section.settings.show_payment_icons %}
-      <span class="site-footer__payment">{% for type in shop.enabled_payment_types %}{{ type | payment_type_svg_tag }}{% endfor %}</span>
-    {% endif %}
+<footer style="background-color: var(--kmh-navy); color: #F8FAFC; padding-top: 5rem; padding-bottom: 3rem; margin-top: 4rem; border-top: 1px solid rgba(212, 175, 55, 0.2);">
+  <div class="kmh-container">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 3rem; margin-bottom: 4rem;">
+      
+      <!-- Brand & Bio -->
+      <div>
+        <a href="/" class="kmh-logo" style="color: #FFFFFF; font-size: 1.8rem; margin-bottom: 1.2rem; display: inline-block;">
+          KITCHEN<span style="color: var(--kmh-gold);">MIX</span>HAVEN
+        </a>
+        <p style="color: #94A3B8; font-size: 0.9rem; line-height: 1.7; margin-bottom: 1.5rem;">
+          KitchenMixHaven is your destination for ultra-premium kitchen appliances, commercial-grade stand mixers, high-precision espresso systems, and modern culinary tech.
+        </p>
+        <div style="display: flex; gap: 12px;">
+          <a href="#" class="kmh-icon-btn" style="background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.15); color: var(--kmh-gold);">IG</a>
+          <a href="#" class="kmh-icon-btn" style="background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.15); color: var(--kmh-gold);">FB</a>
+          <a href="#" class="kmh-icon-btn" style="background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.15); color: var(--kmh-gold);">YT</a>
+        </div>
+      </div>
+
+      <!-- Quick Collections -->
+      <div>
+        <h4 style="font-family: var(--font-heading); color: #FFFFFF; margin-bottom: 1.2rem; font-size: 1.2rem;">Collections</h4>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem; color: #CBD5E1;">
+          <li><a href="/collections/stand-mixers" style="color: inherit;">Stand Mixers & Accessories</a></li>
+          <li><a href="/collections/coffee-espresso" style="color: inherit;">Espresso & Grinders</a></li>
+          <li><a href="/collections/blenders" style="color: inherit;">Professional Blenders</a></li>
+          <li><a href="/collections/air-fryers" style="color: inherit;">Multi-Oven & Air Fryers</a></li>
+          <li><a href="/pages/sale" style="color: var(--kmh-gold); font-weight: 600;">Flash Sale & Clearance</a></li>
+        </ul>
+      </div>
+
+      <!-- Customer Support -->
+      <div>
+        <h4 style="font-family: var(--font-heading); color: #FFFFFF; margin-bottom: 1.2rem; font-size: 1.2rem;">Customer Care</h4>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem; color: #CBD5E1;">
+          <li><a href="/pages/about" style="color: inherit;">About KitchenMixHaven</a></li>
+          <li><a href="/pages/contact" style="color: inherit;">Contact Support & Showroom</a></li>
+          <li><a href="/pages/compare" style="color: inherit;">Appliance Comparison Matrix</a></li>
+          <li><a href="/pages/gift-guide" style="color: inherit;">Curated Gift Guide</a></li>
+          <li><a href="/pages/faq" style="color: inherit;">Warranty & 30-Day Returns</a></li>
+        </ul>
+      </div>
+
+      <!-- Newsletter Join -->
+      <div>
+        <h4 style="font-family: var(--font-heading); color: #FFFFFF; margin-bottom: 0.8rem; font-size: 1.2rem;">Culinary Insider</h4>
+        <p style="color: #94A3B8; font-size: 0.85rem; margin-bottom: 1.2rem;">Subscribe to receive exclusive appliance drops, chef recipes, and 10% off your first luxury mixer.</p>
+        <form onsubmit="event.preventDefault(); alert('Thank you for subscribing to KitchenMixHaven!');" style="display: flex; gap: 8px;">
+          <input type="email" placeholder="Enter your email..." required style="padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.08); color: #FFFFFF; flex-grow: 1; font-size: 0.85rem;">
+          <button type="submit" class="kmh-btn kmh-btn-gold kmh-btn-sm" style="border-radius: 8px;">Join</button>
+        </form>
+      </div>
+
+    </div>
+
+    <!-- Bottom Bar -->
+    <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; font-size: 0.8rem; color: #94A3B8;">
+      <div>
+        &copy; {{ 'now' | date: "%Y" }} KitchenMixHaven Inc. All Rights Reserved. Designed for Exceptional Cooking.
+      </div>
+      <div style="display: flex; gap: 1.5rem;">
+        <a href="#" style="color: inherit;">Privacy Policy</a>
+        <a href="#" style="color: inherit;">Terms of Service</a>
+        <a href="#" style="color: inherit;">Shipping Policy</a>
+      </div>
+    </div>
   </div>
 </footer>
 
-{% stylesheet %}
-  .site-footer { display: grid; gap: 2rem; margin-top: 2rem; padding: 3rem 0; border-top: 1px solid rgba(47, 36, 28, .1); }
-  .site-footer a { text-decoration: none; color: var(--color-foreground); }
-  .site-footer__brand { max-width: 58ch; }
-  .site-footer__brand h2 { font-size: clamp(1.8rem, 4vw, 3rem); }
-  .site-footer__brand p { margin-top: .75rem; line-height: 1.7; }
-  .site-footer__links, .site-footer__bottom, .site-footer__payment { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
-  .site-footer__bottom { justify-content: space-between; }
-  .site-footer__payment svg { width: 2.4rem; }
-{% endstylesheet %}
-
 {% schema %}
 {
-  "name": "t:general.footer",
-  "settings": [
-    { "type": "text", "id": "heading", "label": "Footer heading", "default": "KitchenMixHaven" },
-    { "type": "textarea", "id": "text", "label": "Footer text", "default": "Tools, tips, and mixer essentials for confident home cooking." },
-    { "type": "link_list", "id": "menu", "label": "t:labels.menu" },
-    { "type": "checkbox", "id": "show_payment_icons", "label": "t:labels.show_payment_icons", "default": true }
-  ]
+  "name": "Footer",
+  "settings": []
 }
 {% endschema %}

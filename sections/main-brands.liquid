@@ -1,0 +1,42 @@
+<div class="kmh-section-padding">
+  <div class="kmh-container">
+    
+    <div class="kmh-section-header">
+      <span class="kmh-subtitle">Official Partnerships</span>
+      <h1 class="kmh-title">Authorized Luxury Brands</h1>
+      <p class="kmh-description">Explore engineered appliances from world-renowned culinary leaders.</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+      
+      {% assign brand_names = "KitchenAid|Breville|Ninja|Cuisinart|Hamilton Beach|Instant|Beautiful" | split: "|" %}
+      {% assign brand_bios = "Iconic American stand mixers & culinary attachments since 1919.|Precision Australian espresso systems and smart countertop ovens.|High-performance nutrient extraction blenders and dual air fryers.|French-inspired food processing technology and multi-cookers.|Reliable countertop appliances engineered for daily kitchen performance.|Multifunctional pressure cookers, air fryer lids, and slow cookers.|Sleek, modern minimalist kitchenware curated by Drew Barrymore." | split: "|" %}
+
+      {% for brand in brand_names %}
+        {% assign idx = forloop.index0 %}
+        <div class="kmh-card" style="padding: 2rem; display: flex; flex-direction: column; justify-content: space-between; text-align: center;">
+          <div>
+            <div style="font-family: var(--font-heading); font-size: 2rem; font-weight: 700; color: var(--kmh-navy); margin-bottom: 1rem;">
+              {{ brand }}
+            </div>
+            <p style="font-size: 0.9rem; color: #475569; line-height: 1.6; margin-bottom: 1.5rem;">
+              {{ brand_bios[idx] }}
+            </p>
+          </div>
+          <a href="/collections/all" class="kmh-btn kmh-btn-secondary kmh-btn-sm" style="width: 100%;">
+            Shop {{ brand }} Collection &rarr;
+          </a>
+        </div>
+      {% endfor %}
+
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Main Brands",
+  "settings": []
+}
+{% endschema %}

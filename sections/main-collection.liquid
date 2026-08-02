@@ -1,0 +1,127 @@
+<div class="kmh-collection-page">
+  
+  <!-- Collection Banner -->
+  <div style="background: linear-gradient(135deg, #0F172A, #1E293B); color: #FFFFFF; padding: 4rem 0; text-align: center; border-bottom: 1px solid rgba(212,175,55,0.2);">
+    <div class="kmh-container">
+      <span style="color: var(--kmh-gold); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em;">Collection Showcase</span>
+      <h1 style="font-family: var(--font-heading); color: #FFFFFF; font-size: 3rem; margin: 0.5rem 0;">{{ collection.title | default: "All Luxury Kitchen Appliances" }}</h1>
+      <p style="color: #CBD5E1; max-width: 600px; margin: 0 auto; font-size: 1rem;">
+        {{ collection.description | default: "Browse our complete catalog of high-torque planetary stand mixers, precision espresso systems, and commercial kitchen gadgets." }}
+      </p>
+    </div>
+  </div>
+
+  <div class="kmh-container kmh-section-padding">
+    
+    <!-- Filter Toolbar -->
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--kmh-border);">
+      <div style="font-weight: 600; font-size: 0.9rem; color: #64748B;">
+        Showing <strong style="color: var(--kmh-navy);">12 Products</strong>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <select style="padding: 0.6rem 1rem; border: 1px solid var(--kmh-border); border-radius: 8px; font-size: 0.85rem; outline: none; background: #FFFFFF; cursor: pointer;">
+          <option>Sort by: Featured</option>
+          <option>Price: Low to High</option>
+          <option>Price: High to Low</option>
+          <option>Best Selling</option>
+          <option>Customer Rating</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Main Grid with Sidebar Filter -->
+    <div style="display: grid; grid-template-columns: 260px 1fr; gap: 2.5rem;">
+      
+      <!-- Filter Sidebar -->
+      <aside style="background: var(--kmh-bg-light); padding: 1.5rem; border-radius: var(--radius-card); border: 1px solid var(--kmh-border); height: fit-content;">
+        <h3 style="font-family: var(--font-heading); font-size: 1.2rem; margin-bottom: 1.2rem; border-bottom: 1px solid var(--kmh-border); padding-bottom: 0.8rem;">Filters</h3>
+        
+        <!-- Brand Filter -->
+        <div style="margin-bottom: 1.5rem;">
+          <h4 style="font-size: 0.9rem; margin-bottom: 0.8rem;">Brand</h4>
+          <div style="display: flex; flex-direction: column; gap: 6px; font-size: 0.85rem;">
+            <label><input type="checkbox" checked> KitchenMixHaven (8)</label>
+            <label><input type="checkbox"> KitchenAid (5)</label>
+            <label><input type="checkbox"> Breville (4)</label>
+            <label><input type="checkbox"> Ninja (3)</label>
+          </div>
+        </div>
+
+        <!-- Power Rating Filter -->
+        <div style="margin-bottom: 1.5rem;">
+          <h4 style="font-size: 0.9rem; margin-bottom: 0.8rem;">Motor Output</h4>
+          <div style="display: flex; flex-direction: column; gap: 6px; font-size: 0.85rem;">
+            <label><input type="checkbox"> 750W+ Commercial</label>
+            <label><input type="checkbox"> 500W Standard</label>
+            <label><input type="checkbox"> 350W Compact</label>
+          </div>
+        </div>
+
+        <!-- Capacity Filter -->
+        <div style="margin-bottom: 1.5rem;">
+          <h4 style="font-size: 0.9rem; margin-bottom: 0.8rem;">Bowl Capacity</h4>
+          <div style="display: flex; flex-direction: column; gap: 6px; font-size: 0.85rem;">
+            <label><input type="checkbox"> 7.5 Quarts & Above</label>
+            <label><input type="checkbox"> 5.0 - 6.5 Quarts</label>
+            <label><input type="checkbox"> Under 5.0 Quarts</label>
+          </div>
+        </div>
+
+        <!-- Price Range Slider Mock -->
+        <div style="margin-bottom: 1.5rem;">
+          <h4 style="font-size: 0.9rem; margin-bottom: 0.8rem;">Price Range</h4>
+          <input type="range" min="50" max="1000" value="500" style="width: 100%;">
+          <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: #64748B; margin-top: 4px;">
+            <span>$50</span>
+            <span>$1,000</span>
+          </div>
+        </div>
+
+        <button class="kmh-btn kmh-btn-primary kmh-btn-sm" style="width: 100%;">Apply Filters</button>
+      </aside>
+
+      <!-- Collection Product Grid -->
+      <div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
+          {% assign titles = "Artisan 7.5QT Stand Mixer|Pro-Blend 1800W Blender|Barista Touch Espresso|XL Dual Air Fryer 10QT|Precision Multi Food Processor|Countertop Smart Oven|Commercial Meat Grinder|Precision Espresso Grinder" | split: "|" %}
+          {% assign prices = "$499.00|$279.00|$699.00|$219.00|$189.00|$349.00|$299.00|$399.00" | split: "|" %}
+
+          {% for item in titles %}
+            {% assign idx = forloop.index0 %}
+            <div class="kmh-card kmh-product-card">
+              <div class="kmh-product-card__image-wrapper">
+                <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle, var(--kmh-bg-light), #E2E8F0);">
+                  <svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="var(--kmh-navy)" stroke-width="1.2"><rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="12" cy="12" r="4"/></svg>
+                </div>
+                <div class="kmh-product-card__actions">
+                  <button class="kmh-icon-btn" data-wishlist-toggle data-product-id="col-prod-{{ idx }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l8.72-8.72 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+                  <button class="kmh-icon-btn" data-quickview data-title="{{ item }}" data-price="{{ prices[idx] }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                </div>
+              </div>
+
+              <div class="kmh-product-card__content">
+                <span class="kmh-product-card__brand">KitchenMixHaven</span>
+                <h3 class="kmh-product-card__title"><a href="/products/appliance">{{ item }}</a></h3>
+                <div class="kmh-rating">★★★★★ <span style="color:#64748B; font-size:0.75rem;">(4.9)</span></div>
+                <div class="kmh-product-card__price-row">
+                  <span class="kmh-price">{{ prices[idx] }}</span>
+                </div>
+                <button class="kmh-btn kmh-btn-primary kmh-btn-sm" style="margin-top: 1rem; width: 100%;" onclick="KMH_OpenCart()">Add to Cart</button>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Main Collection",
+  "settings": []
+}
+{% endschema %}

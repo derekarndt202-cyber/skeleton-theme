@@ -1,0 +1,32 @@
+<div class="kmh-drawer-overlay" id="KMH-QuickViewOverlay"></div>
+
+<div class="kmh-modal" id="KMH-QuickViewModal">
+  <div class="kmh-modal__content" style="padding: 2rem;">
+    <button class="kmh-icon-btn" data-quickview-close style="position: absolute; top: 1rem; right: 1rem; z-index: 10;">&times;</button>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; align-items: center;">
+      <div style="background: var(--kmh-bg-light); border-radius: 12px; overflow: hidden; padding: 1rem;">
+        <img data-qv-image src="" alt="Appliance" style="width: 100%; height: 350px; object-fit: cover; border-radius: 8px;">
+      </div>
+
+      <div>
+        <span style="color: var(--kmh-gold); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;">KitchenMixHaven Signature</span>
+        <h2 data-qv-title style="font-family: var(--font-heading); margin: 0.5rem 0 1rem;">Appliance Name</h2>
+        
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 1rem;">
+          <div class="kmh-rating">★★★★★ (4.9)</div>
+          <span style="color: var(--kmh-success); font-weight: 600; font-size: 0.85rem;">In Stock & Ready to Ship</span>
+        </div>
+
+        <div data-qv-price style="font-size: 1.8rem; font-weight: 700; color: var(--kmh-navy); margin-bottom: 1.5rem;">$299.00</div>
+
+        <p style="font-size: 0.9rem; color: #475569; margin-bottom: 1.5rem;">Engineered for professional home chefs. Features die-cast metal housing, precision speed control, and quiet brushless motor technology.</p>
+
+        <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+          <button class="kmh-btn kmh-btn-primary" style="flex-grow: 1;" onclick="KMH_OpenCart()">Add to Cart</button>
+          <a href="#" class="kmh-btn kmh-btn-secondary">Full Specs</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

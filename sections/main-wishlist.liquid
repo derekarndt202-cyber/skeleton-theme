@@ -1,0 +1,54 @@
+<div class="kmh-section-padding">
+  <div class="kmh-container">
+    
+    <div class="kmh-section-header">
+      <span class="kmh-subtitle">Your Saved Favorites</span>
+      <h1 class="kmh-title">Wishlist</h1>
+      <p class="kmh-description">Save your dream kitchen setup and move items straight to cart when ready.</p>
+    </div>
+
+    <!-- Toolbar -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--kmh-border);">
+      <div style="font-size: 0.95rem; font-weight: 600; color: var(--kmh-navy);">
+        Saved Items (<span data-wishlist-count>0</span>)
+      </div>
+      <div style="display: flex; gap: 1rem;">
+        <button class="kmh-btn kmh-btn-secondary kmh-btn-sm" onclick="alert('Wishlist share link copied to clipboard!')">
+          🔗 Share Wishlist
+        </button>
+        <button class="kmh-btn kmh-btn-secondary kmh-btn-sm" onclick="localStorage.removeItem('kmh_wishlist'); location.reload();">
+          Clear All
+        </button>
+      </div>
+    </div>
+
+    <!-- Grid Container -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem;">
+      <div class="kmh-card kmh-product-card">
+        <div class="kmh-product-card__image-wrapper">
+          <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle, var(--kmh-bg-light), #E2E8F0);">
+            <svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="var(--kmh-navy)" stroke-width="1.2"><rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="12" cy="12" r="4"/></svg>
+          </div>
+        </div>
+        <div class="kmh-product-card__content">
+          <span class="kmh-product-card__brand">KitchenMixHaven</span>
+          <h3 class="kmh-product-card__title">Artisan 7.5QT Stand Mixer</h3>
+          <div class="kmh-product-card__price-row">
+            <span class="kmh-price">$499.00</span>
+          </div>
+          <button class="kmh-btn kmh-btn-gold kmh-btn-sm" style="margin-top: 1rem; width: 100%;" onclick="KMH_OpenCart()">
+            Move to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Main Wishlist",
+  "settings": []
+}
+{% endschema %}

@@ -1,117 +1,709 @@
-/** Critical CSS for the theme. This file is included on every page. */
+/**
+ * KitchenMixHaven - Critical Theme CSS
+ * Premium, Modern, Clean, High-End Appliance Theme
+ */
 
-/* Reset styles inspired by https://www.joshwcomeau.com/css/custom-css-reset/ */
-* {
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+/* Custom CSS Reset */
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
+  font-family: var(--font-body);
+  background-color: var(--kmh-bg);
+  color: var(--kmh-navy);
+  line-height: 1.6;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  margin: 0;
-  min-height: 100svh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-html:has(dialog[scroll-lock][open], details[scroll-lock][open]) {
-  overflow: hidden;
+/* Dark Mode Theme Overrides */
+body.dark-mode {
+  --kmh-bg: #090D16;
+  --kmh-bg-light: #0F172A;
+  --kmh-navy: #F8FAFC;
+  --kmh-border: #1E293B;
+  background-color: var(--kmh-bg);
+  color: var(--kmh-navy);
 }
 
-img,
-picture,
-video,
-canvas,
-svg {
-  display: block;
-  max-width: 100%;
-  height: auto;
+body.dark-mode .kmh-card,
+body.dark-mode .kmh-header,
+body.dark-mode .kmh-modal__content,
+body.dark-mode .kmh-cart-drawer {
+  background-color: #0F172A;
+  border-color: #1E293B;
+  color: #F8FAFC;
 }
 
-input,
-textarea,
-select {
-  font: inherit;
-  border-radius: var(--style-border-radius-inputs);
+body.dark-mode h1, body.dark-mode h2, body.dark-mode h3, body.dark-mode h4, body.dark-mode p {
+  color: #F8FAFC;
 }
 
-select {
-  background-color: var(--color-background);
-  color: currentcolor;
+/* Scroll Lock */
+body.scroll-locked {
+  overflow: hidden !important;
 }
 
-dialog {
-  background-color: var(--color-background);
-  color: var(--color-foreground);
+/* Typography */
+h1, h2, h3, h4, h5, h6, .font-heading {
+  font-family: var(--font-heading);
+  color: var(--kmh-navy);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
 }
+
+h1 { font-size: clamp(2.5rem, 5vw, 4.2rem); }
+h2 { font-size: clamp(2rem, 3.5vw, 3rem); }
+h3 { font-size: clamp(1.4rem, 2.2vw, 2rem); }
+h4 { font-size: clamp(1.15rem, 1.5vw, 1.4rem); }
 
 p {
-  text-wrap: pretty;
-}
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  overflow-wrap: break-word;
+  margin-bottom: 1rem;
+  color: #475569;
 }
 
-p:empty {
-  display: none;
+p:last-child {
+  margin-bottom: 0;
 }
 
-:is(p, h1, h2, h3, h4, h5, h6):first-child,
-:empty:first-child + :where(p, h1, h2, h3, h4, h5, h6) {
-  margin-block-start: 0;
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--kmh-transition);
 }
 
-:is(p, h1, h2, h3, h4, h5, h6):last-child,
-:where(p, h1, h2, h3, h4, h5, h6) + :has(+ :empty:last-child) {
-  margin-block-end: 0;
-}
-
-/** Theme styles below */
-body {
-  font-family: var(--font-primary--family);
-  background-color: var(--color-background);
-  color: var(--color-foreground);
-}
-
-/** Section layout utilities */
-
-/**
- * Setup a grid that enables both full-width and constrained layouts
- * depending on the class of the child elements.
- *
- * By default, a minimum content margin is set on the left and right
- * sides of the section and the content is centered in the viewport to
- * not exceed the maximum page width.
- *
- * When a child element is given the `full-width` class, it will span
- * the entire viewport.
- */
+/* Page Layout Grid */
 .shopify-section {
-  --content-width: min(
-    calc(var(--page-width) - var(--page-margin) * 2),
-    calc(100% - var(--page-margin) * 2)
-  );
-  --content-margin: minmax(var(--page-margin), 1fr);
-  --content-grid: var(--content-margin) var(--content-width) var(--content-margin);
-
-  /* This is required to make <img> elements work as background images */
+  width: 100%;
   position: relative;
-  grid-template-columns: var(--content-grid);
-  display: grid;
+}
+
+.kmh-container {
+  width: 100%;
+  max-width: var(--page-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--page-margin);
+  padding-right: var(--page-margin);
+}
+
+.kmh-section-padding {
+  padding-top: clamp(3rem, 6vw, 6rem);
+  padding-bottom: clamp(3rem, 6vw, 6rem);
+}
+
+/* Section Headers */
+.kmh-section-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto clamp(2.5rem, 4vw, 4rem);
+}
+
+.kmh-subtitle {
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--kmh-gold);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.kmh-title {
+  margin-bottom: 1rem;
+}
+
+.kmh-description {
+  font-size: 1.1rem;
+  color: #64748B;
+}
+
+/* Buttons */
+.kmh-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.9rem 2rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: var(--radius-button);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: var(--kmh-transition);
+  white-space: nowrap;
+}
+
+.kmh-btn-primary {
+  background-color: var(--kmh-navy);
+  color: #FFFFFF;
+  border-color: var(--kmh-navy);
+}
+
+body.dark-mode .kmh-btn-primary {
+  background-color: var(--kmh-gold);
+  color: #0F172A;
+  border-color: var(--kmh-gold);
+}
+
+.kmh-btn-primary:hover {
+  background-color: var(--kmh-gold);
+  border-color: var(--kmh-gold);
+  color: var(--kmh-navy);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+}
+
+.kmh-btn-secondary {
+  background-color: #FFFFFF;
+  color: var(--kmh-navy);
+  border-color: var(--kmh-navy);
+}
+
+body.dark-mode .kmh-btn-secondary {
+  background-color: #1E293B;
+  color: #FFFFFF;
+  border-color: #334155;
+}
+
+.kmh-btn-secondary:hover {
+  background-color: var(--kmh-navy);
+  color: #FFFFFF;
+  border-color: var(--kmh-navy);
+  transform: translateY(-2px);
+}
+
+.kmh-btn-gold {
+  background-color: var(--kmh-gold);
+  color: var(--kmh-navy);
+}
+
+.kmh-btn-gold:hover {
+  background-color: var(--kmh-navy);
+  color: #FFFFFF;
+}
+
+.kmh-btn-sm {
+  padding: 0.6rem 1.2rem;
+  font-size: 0.8rem;
+}
+
+.kmh-btn-full {
   width: 100%;
 }
 
-/* Child elements, by default, are constrained to the central column of the grid. */
-.shopify-section > * {
-  grid-column: 2;
+/* Cards (Standard Theme Card Style) */
+.kmh-card {
+  background: #FFFFFF;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--kmh-border);
+  box-shadow: var(--kmh-shadow-subtle);
+  overflow: hidden;
+  transition: var(--kmh-transition);
+  position: relative;
 }
 
-/* Child elements that use the full-width utility class span the entire viewport. */
-.shopify-section > .full-width {
-  grid-column: 1 / -1;
+.kmh-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: var(--kmh-shadow-hover);
+  border-color: rgba(212, 175, 55, 0.4);
+}
+
+/* Product Card Component */
+.kmh-product-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.kmh-product-card__image-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+  background-color: var(--kmh-bg-light);
+  overflow: hidden;
+}
+
+.kmh-product-card__image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.kmh-card:hover .kmh-product-card__image {
+  transform: scale(1.06);
+}
+
+.kmh-product-card__badges {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 2;
+}
+
+.kmh-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-radius: 4px;
+}
+
+.kmh-badge--sale {
+  background-color: var(--kmh-gold);
+  color: var(--kmh-navy);
+}
+
+.kmh-badge--new {
+  background-color: var(--kmh-navy);
+  color: #FFFFFF;
+}
+
+.kmh-badge--bestseller {
+  background-color: #059669;
+  color: #FFFFFF;
+}
+
+.kmh-product-card__actions {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  opacity: 0;
+  transform: translateX(10px);
+  transition: var(--kmh-transition);
+  z-index: 2;
+}
+
+.kmh-card:hover .kmh-product-card__actions {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.kmh-icon-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 1px solid var(--kmh-border);
+  color: var(--kmh-navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--kmh-transition);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+body.dark-mode .kmh-icon-btn {
+  background: #1E293B;
+  color: #F8FAFC;
+  border-color: #334155;
+}
+
+.kmh-icon-btn:hover, .kmh-icon-btn.active {
+  background: var(--kmh-navy);
+  color: var(--kmh-gold);
+  border-color: var(--kmh-navy);
+}
+
+.kmh-product-card__content {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.kmh-product-card__brand {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--kmh-gold);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.kmh-product-card__title {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.kmh-product-card__price-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 10px;
+}
+
+.kmh-price {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--kmh-navy);
+}
+
+.kmh-price--compare {
+  font-size: 0.95rem;
+  text-decoration: line-through;
+  color: #94A3B8;
+}
+
+.kmh-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.85rem;
+  color: var(--kmh-gold);
+}
+
+/* Header & Announcement Bar */
+.kmh-announcement-bar {
+  background-color: var(--kmh-navy);
+  color: #FFFFFF;
+  padding: 8px 16px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-align: center;
+  position: relative;
+  z-index: 101;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.kmh-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--kmh-border);
+  transition: var(--kmh-transition);
+}
+
+body.dark-mode .kmh-header {
+  background-color: rgba(15, 23, 42, 0.95);
+}
+
+.kmh-header.scrolled {
+  background-color: #FFFFFF;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
+}
+
+body.dark-mode .kmh-header.scrolled {
+  background-color: #0F172A;
+}
+
+.kmh-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+}
+
+.kmh-logo {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--kmh-navy);
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.kmh-logo span {
+  color: var(--kmh-gold);
+}
+
+.kmh-nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+}
+
+.kmh-nav__link {
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--kmh-navy);
+  padding: 8px 0;
+  position: relative;
+}
+
+.kmh-nav__link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--kmh-gold);
+  transition: var(--kmh-transition);
+}
+
+.kmh-nav__link:hover::after {
+  width: 100%;
+}
+
+.kmh-header__icons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.kmh-badge-count {
+  position: absolute;
+  top: -4px;
+  right: -6px;
+  background-color: var(--kmh-gold);
+  color: var(--kmh-navy);
+  font-size: 0.65rem;
+  font-weight: 700;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* AJAX Cart Drawer */
+.kmh-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--kmh-transition);
+}
+
+.kmh-drawer-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.kmh-cart-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  max-width: 440px;
+  height: 100vh;
+  background: #FFFFFF;
+  z-index: 1001;
+  box-shadow: var(--kmh-shadow-drawer);
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.kmh-cart-drawer.active {
+  transform: translateX(0);
+}
+
+.kmh-cart-drawer__header {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--kmh-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.kmh-cart-drawer__body {
+  padding: 1.5rem;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.kmh-cart-drawer__footer {
+  padding: 1.5rem;
+  border-top: 1px solid var(--kmh-border);
+  background-color: var(--kmh-bg-light);
+}
+
+/* Free Shipping Progress Bar */
+.kmh-shipping-bar {
+  margin-bottom: 1.2rem;
+  background-color: #E2E8F0;
+  border-radius: 999px;
+  height: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.kmh-shipping-bar__fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--kmh-navy), var(--kmh-gold));
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+
+/* Search Overlay */
+.kmh-search-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(15px);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--kmh-transition);
+  padding: 2rem;
+}
+
+body.dark-mode .kmh-search-overlay {
+  background: rgba(15, 23, 42, 0.98);
+}
+
+.kmh-search-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.kmh-search-overlay__container {
+  max-width: 800px;
+  margin: 4rem auto 0;
+  width: 100%;
+}
+
+.kmh-search-input-group {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.kmh-search-input {
+  width: 100%;
+  padding: 1.2rem 1.5rem 1.2rem 3.5rem;
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  border: none;
+  border-bottom: 2px solid var(--kmh-gold);
+  background: transparent;
+  color: var(--kmh-navy);
+  outline: none;
+}
+
+/* Modals */
+.kmh-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--kmh-transition);
+}
+
+.kmh-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.kmh-modal__content {
+  background: #FFFFFF;
+  border-radius: var(--radius-card);
+  width: 100%;
+  max-width: 900px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Accordions */
+.kmh-accordion {
+  border: 1px solid var(--kmh-border);
+  border-radius: 10px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.kmh-accordion__trigger {
+  width: 100%;
+  padding: 1.2rem 1.5rem;
+  background: #FFFFFF;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--kmh-navy);
+  cursor: pointer;
+  text-align: left;
+}
+
+body.dark-mode .kmh-accordion__trigger {
+  background: #0F172A;
+  color: #F8FAFC;
+}
+
+.kmh-accordion__content {
+  padding: 0 1.5rem 1.2rem;
+  display: none;
+  color: #475569;
+}
+
+body.dark-mode .kmh-accordion__content {
+  color: #CBD5E1;
+}
+
+.kmh-accordion.active .kmh-accordion__content {
+  display: block;
+}
+
+/* Responsive Utilities */
+@media (max-width: 1024px) {
+  .kmh-nav { display: none; }
+  .kmh-header__inner { height: 70px; }
+}
+
+@media (max-width: 640px) {
+  :root { --page-margin: 16px; }
+  .kmh-btn { padding: 0.8rem 1.4rem; font-size: 0.85rem; }
+  .kmh-cart-drawer { max-width: 100%; }
 }

@@ -1,0 +1,45 @@
+<div class="kmh-section-padding" style="background-color: var(--kmh-bg-light);">
+  <div class="kmh-container">
+    
+    <div class="kmh-section-header">
+      <span class="kmh-subtitle">Curated Categories</span>
+      <h2 class="kmh-title">Explore Kitchen Appliances</h2>
+      <p class="kmh-description">From high-torque dough mixing to precise barista espresso extraction.</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
+      
+      {% assign categories = "Stand Mixers|Blenders|Coffee & Espresso|Dual Air Fryers|Food Processors|Artisan Toasters|Precision Kettles|Kitchen Gadgets" | split: "|" %}
+      {% assign icons = "⚙️|🌪️|☕|🔥|🔪|🍞|🫖|💡" | split: "|" %}
+      {% assign descriptions = "High-torque Planetary Action|1500W High Speed Extraction|19-Bar Italian Pump Pressure|Rapid Air Circulation 360°|Quad-Blade Precision Chopping|Extra Wide Slot Toasting|PID Temperature Control|Professional Accessories" | split: "|" %}
+
+      {% for cat in categories %}
+        {% assign idx = forloop.index0 %}
+        <div class="kmh-card" style="padding: 2rem 1.5rem; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: space-between; min-height: 240px; border: 1px solid var(--kmh-border);">
+          <div>
+            <div style="font-size: 2.8rem; margin-bottom: 1rem; height: 60px; width: 60px; border-radius: 50%; background: rgba(212, 175, 55, 0.1); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.2rem;">
+              {{ icons[idx] }}
+            </div>
+            <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--kmh-navy);">{{ cat }}</h3>
+            <p style="font-size: 0.85rem; color: #64748B; margin-bottom: 1.5rem;">{{ descriptions[idx] }}</p>
+          </div>
+          <a href="/collections/all" class="kmh-btn kmh-btn-secondary kmh-btn-sm" style="width: 100%;">
+            Explore {{ cat }} &rarr;
+          </a>
+        </div>
+      {% endfor %}
+
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Featured Categories",
+  "settings": [],
+  "presets": [
+    { "name": "Featured Categories" }
+  ]
+}
+{% endschema %}

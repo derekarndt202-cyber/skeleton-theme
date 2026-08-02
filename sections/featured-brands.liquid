@@ -1,0 +1,28 @@
+<div style="padding: 3.5rem 0; background: #FFFFFF; border-bottom: 1px solid var(--kmh-border);">
+  <div class="kmh-container">
+    
+    <p style="text-align: center; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--kmh-gold); margin-bottom: 2rem;">
+      Authorized Luxury Retail Partner For
+    </p>
+
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: clamp(2rem, 5vw, 4rem);">
+      {% assign brands = "KitchenAid|Ninja|Breville|Cuisinart|Hamilton Beach|Instant|Beautiful" | split: "|" %}
+      {% for brand in brands %}
+        <div style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 700; color: #64748B; letter-spacing: 0.05em; opacity: 0.8; transition: var(--kmh-transition); cursor: pointer;" onmouseover="this.style.opacity=1; this.style.color='var(--kmh-navy)';" onmouseout="this.style.opacity=0.8; this.style.color='#64748B';">
+          {{ brand }}
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Featured Brands",
+  "settings": [],
+  "presets": [
+    { "name": "Featured Brands" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,85 @@
+<div class="kmh-contact-page kmh-section-padding">
+  <div class="kmh-container">
+    
+    <div class="kmh-section-header">
+      <span class="kmh-subtitle">Client Support & Showrooms</span>
+      <h1 class="kmh-title">Get in Touch</h1>
+      <p class="kmh-description">Our kitchen appliance concierges are available 7 days a week to answer specs, order inquiries, or warranty support.</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem;">
+      
+      <!-- Contact Form -->
+      <div class="kmh-card" style="padding: 2.5rem;">
+        <h3 style="font-family: var(--font-heading); font-size: 1.6rem; margin-bottom: 1.5rem;">Send Us a Message</h3>
+
+        <form onsubmit="event.preventDefault(); alert('Thank you! Your message has been sent to our customer care team.');" style="display: flex; flex-direction: column; gap: 1.2rem;">
+          <div>
+            <label style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 4px;">Full Name *</label>
+            <input type="text" required style="width: 100%; padding: 0.8rem 1rem; border-radius: 8px; border: 1px solid var(--kmh-border); font-size: 0.9rem;">
+          </div>
+
+          <div>
+            <label style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 4px;">Email Address *</label>
+            <input type="email" required style="width: 100%; padding: 0.8rem 1rem; border-radius: 8px; border: 1px solid var(--kmh-border); font-size: 0.9rem;">
+          </div>
+
+          <div>
+            <label style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 4px;">Inquiry Type</label>
+            <select style="width: 100%; padding: 0.8rem 1rem; border-radius: 8px; border: 1px solid var(--kmh-border); font-size: 0.9rem; background: #FFFFFF;">
+              <option>Appliance Specification Question</option>
+              <option>Order & Delivery Status</option>
+              <option>Warranty Claim & Technical Support</option>
+              <option>Commercial & Wholesale Partnership</option>
+            </select>
+          </div>
+
+          <div>
+            <label style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 4px;">Your Message *</label>
+            <textarea rows="5" required style="width: 100%; padding: 0.8rem 1rem; border-radius: 8px; border: 1px solid var(--kmh-border); font-size: 0.9rem; font-family: var(--font-body);"></textarea>
+          </div>
+
+          <button type="submit" class="kmh-btn kmh-btn-primary" style="width: 100%;">
+            Send Message &rarr;
+          </button>
+        </form>
+      </div>
+
+      <!-- Contact Details & Map Card -->
+      <div style="display: flex; flex-direction: column; gap: 2rem;">
+        
+        <div class="kmh-card" style="padding: 2rem; background: var(--kmh-bg-light);">
+          <h4 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 1rem; color: var(--kmh-navy);">Flagship Showroom & HQ</h4>
+          <p style="font-size: 0.9rem; color: #475569; margin-bottom: 1.2rem;">
+            📍 742 Culinary Boulevard, Suite 500<br>
+            Chicago, IL 60611, United States
+          </p>
+
+          <p style="font-size: 0.9rem; color: #475569; margin-bottom: 0.5rem;">
+            ✉️ <strong>Email:</strong> support@kitchenmixhaven.example.com
+          </p>
+          <p style="font-size: 0.9rem; color: #475569; margin-bottom: 1rem;">
+            📞 <strong>Phone:</strong> 1-800-555-MIXER (Mon-Sun: 8am - 8pm CST)
+          </p>
+        </div>
+
+        <!-- Interactive Map Location Card -->
+        <div style="border-radius: var(--radius-card); border: 1px solid var(--kmh-border); height: 260px; background: linear-gradient(135deg, var(--kmh-navy), #1E293B); display: flex; flex-direction: column; align-items: center; justify-content: center; color: #FFFFFF; text-align: center; padding: 1.5rem;">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--kmh-gold)" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <h4 style="font-family: var(--font-heading); color: #FFFFFF; margin: 0.8rem 0 0.4rem;">Visit Our Chicago Showroom</h4>
+          <p style="font-size: 0.85rem; color: #CBD5E1;">Test drive our 7.5QT stand mixers live with our head pastry chef.</p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Main Contact",
+  "settings": []
+}
+{% endschema %}

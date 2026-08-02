@@ -1,82 +1,145 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Skeleton",
-    "theme_version": "0.1.0",
-    "theme_author": "Shopify",
-    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
-    "theme_support_url": "https://support.shopify.com/"
+    "theme_name": "KitchenMixHaven",
+    "theme_version": "1.0.0",
+    "theme_author": "KitchenMixHaven",
+    "theme_documentation_url": "https://kitchenmixhaven.example.com",
+    "theme_support_url": "https://kitchenmixhaven.example.com/support"
   },
   {
-    "name": "t:general.typography",
+    "name": "Colors & Aesthetics",
     "settings": [
       {
-        "type": "header",
-        "content": "t:general.fonts"
+        "type": "color",
+        "id": "color_primary",
+        "default": "#0F172A",
+        "label": "Primary Color (Deep Navy)"
       },
       {
-        "type": "font_picker",
-        "id": "type_primary_font",
-        "default": "work_sans_n4",
-        "label": "t:general.primary"
+        "type": "color",
+        "id": "color_secondary",
+        "default": "#111827",
+        "label": "Secondary Color (Charcoal)"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "default": "#D4AF37",
+        "label": "Accent Color (Luxury Gold)"
+      },
+      {
+        "type": "color",
+        "id": "color_background",
+        "default": "#FFFFFF",
+        "label": "Page Background"
+      },
+      {
+        "type": "color",
+        "id": "color_bg_light",
+        "default": "#F8FAFC",
+        "label": "Light Gray Background"
+      },
+      {
+        "type": "color",
+        "id": "color_border",
+        "default": "#E5E7EB",
+        "label": "Border Color"
+      },
+      {
+        "type": "color",
+        "id": "color_success",
+        "default": "#16A34A",
+        "label": "Success Color"
       }
     ]
   },
   {
-    "name": "t:general.layout",
+    "name": "Typography",
     "settings": [
       {
         "type": "select",
-        "id": "max_page_width",
-        "label": "t:labels.page_width",
+        "id": "heading_font",
+        "label": "Heading Font Family",
         "options": [
-          {
-            "value": "90rem",
-            "label": "t:options.page_width.narrow"
-          },
-          {
-            "value": "110rem",
-            "label": "t:options.page_width.wide"
-          }
+          { "value": "'Playfair Display', serif", "label": "Playfair Display" },
+          { "value": "'Cormorant Garamond', serif", "label": "Cormorant Garamond" }
         ],
-        "default": "90rem"
+        "default": "'Playfair Display', serif"
       },
       {
-        "type": "range",
-        "id": "min_page_margin",
-        "min": 10,
-        "max": 100,
-        "step": 1,
-        "unit": "px",
-        "label": "t:labels.page_margin",
-        "default": 20
+        "type": "select",
+        "id": "body_font",
+        "label": "Body Font Family",
+        "options": [
+          { "value": "'Inter', sans-serif", "label": "Inter" },
+          { "value": "'Manrope', sans-serif", "label": "Manrope" }
+        ],
+        "default": "'Inter', sans-serif"
       }
     ]
   },
   {
-    "name": "t:general.colors",
+    "name": "Cards & Components",
     "settings": [
       {
-        "type": "color",
-        "id": "background_color",
-        "default": "#FFFFFF",
-        "label": "t:labels.background"
-      },
-      {
-        "type": "color",
-        "id": "foreground_color",
-        "default": "#333333",
-        "label": "t:labels.foreground"
+        "type": "range",
+        "id": "card_corner_radius",
+        "min": 4,
+        "max": 24,
+        "step": 2,
+        "unit": "px",
+        "label": "Card Border Radius",
+        "default": 14
       },
       {
         "type": "range",
-        "id": "input_corner_radius",
+        "id": "button_corner_radius",
         "min": 0,
-        "max": 10,
-        "step": 1,
+        "max": 24,
+        "step": 2,
         "unit": "px",
-        "label": "t:labels.input_corner_radius",
-        "default": 4
+        "label": "Button Border Radius",
+        "default": 10
+      },
+      {
+        "type": "select",
+        "id": "page_max_width",
+        "label": "Layout Width",
+        "options": [
+          { "value": "1280px", "label": "Standard (1280px)" },
+          { "value": "1440px", "label": "Wide (1440px)" },
+          { "value": "1600px", "label": "Ultra Wide (1600px)" }
+        ],
+        "default": "1440px"
+      }
+    ]
+  },
+  {
+    "name": "Header & Navigation",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_sticky_header",
+        "label": "Enable Sticky Transparent Header",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_announcement_bar",
+        "label": "Enable Announcement Bar",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Free Shipping Threshold",
+    "settings": [
+      {
+        "type": "number",
+        "id": "free_shipping_threshold",
+        "label": "Free Shipping Threshold ($)",
+        "default": 150
       }
     ]
   }

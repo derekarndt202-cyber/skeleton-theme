@@ -1,0 +1,62 @@
+<div class="kmh-gift-guide kmh-section-padding">
+  <div class="kmh-container">
+    
+    <div class="kmh-section-header">
+      <span class="kmh-subtitle">Curated Culinary Collections</span>
+      <h1 class="kmh-title">Kitchen Gift Guide</h1>
+      <p class="kmh-description">Find the perfect luxury gift for bakers, baristas, and home chefs at every price tier.</p>
+    </div>
+
+    <!-- Price Tier Navigation -->
+    <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 3.5rem;">
+      <a href="#under-25" class="kmh-btn kmh-btn-secondary kmh-btn-sm">Under $25</a>
+      <a href="#under-50" class="kmh-btn kmh-btn-secondary kmh-btn-sm">Under $50</a>
+      <a href="#under-100" class="kmh-btn kmh-btn-secondary kmh-btn-sm">Under $100</a>
+      <a href="#premium" class="kmh-btn kmh-btn-gold kmh-btn-sm">Premium Gifts</a>
+    </div>
+
+    <!-- Tier 1: Under $25 -->
+    <div id="under-25" style="margin-bottom: 4rem;">
+      <h2 style="font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 1.5rem; border-bottom: 2px solid var(--kmh-border); padding-bottom: 0.5rem;">
+        Gifts Under $25
+      </h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem;">
+        <div class="kmh-card" style="padding: 1.25rem;">
+          <h4 style="font-family: var(--font-heading);">Silicone Flex Bowl Scraper Set</h4>
+          <div style="color: var(--kmh-gold); font-weight: 700; margin: 4px 0 10px;">$19.99</div>
+          <button class="kmh-btn kmh-btn-primary kmh-btn-sm" style="width: 100%;" onclick="KMH_OpenCart()">Add Gift</button>
+        </div>
+        <div class="kmh-card" style="padding: 1.25rem;">
+          <h4 style="font-family: var(--font-heading);">Precision Stainless Measuring Spoons</h4>
+          <div style="color: var(--kmh-gold); font-weight: 700; margin: 4px 0 10px;">$24.50</div>
+          <button class="kmh-btn kmh-btn-primary kmh-btn-sm" style="width: 100%;" onclick="KMH_OpenCart()">Add Gift</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tier 2: Premium Gifts -->
+    <div id="premium" style="margin-bottom: 2rem;">
+      <h2 style="font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 1.5rem; border-bottom: 2px solid var(--kmh-gold); padding-bottom: 0.5rem;">
+        Premium Showstopper Gifts
+      </h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+        <div class="kmh-card kmh-product-card">
+          <div class="kmh-product-card__content">
+            <span class="kmh-product-card__brand">KitchenMixHaven</span>
+            <h3 class="kmh-product-card__title">Artisan 7.5QT Stand Mixer (Gold Edition)</h3>
+            <div class="kmh-price">$549.00</div>
+            <button class="kmh-btn kmh-btn-gold kmh-btn-sm" style="margin-top: 1rem; width: 100%;" onclick="KMH_OpenCart()">Shop Premium Gift</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Main Gift Guide",
+  "settings": []
+}
+{% endschema %}

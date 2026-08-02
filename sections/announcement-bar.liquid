@@ -1,0 +1,29 @@
+{% if section.settings.show_announcement %}
+  <div class="kmh-announcement-bar">
+    <div class="kmh-container" style="display: flex; align-items: center; justify-content: space-between;">
+      <div style="display: flex; align-items: center; gap: 12px; margin: 0 auto;">
+        <span style="color: var(--kmh-gold); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700;">★ Announcement</span>
+        <span style="font-weight: 500; font-size: 0.85rem;">{{ section.settings.announcement_text }}</span>
+        {% if section.settings.announcement_link != blank %}
+          <a href="{{ section.settings.announcement_link }}" style="color: var(--kmh-gold); font-weight: 700; text-decoration: underline; margin-left: 6px;">{{ section.settings.link_text | default: 'Shop Now' }} &rarr;</a>
+        {% endif %}
+      </div>
+      <div style="display: flex; align-items: center; gap: 15px; font-size: 0.75rem; color: #94A3B8;" class="desktop-only">
+        <span>USD ($)</span>
+        <span>English</span>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "settings": [
+    { "type": "checkbox", "id": "show_announcement", "label": "Show Announcement", "default": true },
+    { "type": "text", "id": "announcement_text", "label": "Text", "default": "Complimentary Shipping on Orders Over $150 | 5-Year Luxury Warranty Included" },
+    { "type": "url", "id": "announcement_link", "label": "Link" },
+    { "type": "text", "id": "link_text", "label": "Link Text", "default": "Explore Deals" }
+  ]
+}
+{% endschema %}

@@ -1,71 +1,66 @@
-<header class="site-header" style="--header-accent: {{ section.settings.accent_color }};">
-  {% if section.settings.announcement != blank %}
-    <div class="site-header__announcement">{{ section.settings.announcement }}</div>
-  {% endif %}
+<header class="kmh-header">
+  <div class="kmh-container">
+    <div class="kmh-header__inner">
+      
+      <!-- Mobile Nav Hamburger -->
+      <button class="kmh-icon-btn mobile-only" data-mobile-nav-toggle aria-label="Toggle menu" style="display: none;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
 
-  <div class="site-header__inner">
-    <a class="site-header__brand" href="{{ routes.root_url }}" aria-label="{{ shop.name }} home">
-      {% if section.settings.logo %}
-        {{ section.settings.logo | image_url: width: 320 | image_tag: widths: '120, 180, 240, 320', alt: shop.name }}
-      {% else %}
-        <span class="site-header__mark">KMH</span>
-        <span>
-          <strong>{{ section.settings.brand_name | default: shop.name }}</strong>
-          {% if section.settings.tagline != blank %}<small>{{ section.settings.tagline }}</small>{% endif %}
-        </span>
-      {% endif %}
-    </a>
-
-    <nav class="site-header__menu" aria-label="Main menu">
-      {% for link in section.settings.menu.links %}
-        {{ link.title | link_to: link.url }}
-      {% endfor %}
-    </nav>
-
-    <div class="site-header__icons">
-      <a class="site-header__search" href="{{ routes.search_url }}">Search</a>
-      {% if shop.customer_accounts_enabled %}
-        <shopify-account menu="{{ section.settings.customer_account_menu }}">
-          {{ 'icon-account.svg' | inline_asset_content }}
-        </shopify-account>
-      {% endif %}
-      <a class="site-header__cart" href="{{ routes.cart_url }}" aria-label="Cart">
-        {% if cart.item_count > 0 %}<sup>{{ cart.item_count }}</sup>{% endif %}
-        {{ 'icon-cart.svg' | inline_asset_content }}
+      <!-- Brand Logo -->
+      <a href="/" class="kmh-logo">
+        KITCHEN<span>MIX</span>HAVEN
       </a>
+
+      <!-- Desktop Navigation & Mega Menu -->
+      <nav role="navigation">
+        <ul class="kmh-nav">
+          <li><a href="/collections/all" class="kmh-nav__link">Appliances</a></li>
+          <li><a href="/collections/stand-mixers" class="kmh-nav__link">Stand Mixers</a></li>
+          <li><a href="/pages/configurator" class="kmh-nav__link" style="color: var(--kmh-gold); font-weight: 700;">★ Build Your Mixer</a></li>
+          <li><a href="/collections/coffee-espresso" class="kmh-nav__link">Coffee & Espresso</a></li>
+          <li><a href="/pages/recipes" class="kmh-nav__link">Recipes</a></li>
+          <li><a href="/pages/compare" class="kmh-nav__link">Compare Matrix</a></li>
+        </ul>
+      </nav>
+
+      <!-- Action Icons -->
+      <div class="kmh-header__icons">
+        <!-- Dark Mode Switcher -->
+        <button class="kmh-icon-btn" data-dark-toggle aria-label="Toggle Dark Mode" title="Toggle Light/Dark Theme">
+          🌙
+        </button>
+
+        <!-- Live Search Trigger -->
+        <button class="kmh-icon-btn" data-search-trigger aria-label="Search store">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        </button>
+
+        <!-- Wishlist -->
+        <a href="/pages/wishlist" class="kmh-icon-btn" aria-label="View Wishlist" style="position: relative;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l8.72-8.72 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          <span class="kmh-badge-count" data-wishlist-count>0</span>
+        </a>
+
+        <!-- Account -->
+        <a href="/account" class="kmh-icon-btn" aria-label="Customer Account">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </a>
+
+        <!-- AJAX Cart Drawer Trigger -->
+        <button class="kmh-icon-btn" data-cart-trigger aria-label="Open cart" style="position: relative; background: var(--kmh-navy); color: var(--kmh-gold); border-color: var(--kmh-navy);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+          <span class="kmh-badge-count" style="background: var(--kmh-gold); color: var(--kmh-navy);">{{ cart.item_count }}</span>
+        </button>
+      </div>
+
     </div>
   </div>
 </header>
 
-{% stylesheet %}
-  .site-header { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--color-background), transparent 5%); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(47, 36, 28, .09); }
-  .site-header__announcement { background: var(--header-accent); color: #fff; text-align: center; padding: .55rem 1rem; font-weight: 800; font-size: .9rem; }
-  .site-header__inner { min-height: 5rem; display: flex; align-items: center; justify-content: space-between; gap: 1.25rem; width: min(var(--page-width), calc(100% - var(--page-margin) * 2)); margin-inline: auto; }
-  .site-header a { position: relative; text-decoration: none; color: var(--color-foreground); display: inline-flex; align-items: center; justify-content: center; }
-  .site-header__brand { gap: .75rem; flex-shrink: 0; }
-  .site-header__brand img { max-width: 180px; }
-  .site-header__brand strong { display: block; font-size: 1.15rem; }
-  .site-header__brand small { display: block; color: color-mix(in srgb, var(--color-foreground), transparent 35%); }
-  .site-header__mark { display: grid; place-items: center; width: 2.7rem; height: 2.7rem; border-radius: 50%; background: var(--header-accent); color: #fff; font-weight: 900; }
-  .site-header__menu, .site-header__icons { display: flex; align-items: center; gap: 1rem; }
-  .site-header__menu a { font-weight: 700; }
-  .site-header__search { border: 1px solid rgba(47, 36, 28, .14); border-radius: 999px; padding: .45rem .8rem; }
-  .site-header__cart sup { position: absolute; left: 70%; top: -.6rem; background: var(--header-accent); color: #fff; border-radius: 50%; min-width: 1.25rem; min-height: 1.25rem; display: grid; place-items: center; font-size: .75rem; }
-  .site-header svg { width: 1.8rem; }
-  @media (max-width: 820px) { .site-header__inner { flex-wrap: wrap; padding: .75rem 0; } .site-header__menu { order: 3; width: 100%; overflow-x: auto; padding-bottom: .25rem; } }
-{% endstylesheet %}
-
 {% schema %}
 {
-  "name": "t:general.header",
-  "settings": [
-    { "type": "text", "id": "announcement", "label": "Announcement bar", "default": "Free mixer attachment guide with every order" },
-    { "type": "image_picker", "id": "logo", "label": "Logo" },
-    { "type": "text", "id": "brand_name", "label": "Brand name", "default": "KitchenMixHaven" },
-    { "type": "text", "id": "tagline", "label": "Tagline", "default": "Mixers for every maker" },
-    { "type": "color", "id": "accent_color", "label": "Accent color", "default": "#d65a31" },
-    { "type": "link_list", "id": "menu", "label": "t:labels.menu" },
-    { "type": "link_list", "id": "customer_account_menu", "label": "t:labels.customer_account_menu", "default": "customer-account-main-menu" }
-  ]
+  "name": "Header",
+  "settings": []
 }
 {% endschema %}

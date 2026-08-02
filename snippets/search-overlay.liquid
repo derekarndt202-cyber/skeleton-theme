@@ -1,0 +1,29 @@
+<div class="kmh-search-overlay" id="KMH-SearchOverlay">
+  <div style="display: flex; justify-content: flex-end;">
+    <button class="kmh-icon-btn" data-search-close aria-label="Close search">&times;</button>
+  </div>
+
+  <div class="kmh-search-overlay__container">
+    <div class="kmh-search-input-group">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--kmh-gold)" stroke-width="2" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%);">
+        <circle cx="11" cy="11" r="8"/>
+        <path d="M21 21l-4.35-4.35"/>
+      </svg>
+      <input type="text" id="KMH-SearchInput" class="kmh-search-input" placeholder="Search appliances, attachments, recipes...">
+    </div>
+
+    <!-- Quick Category Badges -->
+    <div style="margin-bottom: 2rem;">
+      <p style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--kmh-gold); margin-bottom: 10px;">Trending Searches</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+        <a href="/collections/stand-mixers" class="kmh-badge" style="background: var(--kmh-bg-light); border: 1px solid var(--kmh-border); color: var(--kmh-navy); text-transform: none; padding: 6px 14px; font-weight: 500;">Stand Mixers</a>
+        <a href="/collections/espresso" class="kmh-badge" style="background: var(--kmh-bg-light); border: 1px solid var(--kmh-border); color: var(--kmh-navy); text-transform: none; padding: 6px 14px; font-weight: 500;">Espresso Machines</a>
+        <a href="/collections/air-fryers" class="kmh-badge" style="background: var(--kmh-bg-light); border: 1px solid var(--kmh-border); color: var(--kmh-navy); text-transform: none; padding: 6px 14px; font-weight: 500;">Dual Air Fryers</a>
+        <a href="/collections/food-processors" class="kmh-badge" style="background: var(--kmh-bg-light); border: 1px solid var(--kmh-border); color: var(--kmh-navy); text-transform: none; padding: 6px 14px; font-weight: 500;">High-Torque Processors</a>
+      </div>
+    </div>
+
+    <!-- Results Placeholder Container -->
+    <div id="KMH-SearchResults"></div>
+  </div>
+</div>

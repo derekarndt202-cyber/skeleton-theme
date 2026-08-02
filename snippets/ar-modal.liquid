@@ -1,0 +1,20 @@
+<div class="kmh-drawer-overlay" id="KMH-AROverlay"></div>
+
+<div class="kmh-modal" id="KMH-ARModal">
+  <div class="kmh-modal__content" style="padding: 2.5rem; max-width: 500px; text-align: center;">
+    <button class="kmh-icon-btn" onclick="document.querySelector('#KMH-AROverlay').classList.remove('active'); document.querySelector('#KMH-ARModal').classList.remove('active');" style="position: absolute; top: 1rem; right: 1rem;">&times;</button>
+    
+    <div style="font-size: 3rem; margin-bottom: 0.5rem;">📱</div>
+    <h3 style="font-family: var(--font-heading); font-size: 1.6rem; margin-bottom: 0.5rem;">View in Your Kitchen (AR)</h3>
+    <p style="font-size: 0.88rem; color: #64748B; margin-bottom: 1.5rem;">Scan this QR code with your smartphone camera to launch 3D Augmented Reality and preview this mixer on your countertop.</p>
+
+    <!-- Simulated QR Code SVG -->
+    <div style="background: #FFFFFF; border: 2px dashed var(--kmh-gold); padding: 1.5rem; border-radius: 14px; width: 180px; height: 180px; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center;">
+      <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="var(--kmh-navy)" stroke-width="2">
+        <path d="M3 3h6v6H3zM15 3h6v6h-6zM3 15h6v6H3zM15 15h3v3h-3zM18 18h3v3h-3zM18 15h3v3h-3z"/>
+      </svg>
+    </div>
+
+    <p style="font-size: 0.75rem; color: #94A3B8;">Supports iOS QuickLook & Android SceneViewer (USDZ & GLTF).</p>
+  </div>
+</div>

@@ -1,0 +1,86 @@
+<div class="kmh-drawer-overlay" id="KMH-CartOverlay"></div>
+
+<div class="kmh-cart-drawer" id="KMH-CartDrawer">
+  <div class="kmh-cart-drawer__header">
+    <h3 style="margin: 0; font-family: var(--font-heading);">Your Shopping Cart</h3>
+    <button class="kmh-icon-btn" data-cart-close aria-label="Close cart">&times;</button>
+  </div>
+
+  <div class="kmh-cart-drawer__body">
+    <!-- Free Shipping Progress -->
+    {% liquid
+      assign threshold = settings.free_shipping_threshold | default: 150
+      assign cart_total = cart.total_price | divided_by: 100
+      assign progress = cart_total | times: 100 | divided_by: threshold
+      if progress > 100
+        assign progress = 100
+      endif
+    %}
+    <div style="margin-bottom: 1.5rem; background: var(--kmh-bg-light); padding: 1rem; border-radius: 10px; border: 1px solid var(--kmh-border);">
+      <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">
+        <span>Free Shipping & Returns</span>
+        <span>
+          {% if cart_total >= threshold %}
+            <strong style="color: var(--kmh-success);">Unlocked!</strong>
+          {% else %}
+            ${{ threshold | minus: cart_total }} away
+          {% endif %}
+        </span>
+      </div>
+      <div class="kmh-shipping-bar">
+        <div class="kmh-shipping-bar__fill" style="width: {{ progress }}%;"></div>
+      </div>
+    </div>
+
+    <!-- Cart Items -->
+    {% if cart.item_count > 0 %}
+      <div class="kmh-cart-items" style="display: flex; flex-direction: column; gap: 1rem;">
+        {% for item in cart.items %}
+          <div class="kmh-cart-item" style="display: flex; gap: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--kmh-border);">
+            <img src="{{ item.image | image_url: width: 120 }}" alt="{{ item.title }}" style="width: 70px; height: 70px; object-fit: cover; border-radius: 8px;">
+            <div style="flex-grow: 1;">
+              <div style="font-weight: 600; font-family: var(--font-heading); font-size: 0.95rem;">{{ item.product.title }}</div>
+              <div style="font-size: 0.8rem; color: #64748B; margin-bottom: 6px;">{{ item.variant.title }}</div>
+              <div style="display: flex; align-items: center; justify-content: space-between;">
+                <div style="display: flex; align-items: center; gap: 8px; border: 1px solid var(--kmh-border); border-radius: 6px; padding: 2px 8px;">
+                  <button class="kmh-qty-btn kmh-qty-minus" style="border: none; background: none; cursor: pointer;">-</button>
+                  <input type="number" value="{{ item.quantity }}" style="width: 30px; text-align: center; border: none; font-size: 0.85rem;">
+                  <button class="kmh-qty-btn kmh-qty-plus" style="border: none; background: none; cursor: pointer;">+</button>
+                </div>
+                <div style="font-weight: 700; color: var(--kmh-navy);">{{ item.final_line_price | money }}</div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div style="text-align: center; padding: 3rem 1rem;">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--kmh-gold)" stroke-width="1.5" style="margin: 0 auto 1rem;">
+          <path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+        </svg>
+        <p style="font-weight: 600; font-size: 1.1rem; color: var(--kmh-navy);">Your cart is empty</p>
+        <p style="font-size: 0.85rem; color: #64748B; margin-bottom: 1.5rem;">Explore our high-performance kitchen appliances and upgrade your culinary space.</p>
+        <a href="/collections/all" class="kmh-btn kmh-btn-primary kmh-btn-sm" data-cart-close>Explore Collections</a>
+      </div>
+    {% endif %}
+
+    <!-- Cart Upsell -->
+    <div style="margin-top: 2rem; background: var(--kmh-bg-light); padding: 1rem; border-radius: 10px;">
+      <p style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--kmh-gold); margin-bottom: 8px;">Frequently Added Together</p>
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+        <div style="font-size: 0.85rem; font-weight: 600;">Stainless Steel Whisk Attachment</div>
+        <button class="kmh-btn kmh-btn-gold kmh-btn-sm">+ $29</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cart Footer -->
+  <div class="kmh-cart-drawer__footer">
+    <div style="display: flex; justify-content: space-between; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; color: var(--kmh-navy);">
+      <span>Subtotal</span>
+      <span>{{ cart.total_price | money }}</span>
+    </div>
+    <p style="font-size: 0.75rem; color: #64748B; margin-bottom: 1rem;">Taxes and shipping calculated at checkout.</p>
+    <a href="/checkout" class="kmh-btn kmh-btn-primary kmh-btn-full">Proceed to Checkout</a>
+  </div>
+</div>

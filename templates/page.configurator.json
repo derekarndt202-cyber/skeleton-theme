@@ -1,7 +1,7 @@
 {
   "sections": {
     "main": {
-      "type": "main-contact",
+      "type": "main-configurator",
       "settings": {}
     }
   },

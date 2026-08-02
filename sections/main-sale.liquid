@@ -1,0 +1,63 @@
+<div class="kmh-sale-page">
+  
+  <!-- Flash Sale Countdown Banner -->
+  <div style="background: linear-gradient(135deg, #0F172A, #991B1B); color: #FFFFFF; padding: 4rem 0; text-align: center; border-bottom: 1px solid var(--kmh-gold);">
+    <div class="kmh-container">
+      <span class="kmh-badge kmh-badge--sale" style="font-size: 0.85rem; padding: 6px 14px; margin-bottom: 1rem; background: var(--kmh-gold); color: var(--kmh-navy);">
+        Limited Time Flash Event
+      </span>
+
+      <h1 style="font-family: var(--font-heading); color: #FFFFFF; font-size: clamp(2.5rem, 5vw, 4rem); margin: 0.5rem 0;">
+        Summer Appliance Sale
+      </h1>
+      <p style="color: #F8FAFC; max-width: 600px; margin: 0 auto 1.5rem; font-size: 1.1rem;">
+        Save up to $150 on flagship 7.5QT stand mixers, high-power blenders, and espresso systems.
+      </p>
+
+      <!-- Live JS Countdown Box -->
+      <div style="display: inline-flex; align-items: center; gap: 1rem; background: rgba(0,0,0,0.4); backdrop-filter: blur(10px); padding: 0.8rem 2rem; border-radius: 999px; border: 1px solid var(--kmh-gold);">
+        <span style="font-size: 0.85rem; font-weight: 700; uppercase; letter-spacing: 0.08em; color: var(--kmh-gold);">Ends In:</span>
+        <span style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 700;" data-countdown>48h 00m 00s</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="kmh-container kmh-section-padding">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+      {% assign sale_titles = "Artisan 7.5QT Stand Mixer|Barista Touch Espresso Machine|XL Dual Air Fryer 10QT|Pro-Blend 1800W Blender" | split: "|" %}
+      {% assign original_prices = "$599.00|$799.00|$249.00|$329.00" | split: "|" %}
+      {% assign sale_prices = "$499.00|$699.00|$199.00|$259.00" | split: "|" %}
+
+      {% for title in sale_titles %}
+        {% assign idx = forloop.index0 %}
+        <div class="kmh-card kmh-product-card">
+          <div class="kmh-product-card__image-wrapper">
+            <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle, var(--kmh-bg-light), #E2E8F0);">
+              <svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="var(--kmh-navy)" stroke-width="1.2"><rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="12" cy="12" r="4"/></svg>
+            </div>
+            <div class="kmh-product-card__badges">
+              <span class="kmh-badge kmh-badge--sale">Save $100</span>
+            </div>
+          </div>
+          <div class="kmh-product-card__content">
+            <span class="kmh-product-card__brand">KitchenMixHaven</span>
+            <h3 class="kmh-product-card__title"><a href="/products/appliance">{{ title }}</a></h3>
+            <div class="kmh-product-card__price-row">
+              <span class="kmh-price">{{ sale_prices[idx] }}</span>
+              <span class="kmh-price--compare">{{ original_prices[idx] }}</span>
+            </div>
+            <button class="kmh-btn kmh-btn-gold kmh-btn-sm" style="margin-top: 1rem; width: 100%;" onclick="KMH_OpenCart()">Claim Deal +</button>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+</div>
+
+{% schema %}
+{
+  "name": "Main Sale",
+  "settings": []
+}
+{% endschema %}

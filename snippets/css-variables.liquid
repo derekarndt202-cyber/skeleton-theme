@@ -1,18 +1,26 @@
 {% style %}
-  {% # Loads all font variantions with display: swap %}
-  {{ settings.type_primary_font | font_face: font_display: 'swap' }}
-  {{ settings.type_primary_font | font_modify: 'weight', 'bold' | font_face: font_display: 'swap' }}
-  {{ settings.type_primary_font | font_modify: 'weight', 'bold' | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}
-  {{ settings.type_primary_font | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}
-
   :root {
-    --font-primary--family: {{ settings.type_primary_font.family }}, {{ settings.type_primary_font.fallback_families }};
-    --font-primary--style: {{ settings.type_primary_font.style }};
-    --font-primary--weight: {{ settings.type_primary_font.weight }};
-    --page-width: {{ settings.max_page_width }};
-    --page-margin: {{ settings.min_page_margin }}px;
-    --color-background: {{ settings.background_color }};
-    --color-foreground: {{ settings.foreground_color }};
-    --style-border-radius-inputs: {{ settings.input_corner_radius }}px;
+    --kmh-navy: {{ settings.color_primary | default: '#0F172A' }};
+    --kmh-charcoal: {{ settings.color_secondary | default: '#111827' }};
+    --kmh-gold: {{ settings.color_accent | default: '#D4AF37' }};
+    --kmh-bg: {{ settings.color_background | default: '#FFFFFF' }};
+    --kmh-bg-light: {{ settings.color_bg_light | default: '#F8FAFC' }};
+    --kmh-border: {{ settings.color_border | default: '#E5E7EB' }};
+    --kmh-success: {{ settings.color_success | default: '#16A34A' }};
+    
+    --font-heading: {{ settings.heading_font | default: "'Playfair Display', serif" }};
+    --font-body: {{ settings.body_font | default: "'Inter', sans-serif" }};
+    
+    --radius-card: {{ settings.card_corner_radius | default: 14 }}px;
+    --radius-button: {{ settings.button_corner_radius | default: 10 }}px;
+    
+    --page-width: {{ settings.page_max_width | default: '1440px' }};
+    --page-margin: 24px;
+    
+    --kmh-shadow-subtle: 0 4px 20px rgba(15, 23, 42, 0.05);
+    --kmh-shadow-hover: 0 20px 40px rgba(15, 23, 42, 0.12);
+    --kmh-shadow-drawer: -10px 0 30px rgba(15, 23, 42, 0.15);
+    
+    --kmh-transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
 {% endstyle %}

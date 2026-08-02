@@ -1,29 +1,61 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
-    "main": {
-      "type": "kitchenmixhaven-home",
-      "blocks": {
-        "dough": { "type": "hub_tile", "settings": { "icon": "🍞", "title": "Dough lab", "description": "High-torque systems for breads, pizza, and enriched dough.", "link": "/collections/all" } },
-        "bake": { "type": "hub_tile", "settings": { "icon": "🧁", "title": "Bake station", "description": "Creaming, whipping, and mixing paths for cakes and cookies.", "link": "/collections/all" } },
-        "prep": { "type": "hub_tile", "settings": { "icon": "🥗", "title": "Prep cockpit", "description": "Compact helpers for sauces, salads, and fast weeknight prep.", "link": "/collections/all" } },
-        "attachments": { "type": "hub_tile", "settings": { "icon": "⚙️", "title": "Attachment deck", "description": "Pasta, grinder, slicer, and specialty add-ons explained.", "link": "/collections/all" } },
-        "capacity": { "type": "guide_step", "settings": { "title": "Choose capacity", "text": "Pick compact bowls for small kitchens, or larger bowls if you batch bake or prep weekly." } },
-        "motor": { "type": "guide_step", "settings": { "title": "Match the motor", "text": "Prioritize torque and stability for dense dough, and speed range for meringues or creams." } },
-        "attachments_step": { "type": "guide_step", "settings": { "title": "Plan attachments", "text": "Think beyond today: pasta, slicers, grinders, and extra bowls can expand one mixer." } },
-        "footprint": { "type": "guide_step", "settings": { "title": "Check footprint", "text": "Measure counter clearance, storage height, bowl access, and outlet placement before checkout." } }
-      },
-      "block_order": ["dough", "bake", "prep", "attachments", "capacity", "motor", "attachments_step", "footprint"],
+    "hero": {
+      "type": "hero-banner",
+      "settings": {}
+    },
+    "brands": {
+      "type": "featured-brands",
+      "settings": {}
+    },
+    "categories": {
+      "type": "featured-categories",
+      "settings": {}
+    },
+    "featured": {
+      "type": "featured-collection",
+      "settings": {}
+    },
+    "why_us": {
+      "type": "why-choose-us",
+      "settings": {}
+    },
+    "lifestyle": {
+      "type": "lifestyle-split-banner",
+      "settings": {}
+    },
+    "comparison": {
+      "type": "product-comparison",
+      "settings": {}
+    },
+    "recipes": {
+      "type": "recipe-inspiration",
+      "settings": {}
+    },
+    "reviews": {
+      "type": "customer-reviews",
+      "settings": {}
+    },
+    "instagram": {
+      "type": "instagram-gallery",
+      "settings": {}
+    },
+    "newsletter": {
+      "type": "newsletter",
       "settings": {}
     }
   },
-  "order": ["main"]
+  "order": [
+    "hero",
+    "brands",
+    "categories",
+    "featured",
+    "why_us",
+    "lifestyle",
+    "comparison",
+    "recipes",
+    "reviews",
+    "instagram",
+    "newsletter"
+  ]
 }
