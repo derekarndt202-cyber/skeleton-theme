@@ -1,77 +1,71 @@
-<header>
-  <h2 class="header__title">
-    {{ shop.name | link_to: routes.root_url }}
-  </h2>
+<header class="site-header" style="--header-accent: {{ section.settings.accent_color }};">
+  {% if section.settings.announcement != blank %}
+    <div class="site-header__announcement">{{ section.settings.announcement }}</div>
+  {% endif %}
 
-  <div class="header__menu">
-    {% for link in section.settings.menu.links %}
-      {{ link.title | link_to: link.url }}
-    {% endfor %}
-  </div>
-
-  <div class="header__icons">
-    {% if shop.customer_accounts_enabled %}
-      <shopify-account menu="{{ section.settings.customer_account_menu }}">
-        {{ 'icon-account.svg' | inline_asset_content }}
-      </shopify-account>
-    {% endif %}
-
-    <a href="{{ routes.cart_url }}">
-      {% if cart.item_count > 0 %}
-        <sup>{{ cart.item_count }}</sup>
+  <div class="site-header__inner">
+    <a class="site-header__brand" href="{{ routes.root_url }}" aria-label="{{ shop.name }} home">
+      {% if section.settings.logo %}
+        {{ section.settings.logo | image_url: width: 320 | image_tag: widths: '120, 180, 240, 320', alt: shop.name }}
+      {% else %}
+        <span class="site-header__mark">KMH</span>
+        <span>
+          <strong>{{ section.settings.brand_name | default: shop.name }}</strong>
+          {% if section.settings.tagline != blank %}<small>{{ section.settings.tagline }}</small>{% endif %}
+        </span>
       {% endif %}
-
-      {{ 'icon-cart.svg' | inline_asset_content }}
     </a>
+
+    <nav class="site-header__menu" aria-label="Main menu">
+      {% for link in section.settings.menu.links %}
+        {{ link.title | link_to: link.url }}
+      {% endfor %}
+    </nav>
+
+    <div class="site-header__icons">
+      <a class="site-header__search" href="{{ routes.search_url }}">Search</a>
+      {% if shop.customer_accounts_enabled %}
+        <shopify-account menu="{{ section.settings.customer_account_menu }}">
+          {{ 'icon-account.svg' | inline_asset_content }}
+        </shopify-account>
+      {% endif %}
+      <a class="site-header__cart" href="{{ routes.cart_url }}" aria-label="Cart">
+        {% if cart.item_count > 0 %}<sup>{{ cart.item_count }}</sup>{% endif %}
+        {{ 'icon-cart.svg' | inline_asset_content }}
+      </a>
+    </div>
   </div>
 </header>
 
 {% stylesheet %}
-  header {
-    height: 5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  header a {
-    position: relative;
-    text-decoration: none;
-    color: var(--color-foreground);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  header a sup {
-    position: absolute;
-    left: 100%;
-    overflow: hidden;
-    max-width: var(--page-margin);
-  }
-  header svg {
-    width: 2rem;
-  }
-  header .header__menu,
-  header .header__icons {
-    display: flex;
-    gap: 1rem;
-  }
+  .site-header { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--color-background), transparent 5%); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(47, 36, 28, .09); }
+  .site-header__announcement { background: var(--header-accent); color: #fff; text-align: center; padding: .55rem 1rem; font-weight: 800; font-size: .9rem; }
+  .site-header__inner { min-height: 5rem; display: flex; align-items: center; justify-content: space-between; gap: 1.25rem; width: min(var(--page-width), calc(100% - var(--page-margin) * 2)); margin-inline: auto; }
+  .site-header a { position: relative; text-decoration: none; color: var(--color-foreground); display: inline-flex; align-items: center; justify-content: center; }
+  .site-header__brand { gap: .75rem; flex-shrink: 0; }
+  .site-header__brand img { max-width: 180px; }
+  .site-header__brand strong { display: block; font-size: 1.15rem; }
+  .site-header__brand small { display: block; color: color-mix(in srgb, var(--color-foreground), transparent 35%); }
+  .site-header__mark { display: grid; place-items: center; width: 2.7rem; height: 2.7rem; border-radius: 50%; background: var(--header-accent); color: #fff; font-weight: 900; }
+  .site-header__menu, .site-header__icons { display: flex; align-items: center; gap: 1rem; }
+  .site-header__menu a { font-weight: 700; }
+  .site-header__search { border: 1px solid rgba(47, 36, 28, .14); border-radius: 999px; padding: .45rem .8rem; }
+  .site-header__cart sup { position: absolute; left: 70%; top: -.6rem; background: var(--header-accent); color: #fff; border-radius: 50%; min-width: 1.25rem; min-height: 1.25rem; display: grid; place-items: center; font-size: .75rem; }
+  .site-header svg { width: 1.8rem; }
+  @media (max-width: 820px) { .site-header__inner { flex-wrap: wrap; padding: .75rem 0; } .site-header__menu { order: 3; width: 100%; overflow-x: auto; padding-bottom: .25rem; } }
 {% endstylesheet %}
 
 {% schema %}
 {
   "name": "t:general.header",
   "settings": [
-    {
-      "type": "link_list",
-      "id": "menu",
-      "label": "t:labels.menu"
-    },
-    {
-      "type": "link_list",
-      "id": "customer_account_menu",
-      "label": "t:labels.customer_account_menu",
-      "default": "customer-account-main-menu"
-    }
+    { "type": "text", "id": "announcement", "label": "Announcement bar", "default": "Free mixer attachment guide with every order" },
+    { "type": "image_picker", "id": "logo", "label": "Logo" },
+    { "type": "text", "id": "brand_name", "label": "Brand name", "default": "KitchenMixHaven" },
+    { "type": "text", "id": "tagline", "label": "Tagline", "default": "Mixers for every maker" },
+    { "type": "color", "id": "accent_color", "label": "Accent color", "default": "#d65a31" },
+    { "type": "link_list", "id": "menu", "label": "t:labels.menu" },
+    { "type": "link_list", "id": "customer_account_menu", "label": "t:labels.customer_account_menu", "default": "customer-account-main-menu" }
   ]
 }
 {% endschema %}

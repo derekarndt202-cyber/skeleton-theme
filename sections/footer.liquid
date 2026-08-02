@@ -1,57 +1,40 @@
-<footer>
-  <div class="footer__copyright">
-    &copy;
-    {{ 'now' | date: '%Y' }}
-    {{ shop.name | link_to: routes.root_url }}, {{ powered_by_link }}
+<footer class="site-footer">
+  <div class="site-footer__brand">
+    <h2>{{ section.settings.heading }}</h2>
+    <p>{{ section.settings.text }}</p>
   </div>
-
-  <div class="footer__links">
+  <div class="site-footer__links">
     {% for link in section.settings.menu.links %}
       {{ link.title | link_to: link.url }}
     {% endfor %}
   </div>
-
-  <div class="footer__payment">
+  <div class="site-footer__bottom">
+    <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name | link_to: routes.root_url }}</span>
     {% if section.settings.show_payment_icons %}
-      {% for type in shop.enabled_payment_types %}
-        {{ type | payment_type_svg_tag }}
-      {% endfor %}
+      <span class="site-footer__payment">{% for type in shop.enabled_payment_types %}{{ type | payment_type_svg_tag }}{% endfor %}</span>
     {% endif %}
   </div>
 </footer>
 
 {% stylesheet %}
-  footer {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 2rem;
-  }
-  footer a {
-    text-decoration: none;
-    color: var(--color-foreground);
-  }
-  footer .footer__links,
-  footer .footer__payment {
-    display: flex;
-    gap: 1rem;
-  }
+  .site-footer { display: grid; gap: 2rem; margin-top: 2rem; padding: 3rem 0; border-top: 1px solid rgba(47, 36, 28, .1); }
+  .site-footer a { text-decoration: none; color: var(--color-foreground); }
+  .site-footer__brand { max-width: 58ch; }
+  .site-footer__brand h2 { font-size: clamp(1.8rem, 4vw, 3rem); }
+  .site-footer__brand p { margin-top: .75rem; line-height: 1.7; }
+  .site-footer__links, .site-footer__bottom, .site-footer__payment { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
+  .site-footer__bottom { justify-content: space-between; }
+  .site-footer__payment svg { width: 2.4rem; }
 {% endstylesheet %}
 
 {% schema %}
 {
   "name": "t:general.footer",
   "settings": [
-    {
-      "type": "link_list",
-      "id": "menu",
-      "label": "t:labels.menu"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_payment_icons",
-      "label": "t:labels.show_payment_icons",
-      "default": true
-    }
+    { "type": "text", "id": "heading", "label": "Footer heading", "default": "KitchenMixHaven" },
+    { "type": "textarea", "id": "text", "label": "Footer text", "default": "Tools, tips, and mixer essentials for confident home cooking." },
+    { "type": "link_list", "id": "menu", "label": "t:labels.menu" },
+    { "type": "checkbox", "id": "show_payment_icons", "label": "t:labels.show_payment_icons", "default": true }
   ]
 }
 {% endschema %}

@@ -10,11 +10,16 @@
 {
   "sections": {
     "main": {
-      "type": "hello-world",
+      "type": "kitchenmixhaven-home",
+      "blocks": {
+        "bread": { "type": "finder_card", "settings": { "icon": "🍞", "title": "Bread makers", "description": "High-torque mixers for dough and daily kneading.", "link": "/collections/all" } },
+        "bakers": { "type": "finder_card", "settings": { "icon": "🧁", "title": "Bakers", "description": "Cream, whip, and fold with precise speed control.", "link": "/collections/all" } },
+        "prep": { "type": "finder_card", "settings": { "icon": "🥗", "title": "Meal prep", "description": "Compact helpers for sauces, salads, and weeknights.", "link": "/collections/all" } },
+        "attachments": { "type": "finder_card", "settings": { "icon": "⚙️", "title": "Attachments", "description": "Pasta, grinder, slicer, and specialty tools.", "link": "/collections/all" } }
+      },
+      "block_order": ["bread", "bakers", "prep", "attachments"],
       "settings": {}
     }
   },
-  "order": [
-    "main"
-  ]
+  "order": ["main"]
 }

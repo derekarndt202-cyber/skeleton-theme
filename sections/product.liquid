@@ -1,52 +1,75 @@
 {% comment %}
-  This section is used in the product template to render product page with
-  media, content, and add-to-cart form.
-
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/product
+  Branded product page for KitchenMixHaven.
 {% endcomment %}
 
-<div class="product-images">
-  {% for image in product.images %}
-    {% render 'image', class: 'product-image', image: image %}
-  {% endfor %}
+<div class="kmh-product">
+  <div class="kmh-product__media">
+    {% for image in product.images %}
+      {% render 'image', class: 'kmh-product__image', image: image %}
+    {% else %}
+      <div class="kmh-product__placeholder">KitchenMixHaven</div>
+    {% endfor %}
+  </div>
+
+  <div class="kmh-product__info">
+    {% if section.settings.badge != blank %}<p class="kmh-product__badge">{{ section.settings.badge }}</p>{% endif %}
+    <h1>{{ product.title }}</h1>
+    <p class="kmh-product__price">{{ product.price | money }}</p>
+    <div class="kmh-product__description">{{ product.description }}</div>
+
+    <div class="kmh-product__highlights">
+      <span>{{ section.settings.highlight_1 }}</span>
+      <span>{{ section.settings.highlight_2 }}</span>
+      <span>{{ section.settings.highlight_3 }}</span>
+    </div>
+
+    <div class="kmh-product__form">
+      {% form 'product', product %}
+        {% assign current_variant = product.selected_or_first_available_variant %}
+        <label for="ProductSelect-{{ section.id }}">Choose your option</label>
+        <select id="ProductSelect-{{ section.id }}" name="id">
+          {% for variant in product.variants %}
+            <option value="{{ variant.id }}" {% if variant == current_variant %}selected="selected"{% endif %} {% unless variant.available %}disabled{% endunless %}>
+              {{ variant.title }} - {{ variant.price | money }}{% unless variant.available %} (Sold out){% endunless %}
+            </option>
+          {% endfor %}
+        </select>
+        <label for="Quantity-{{ section.id }}">Quantity</label>
+        <input id="Quantity-{{ section.id }}" type="number" name="quantity" min="1" value="1">
+        <button class="kmh-product__add" type="submit">Add to cart</button>
+        {{ form | payment_button }}
+      {% endform %}
+    </div>
+  </div>
 </div>
 
-<div class="product-info">
-  <h1>{{ product.title }}</h1>
-  <p>{{ product.price | money }}</p>
-  <p>{{ product.description }}</p>
-</div>
-
-<div class="product-form">
-  {% form 'product', product %}
-    {% assign current_variant = product.selected_or_first_available_variant %}
-
-    <select name="id">
-      {% for variant in product.variants %}
-        <option
-          value="{{ variant.id }}"
-          {% if variant == current_variant %}
-            selected="selected"
-          {% endif %}
-        >
-          {{ variant.title }} - {{ variant.price | money }}
-        </option>
-      {% endfor %}
-    </select>
-
-    <input type="text" name="quantity" min="1" value="1">
-
-    <input type="submit" value="Add to cart">
-    {{ form | payment_button }}
-  {% endform %}
-</div>
+{% stylesheet %}
+  .kmh-product { display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, .8fr); gap: 3rem; padding: 3rem 0; }
+  .kmh-product__media { display: grid; gap: 1rem; }
+  .kmh-product__image img, .kmh-product__placeholder { border-radius: 1.5rem; background: #fff4e7; }
+  .kmh-product__placeholder { min-height: 420px; display: grid; place-items: center; font-weight: 900; color: #d65a31; }
+  .kmh-product__info { position: sticky; top: 7rem; align-self: start; }
+  .kmh-product__badge { color: #d65a31; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+  .kmh-product__info h1 { font-size: clamp(2rem, 5vw, 4rem); line-height: 1; margin-top: .5rem; }
+  .kmh-product__price { font-size: 1.35rem; font-weight: 900; margin-top: 1rem; }
+  .kmh-product__description { line-height: 1.7; margin-top: 1.5rem; }
+  .kmh-product__highlights { display: grid; gap: .75rem; margin: 1.5rem 0; }
+  .kmh-product__highlights span { padding: .9rem 1rem; border-radius: 1rem; background: #fff4e7; font-weight: 800; }
+  .kmh-product__form form { display: grid; gap: .8rem; }
+  .kmh-product__form select, .kmh-product__form input { width: 100%; padding: .85rem; border: 1px solid rgba(47, 36, 28, .18); }
+  .kmh-product__add { border: 0; border-radius: 999px; padding: 1rem 1.25rem; background: #d65a31; color: #fff; font-weight: 900; cursor: pointer; }
+  @media (max-width: 900px) { .kmh-product { grid-template-columns: 1fr; } .kmh-product__info { position: static; } }
+{% endstylesheet %}
 
 {% schema %}
 {
   "name": "t:general.product",
-  "settings": [],
-  "disabled_on": {
-    "groups": ["header", "footer"]
-  }
+  "settings": [
+    { "type": "text", "id": "badge", "label": "Product badge", "default": "KitchenMixHaven pick" },
+    { "type": "text", "id": "highlight_1", "label": "Highlight 1", "default": "Mixer support before and after purchase" },
+    { "type": "text", "id": "highlight_2", "label": "Highlight 2", "default": "Curated for home cooks and bakers" },
+    { "type": "text", "id": "highlight_3", "label": "Highlight 3", "default": "Easy returns and secure checkout" }
+  ],
+  "disabled_on": { "groups": ["header", "footer"] }
 }
 {% endschema %}

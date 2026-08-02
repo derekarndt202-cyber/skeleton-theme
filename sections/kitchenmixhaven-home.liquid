@@ -1,0 +1,167 @@
+{% liquid
+  assign hero_collection = section.settings.hero_collection
+  assign featured_collection = section.settings.featured_collection
+%}
+
+<section class="kmh-home full-width" style="--kmh-accent: {{ section.settings.accent_color }}; --kmh-accent-2: {{ section.settings.secondary_color }}; --kmh-surface: {{ section.settings.surface_color }};">
+  <div class="kmh-hero">
+    <div class="kmh-hero__content">
+      {% if section.settings.eyebrow != blank %}
+        <p class="kmh-eyebrow">{{ section.settings.eyebrow }}</p>
+      {% endif %}
+      <h1>{{ section.settings.heading }}</h1>
+      <div class="kmh-hero__text">{{ section.settings.text }}</div>
+      <div class="kmh-actions">
+        {% if section.settings.primary_label != blank %}
+          <a class="kmh-button kmh-button--primary" href="{{ section.settings.primary_link }}">{{ section.settings.primary_label }}</a>
+        {% endif %}
+        {% if section.settings.secondary_label != blank %}
+          <a class="kmh-button kmh-button--secondary" href="{{ section.settings.secondary_link }}">{{ section.settings.secondary_label }}</a>
+        {% endif %}
+      </div>
+    </div>
+    <div class="kmh-hero__media">
+      {% if section.settings.hero_image %}
+        {{ section.settings.hero_image | image_url: width: 1200 | image_tag: loading: 'eager', alt: section.settings.heading }}
+      {% else %}
+        <div class="kmh-mixer-illustration" aria-hidden="true">
+          <div class="kmh-mixer-illustration__bowl"></div>
+          <div class="kmh-mixer-illustration__head"></div>
+          <div class="kmh-mixer-illustration__stand"></div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="kmh-trust-bar" aria-label="KitchenMixHaven store highlights">
+    <span>{{ section.settings.trust_item_1 }}</span>
+    <span>{{ section.settings.trust_item_2 }}</span>
+    <span>{{ section.settings.trust_item_3 }}</span>
+  </div>
+
+  <div class="kmh-content-grid">
+    <div class="kmh-finder">
+      <p class="kmh-eyebrow">{{ section.settings.finder_eyebrow }}</p>
+      <h2>{{ section.settings.finder_heading }}</h2>
+      <div class="kmh-finder__cards">
+        {% for block in section.blocks %}
+          {% if block.type == 'finder_card' %}
+            <a class="kmh-finder-card" href="{{ block.settings.link }}" {{ block.shopify_attributes }}>
+              <span class="kmh-finder-card__icon">{{ block.settings.icon }}</span>
+              <strong>{{ block.settings.title }}</strong>
+              <span>{{ block.settings.description }}</span>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="kmh-featured">
+      <div class="kmh-section-heading">
+        <div>
+          <p class="kmh-eyebrow">{{ section.settings.featured_eyebrow }}</p>
+          <h2>{{ section.settings.featured_heading }}</h2>
+        </div>
+        {% if featured_collection %}
+          <a href="{{ featured_collection.url }}">Shop all</a>
+        {% endif %}
+      </div>
+      <div class="kmh-products">
+        {% if featured_collection and featured_collection.products_count > 0 %}
+          {% for product in featured_collection.products limit: section.settings.products_to_show %}
+            <a class="kmh-product-card" href="{{ product.url }}">
+              {% if product.featured_image %}
+                {{ product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', alt: product.title }}
+              {% endif %}
+              <span>{{ product.title }}</span>
+              <strong>{{ product.price | money }}</strong>
+            </a>
+          {% endfor %}
+        {% else %}
+          {% for i in (1..4) %}
+            <div class="kmh-product-card kmh-product-card--placeholder">
+              <div></div>
+              <span>Featured mixer {{ i }}</span>
+              <strong>{{ 12999 | money }}</strong>
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .kmh-home { background: linear-gradient(180deg, var(--kmh-surface), #fff 45%); color: #2f241c; }
+  .kmh-hero, .kmh-content-grid, .kmh-trust-bar { width: min(var(--page-width), calc(100% - var(--page-margin) * 2)); margin-inline: auto; }
+  .kmh-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, .8fr); gap: 3rem; align-items: center; padding: 4rem 0 2rem; }
+  .kmh-eyebrow { color: var(--kmh-accent); font-weight: 800; letter-spacing: .12em; text-transform: uppercase; font-size: .8rem; margin-bottom: .75rem; }
+  .kmh-hero h1 { font-size: clamp(2.8rem, 7vw, 5.8rem); line-height: .9; max-width: 10ch; }
+  .kmh-hero__text { font-size: 1.15rem; line-height: 1.7; max-width: 58ch; margin-top: 1.25rem; }
+  .kmh-actions { display: flex; flex-wrap: wrap; gap: .9rem; margin-top: 2rem; }
+  .kmh-button { border-radius: 999px; padding: .9rem 1.35rem; font-weight: 800; text-decoration: none; }
+  .kmh-button--primary { background: var(--kmh-accent); color: #fff; }
+  .kmh-button--secondary { color: #2f241c; border: 2px solid color-mix(in srgb, var(--kmh-accent), transparent 65%); }
+  .kmh-hero__media { border-radius: 2rem; background: radial-gradient(circle at 30% 20%, #fff 0 25%, var(--kmh-accent-2) 26% 100%); min-height: 420px; display: grid; place-items: center; overflow: hidden; box-shadow: 0 24px 80px rgba(87, 46, 15, .16); }
+  .kmh-hero__media img { width: 100%; height: 100%; object-fit: cover; }
+  .kmh-mixer-illustration { position: relative; width: 280px; height: 280px; }
+  .kmh-mixer-illustration__head { position: absolute; width: 210px; height: 95px; background: var(--kmh-accent); border-radius: 58% 42% 45% 55%; top: 35px; left: 35px; }
+  .kmh-mixer-illustration__stand { position: absolute; width: 56px; height: 150px; background: #68442f; border-radius: 28px; left: 112px; top: 92px; }
+  .kmh-mixer-illustration__bowl { position: absolute; width: 220px; height: 110px; background: #fff8ee; border: 8px solid #68442f; border-radius: 0 0 110px 110px; bottom: 10px; left: 30px; }
+  .kmh-trust-bar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; padding: 1rem; border-radius: 1.25rem; background: #fff; box-shadow: 0 12px 40px rgba(47, 36, 28, .08); }
+  .kmh-trust-bar span { text-align: center; font-weight: 800; }
+  .kmh-content-grid { display: grid; gap: 3rem; padding: 3rem 0 4rem; }
+  .kmh-section-heading { display: flex; align-items: end; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
+  .kmh-section-heading h2, .kmh-finder h2 { font-size: clamp(1.8rem, 4vw, 3rem); }
+  .kmh-finder__cards, .kmh-products { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+  .kmh-finder-card, .kmh-product-card { background: #fff; border: 1px solid rgba(47, 36, 28, .1); border-radius: 1.25rem; padding: 1.15rem; color: inherit; text-decoration: none; box-shadow: 0 12px 35px rgba(47, 36, 28, .06); }
+  .kmh-finder-card { display: grid; gap: .5rem; }
+  .kmh-finder-card__icon { font-size: 2rem; }
+  .kmh-product-card img, .kmh-product-card--placeholder div { aspect-ratio: 1; object-fit: cover; width: 100%; border-radius: 1rem; background: var(--kmh-surface); margin-bottom: .9rem; }
+  .kmh-product-card span, .kmh-product-card strong { display: block; }
+  @media (max-width: 900px) { .kmh-hero, .kmh-finder__cards, .kmh-products, .kmh-trust-bar { grid-template-columns: 1fr; } .kmh-hero__media { min-height: 300px; } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "KitchenMixHaven home",
+  "settings": [
+    { "type": "color", "id": "accent_color", "label": "Accent color", "default": "#d65a31" },
+    { "type": "color", "id": "secondary_color", "label": "Secondary hero color", "default": "#ffd8a8" },
+    { "type": "color", "id": "surface_color", "label": "Soft background", "default": "#fff4e7" },
+    { "type": "text", "id": "eyebrow", "label": "Hero eyebrow", "default": "KitchenMixHaven" },
+    { "type": "text", "id": "heading", "label": "Hero heading", "default": "Mix better meals, bakes, and memories." },
+    { "type": "richtext", "id": "text", "label": "Hero text", "default": "<p>Premium stand mixers, hand mixers, attachments, and expert picks for every home cook—from weekday prep to bakery-level projects.</p>" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image" },
+    { "type": "text", "id": "primary_label", "label": "Primary button label", "default": "Shop mixers" },
+    { "type": "url", "id": "primary_link", "label": "Primary button link", "default": "/collections/all" },
+    { "type": "text", "id": "secondary_label", "label": "Secondary button label", "default": "Find my mixer" },
+    { "type": "url", "id": "secondary_link", "label": "Secondary button link", "default": "/pages/contact" },
+    { "type": "text", "id": "trust_item_1", "label": "Trust item 1", "default": "Curated mixer picks" },
+    { "type": "text", "id": "trust_item_2", "label": "Trust item 2", "default": "Attachments made simple" },
+    { "type": "text", "id": "trust_item_3", "label": "Trust item 3", "default": "Fast support for home cooks" },
+    { "type": "text", "id": "finder_eyebrow", "label": "Finder eyebrow", "default": "Shop by kitchen style" },
+    { "type": "text", "id": "finder_heading", "label": "Finder heading", "default": "Choose the right mixer faster" },
+    { "type": "text", "id": "featured_eyebrow", "label": "Featured eyebrow", "default": "Customer favorites" },
+    { "type": "text", "id": "featured_heading", "label": "Featured heading", "default": "Mixer essentials" },
+    { "type": "collection", "id": "featured_collection", "label": "Featured collection" },
+    { "type": "range", "id": "products_to_show", "label": "Products to show", "min": 2, "max": 8, "step": 1, "default": 4 }
+  ],
+  "blocks": [
+    { "type": "finder_card", "name": "Finder card", "settings": [
+      { "type": "text", "id": "icon", "label": "Icon", "default": "🍞" },
+      { "type": "text", "id": "title", "label": "Title", "default": "Bread makers" },
+      { "type": "text", "id": "description", "label": "Description", "default": "High-torque mixers for dough and daily kneading." },
+      { "type": "url", "id": "link", "label": "Link", "default": "/collections/all" }
+    ] }
+  ],
+  "presets": [
+    { "name": "KitchenMixHaven home", "blocks": [
+      { "type": "finder_card", "settings": { "icon": "🍞", "title": "Bread makers", "description": "High-torque mixers for dough and daily kneading." } },
+      { "type": "finder_card", "settings": { "icon": "🧁", "title": "Bakers", "description": "Cream, whip, and fold with precise speed control." } },
+      { "type": "finder_card", "settings": { "icon": "🥗", "title": "Meal prep", "description": "Compact helpers for sauces, salads, and weeknights." } },
+      { "type": "finder_card", "settings": { "icon": "⚙️", "title": "Attachments", "description": "Expand your mixer with pasta, grinder, and slicer tools." } }
+    ] }
+  ]
+}
+{% endschema %}
