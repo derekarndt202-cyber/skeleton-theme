@@ -42,7 +42,7 @@
       "settings": {
         "eyebrow": "KitchenMixHaven Collection",
         "heading": "Featured Stand & Hand Mixers",
-        "collection": "frontpage",
+        "collection": "all-products",
         "products_to_show": 8,
         "show_vendor": true,
         "show_rating": true,
