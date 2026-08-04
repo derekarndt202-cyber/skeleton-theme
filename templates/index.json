@@ -98,6 +98,7 @@
     },
     "instagram": {
       "type": "instagram-gallery",
+      "disabled": true,
       "settings": {
         "eyebrow": "#KitchenMixHaven",
         "heading": "Shop The Look",
