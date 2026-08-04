@@ -16,7 +16,7 @@
     <!-- Filter Toolbar -->
     <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--kmh-border);">
       <div style="font-weight: 600; font-size: 0.9rem; color: #64748B;">
-        Showing <strong style="color: var(--kmh-navy);">12 Products</strong>
+        Showing <strong style="color: var(--kmh-navy);">{{ collection.products_count | default: 8 }} Products</strong>
       </div>
 
       <div style="display: flex; align-items: center; gap: 1rem;">
@@ -84,33 +84,67 @@
       <!-- Collection Product Grid -->
       <div>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
-          {% assign titles = "Artisan 7.5QT Stand Mixer|Pro-Blend 1800W Blender|Barista Touch Espresso|XL Dual Air Fryer 10QT|Precision Multi Food Processor|Countertop Smart Oven|Commercial Meat Grinder|Precision Espresso Grinder" | split: "|" %}
-          {% assign prices = "$499.00|$279.00|$699.00|$219.00|$189.00|$349.00|$299.00|$399.00" | split: "|" %}
-
-          {% for item in titles %}
-            {% assign idx = forloop.index0 %}
-            <div class="kmh-card kmh-product-card">
-              <div class="kmh-product-card__image-wrapper">
-                <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle, var(--kmh-bg-light), #E2E8F0);">
-                  <svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="var(--kmh-navy)" stroke-width="1.2"><rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="12" cy="12" r="4"/></svg>
+          {% if collection != blank and collection.products.size > 0 %}
+            {% for product in collection.products %}
+              <div class="kmh-card kmh-product-card">
+                <div class="kmh-product-card__image-wrapper">
+                  {% if product.featured_media %}
+                    <img class="kmh-product-card__image" src="{{ product.featured_media | image_url: width: 600 }}" alt="{{ product.title | escape }}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
+                  {% else %}
+                    <div style="width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: radial-gradient(circle, var(--kmh-bg-light), #E2E8F0); padding: 1rem; text-align: center;">
+                      <svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="var(--kmh-navy)" stroke-width="1.2"><rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="12" cy="12" r="4"/></svg>
+                      <div style="font-size: 0.75rem; font-weight: 700; color: var(--kmh-navy); margin-top: 8px;">kitchenmixhaven</div>
+                    </div>
+                  {% endif %}
+                  <div class="kmh-product-card__actions">
+                    <button class="kmh-icon-btn" data-wishlist-toggle data-product-id="{{ product.id }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l8.72-8.72 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+                    <button class="kmh-icon-btn" data-quickview data-title="{{ product.title | escape }}" data-price="{{ product.price | money }}" data-image="{% if product.featured_media %}{{ product.featured_media | image_url: width: 600 }}{% endif %}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                  </div>
                 </div>
-                <div class="kmh-product-card__actions">
-                  <button class="kmh-icon-btn" data-wishlist-toggle data-product-id="col-prod-{{ idx }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l8.72-8.72 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
-                  <button class="kmh-icon-btn" data-quickview data-title="{{ item }}" data-price="{{ prices[idx] }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+
+                <div class="kmh-product-card__content">
+                  <span class="kmh-product-card__brand">{{ product.vendor | default: 'KitchenMixHaven' }}</span>
+                  <h3 class="kmh-product-card__title"><a href="{{ product.url }}">{{ product.title }}</a></h3>
+                  <div class="kmh-rating">★★★★★ <span style="color:#64748B; font-size:0.75rem;">(4.9)</span></div>
+                  <div class="kmh-product-card__price-row">
+                    <span class="kmh-price">{{ product.price | money }}</span>
+                    {% if product.compare_at_price > product.price %}
+                      <span class="kmh-price--compare">{{ product.compare_at_price | money }}</span>
+                    {% endif %}
+                  </div>
+                  <button class="kmh-btn kmh-btn-primary kmh-btn-sm" style="margin-top: 1rem; width: 100%;" onclick="KMH_OpenCart()">Add to Cart</button>
                 </div>
               </div>
+            {% endfor %}
+          {% else %}
+            {% assign titles = "Artisan 7.5QT Stand Mixer|Pro-Blend 1800W Blender|Barista Touch Espresso|XL Dual Air Fryer 10QT|Precision Multi Food Processor|Countertop Smart Oven|Commercial Meat Grinder|Precision Espresso Grinder" | split: "|" %}
+            {% assign prices = "$499.00|$279.00|$699.00|$219.00|$189.00|$349.00|$299.00|$399.00" | split: "|" %}
 
-              <div class="kmh-product-card__content">
-                <span class="kmh-product-card__brand">KitchenMixHaven</span>
-                <h3 class="kmh-product-card__title"><a href="/products/appliance">{{ item }}</a></h3>
-                <div class="kmh-rating">★★★★★ <span style="color:#64748B; font-size:0.75rem;">(4.9)</span></div>
-                <div class="kmh-product-card__price-row">
-                  <span class="kmh-price">{{ prices[idx] }}</span>
+            {% for item in titles %}
+              {% assign idx = forloop.index0 %}
+              <div class="kmh-card kmh-product-card">
+                <div class="kmh-product-card__image-wrapper">
+                  <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle, var(--kmh-bg-light), #E2E8F0);">
+                    <svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="var(--kmh-navy)" stroke-width="1.2"><rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="12" cy="12" r="4"/></svg>
+                  </div>
+                  <div class="kmh-product-card__actions">
+                    <button class="kmh-icon-btn" data-wishlist-toggle data-product-id="col-prod-{{ idx }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l8.72-8.72 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+                    <button class="kmh-icon-btn" data-quickview data-title="{{ item }}" data-price="{{ prices[idx] }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                  </div>
                 </div>
-                <button class="kmh-btn kmh-btn-primary kmh-btn-sm" style="margin-top: 1rem; width: 100%;" onclick="KMH_OpenCart()">Add to Cart</button>
+
+                <div class="kmh-product-card__content">
+                  <span class="kmh-product-card__brand">KitchenMixHaven</span>
+                  <h3 class="kmh-product-card__title"><a href="/products/appliance">{{ item }}</a></h3>
+                  <div class="kmh-rating">★★★★★ <span style="color:#64748B; font-size:0.75rem;">(4.9)</span></div>
+                  <div class="kmh-product-card__price-row">
+                    <span class="kmh-price">{{ prices[idx] }}</span>
+                  </div>
+                  <button class="kmh-btn kmh-btn-primary kmh-btn-sm" style="margin-top: 1rem; width: 100%;" onclick="KMH_OpenCart()">Add to Cart</button>
+                </div>
               </div>
-            </div>
-          {% endfor %}
+            {% endfor %}
+          {% endif %}
         </div>
       </div>
 

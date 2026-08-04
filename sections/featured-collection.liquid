@@ -1,5 +1,8 @@
 {% liquid
   assign featured_collection = section.settings.collection
+  if featured_collection == blank
+    assign featured_collection = collections['all']
+  endif
   assign products_limit = section.settings.products_to_show | default: 8
 %}
 
@@ -31,6 +34,7 @@
               {% else %}
                 <div style="width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: radial-gradient(circle, var(--kmh-bg-light), #E2E8F0); padding: 1rem; text-align: center;">
                   <svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="var(--kmh-navy)" stroke-width="1.2"><rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="12" cy="12" r="4"/></svg>
+                  <div style="font-size: 0.75rem; font-weight: 700; color: var(--kmh-navy); margin-top: 8px;">kitchenmixhaven</div>
                 </div>
               {% endif %}
 
@@ -46,7 +50,7 @@
                 <button class="kmh-icon-btn" data-wishlist-toggle data-product-id="{{ product.id }}" aria-label="Add to Wishlist">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l8.72-8.72 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
                 </button>
-                <button class="kmh-icon-btn" data-quickview data-title="{{ product.title | escape }}" data-price="{{ product.price | money }}" data-image="{{ product.featured_media | image_url: width: 600 }}" aria-label="Quick View">
+                <button class="kmh-icon-btn" data-quickview data-title="{{ product.title | escape }}" data-price="{{ product.price | money }}" data-image="{% if product.featured_media %}{{ product.featured_media | image_url: width: 600 }}{% endif %}" aria-label="Quick View">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                 </button>
               </div>
@@ -67,8 +71,14 @@
                 {% endif %}
               </div>
 
+              {% if section.settings.show_rating %}
+                <div class="kmh-rating">
+                  ★★★★★ <span style="color: #64748B; font-size: 0.75rem;">(Verified Active)</span>
+                </div>
+              {% endif %}
+
               <button class="kmh-btn kmh-btn-primary kmh-btn-sm" style="margin-top: 1rem; width: 100%;" onclick="KMH_OpenCart()">
-                Add to Cart
+                View & Add to Cart
               </button>
             </div>
           </div>
