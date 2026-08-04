@@ -1,30 +1,46 @@
+{% liquid
+  assign all_prods = collections['all'].products
+  assign martha_product = nil
+  assign kitchenaid_product = nil
+  assign kitchen_in_the_box_product = nil
+  assign hamilton_beach_product = nil
+
+  for prod in all_prods
+    if prod.title contains 'Martha Stewart'
+      assign martha_product = prod
+    elsif prod.title contains 'KitchenAid'
+      assign kitchenaid_product = prod
+    elsif prod.title contains 'Kitchen in the box'
+      assign kitchen_in_the_box_product = prod
+    elsif prod.title contains 'Hamilton Beach'
+      assign hamilton_beach_product = prod
+    endif
+  endfor
+%}
+
 <div class="kmh-configurator-page kmh-section-padding">
   <div class="kmh-container">
     
     <div class="kmh-section-header">
       <span class="kmh-subtitle">KitchenMixHaven Studio</span>
       <h1 class="kmh-title">Custom Mixer Finish & Capacity Studio</h1>
-      <p class="kmh-description">Customize designer metallic finishes (Gunmetal, Champagne Bronze, Slate Blue, Onyx Black) and bowl capacity options.</p>
+      <p class="kmh-description">Customize designer metallic finishes and bowl capacity options matching your kitchen space.</p>
     </div>
 
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3.5rem; align-items: start;">
       
       <!-- Visual Interactive Preview Stage -->
       <div class="kmh-card" style="padding: 2rem; position: sticky; top: 100px; text-align: center;">
-        <div style="background: var(--kmh-bg-light); border-radius: 14px; padding: 2rem; border: 1px solid var(--kmh-border); margin-bottom: 1.5rem; position: relative;">
-          <svg width="140" height="140" viewBox="0 0 24 24" fill="none" stroke="var(--kmh-gold)" stroke-width="1.2" style="margin: 0 auto;">
-            <rect x="4" y="4" width="16" height="16" rx="4"/>
-            <circle cx="12" cy="12" r="4"/>
-          </svg>
-          <span class="kmh-badge kmh-badge--bestseller" style="position: absolute; top: 12px; left: 12px;">Active Catalog Build</span>
+        <div id="KMH-PreviewContainer" style="background: var(--kmh-bg-light); border-radius: 14px; padding: 2rem; border: 1px solid var(--kmh-border); margin-bottom: 1.5rem; position: relative; min-height: 220px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+          <!-- Rendered dynamically by JS -->
         </div>
 
         <h3 style="font-family: var(--font-heading); font-size: 1.6rem;" id="KMH-ConfigSummaryTitle">Stand Mixer Precision Edition</h3>
-        <div style="color: #64748B; font-size: 0.9rem; margin-bottom: 1rem;" id="KMH-ConfigSummarySpecs">Gunmetal finish &bull; 5.3Qt Stainless Steel Bowl</div>
+        <div style="color: #64748B; font-size: 0.9rem; margin-bottom: 1rem;" id="KMH-ConfigSummarySpecs">Loading options...</div>
         
-        <div style="font-size: 1.8rem; font-weight: 700; color: var(--kmh-navy); margin-bottom: 1.5rem;" id="KMH-ConfigPrice">Vendor: kitchenmixhaven</div>
+        <div style="font-size: 1.8rem; font-weight: 700; color: var(--kmh-navy); margin-bottom: 1.5rem;" id="KMH-ConfigPrice">Calculated Price</div>
 
-        <button class="kmh-btn kmh-btn-gold kmh-btn-full" onclick="KMH_OpenCart()">
+        <button class="kmh-btn kmh-btn-gold kmh-btn-full" id="KMH-AddToCartBtn">
           Add Custom System to Cart
         </button>
       </div>
@@ -37,19 +53,8 @@
           <span style="color: var(--kmh-gold); font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;">Step 1</span>
           <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin: 4px 0 1rem;">Choose Designer Metallic Finish</h3>
           
-          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
-            <button class="kmh-btn kmh-btn-secondary" style="justify-content: flex-start;" onclick="updateConfig('Gunmetal Metallic', 'Stainless Steel Bowl')">
-              <span style="width: 16px; height: 16px; border-radius: 50%; background: #475569; display: inline-block;"></span> Gunmetal Metallic
-            </button>
-            <button class="kmh-btn kmh-btn-secondary" style="justify-content: flex-start;" onclick="updateConfig('Champagne Bronze', 'Metallic Finish')">
-              <span style="width: 16px; height: 16px; border-radius: 50%; background: #D4AF37; display: inline-block;"></span> Champagne Bronze
-            </button>
-            <button class="kmh-btn kmh-btn-secondary" style="justify-content: flex-start;" onclick="updateConfig('Slate Blue', 'Precision Control')">
-              <span style="width: 16px; height: 16px; border-radius: 50%; background: #334155; display: inline-block;"></span> Slate Blue
-            </button>
-            <button class="kmh-btn kmh-btn-secondary" style="justify-content: flex-start;" onclick="updateConfig('Onyx Black', 'KitchenAid Classic Series')">
-              <span style="width: 16px; height: 16px; border-radius: 50%; background: #0F172A; display: inline-block;"></span> Onyx Black
-            </button>
+          <div id="KMH-FinishContainer" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
+            <!-- Rendered dynamically by JS -->
           </div>
         </div>
 
@@ -58,22 +63,8 @@
           <span style="color: var(--kmh-gold); font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;">Step 2</span>
           <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin: 4px 0 1rem;">Select Model Capacity & Speed Tier</h3>
           
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
-            <label style="border: 1px solid var(--kmh-border); border-radius: 8px; padding: 1rem; display: block; cursor: pointer;">
-              <input type="radio" name="capacity" checked onclick="updateCapacity('Martha Stewart 5.3Qt 12-Speed')">
-              <strong>Martha Stewart 5.3Qt</strong>
-              <div style="font-size: 0.8rem; color: #64748B;">12-Speed Tilt-Head (5 Variants)</div>
-            </label>
-            <label style="border: 1px solid var(--kmh-border); border-radius: 8px; padding: 1rem; display: block; cursor: pointer;">
-              <input type="radio" name="capacity" onclick="updateCapacity('KitchenAid Classic 4.5Qt')">
-              <strong>KitchenAid Classic 4.5Qt</strong>
-              <div style="font-size: 0.8rem; color: #64748B;">K45SS Series (Onyx Black)</div>
-            </label>
-            <label style="border: 1px solid var(--kmh-border); border-radius: 8px; padding: 1rem; display: block; cursor: pointer;">
-              <input type="radio" name="capacity" onclick="updateCapacity('Kitchen in the box 3.2Qt')">
-              <strong>Kitchen in the box 3.2Qt</strong>
-              <div style="font-size: 0.8rem; color: #64748B;">6-Speed Portable (10 Variants)</div>
-            </label>
+          <div id="KMH-CapacityContainer" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+            <!-- Rendered dynamically by JS -->
           </div>
         </div>
 
@@ -83,10 +74,21 @@
           <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin: 4px 0 1rem;">Add Companion Hand Mixer</h3>
           
           <div style="display: flex; flex-direction: column; gap: 10px;">
-            <label style="display: flex; align-items: center; justify-content: space-between; border: 1px solid var(--kmh-border); border-radius: 8px; padding: 0.8rem 1rem;">
-              <span><input type="checkbox"> Hamilton Beach 6-Speed Hand Mixer with QuickBurst (250W)</span>
-              <strong>In Stock (2 Variants)</strong>
-            </label>
+            {% if hamilton_beach_product != blank and hamilton_beach_product.available %}
+              <label style="display: flex; align-items: center; justify-content: space-between; border: 1px solid var(--kmh-border); border-radius: 8px; padding: 0.8rem 1rem; cursor: pointer;">
+                <span style="display: flex; align-items: center; gap: 8px;">
+                  <input type="checkbox" id="KMH-AddHandMixer"> 
+                  {{ hamilton_beach_product.title | truncate: 50 }}
+                  (<span id="KMH-HandMixerPrice">{{ hamilton_beach_product.price | money }}</span>)
+                </span>
+                <strong style="color: var(--kmh-success);">In Stock</strong>
+              </label>
+            {% else %}
+              <label style="display: flex; align-items: center; justify-content: space-between; border: 1px solid var(--kmh-border); border-radius: 8px; padding: 0.8rem 1rem; opacity: 0.5;">
+                <span>Hamilton Beach Companion Mixer (Out of Stock)</span>
+                <strong>Unavailable</strong>
+              </label>
+            {% endif %}
           </div>
         </div>
 
@@ -98,22 +100,291 @@
 </div>
 
 <script>
-  let currentFinish = 'Gunmetal Metallic';
-  let currentCapacity = '5.3Qt Stainless Steel Bowl';
+  const configuratorProducts = {
+    martha: {% if martha_product != blank %}{
+      id: {{ martha_product.id | json }},
+      title: {{ martha_product.title | json }},
+      url: {{ martha_product.url | json }},
+      variants: [
+        {% for variant in martha_product.variants %}
+          {
+            id: {{ variant.id | json }},
+            title: {{ variant.title | json }},
+            price: {{ variant.price | money | json }},
+            raw_price: {{ variant.price | json }},
+            available: {{ variant.available | json }},
+            image: {% if variant.featured_media %}{{ variant.featured_media | image_url: width: 600 | json }}{% else %}{{ martha_product.featured_media | image_url: width: 600 | json }}{% endif %}
+          }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ]
+    }{% else %}null{% endif %},
+    
+    kitchenaid: {% if kitchenaid_product != blank %}{
+      id: {{ kitchenaid_product.id | json }},
+      title: {{ kitchenaid_product.title | json }},
+      url: {{ kitchenaid_product.url | json }},
+      variants: [
+        {% for variant in kitchenaid_product.variants %}
+          {
+            id: {{ variant.id | json }},
+            title: {{ variant.title | json }},
+            price: {{ variant.price | money | json }},
+            raw_price: {{ variant.price | json }},
+            available: {{ variant.available | json }},
+            image: {% if variant.featured_media %}{{ variant.featured_media | image_url: width: 600 | json }}{% else %}{{ kitchenaid_product.featured_media | image_url: width: 600 | json }}{% endif %}
+          }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ]
+    }{% else %}null{% endif %},
 
-  function renderSummary() {
-    document.querySelector('#KMH-ConfigSummarySpecs').textContent = `${currentFinish} finish • ${currentCapacity}`;
+    kitchen_in_the_box: {% if kitchen_in_the_box_product != blank %}{
+      id: {{ kitchen_in_the_box_product.id | json }},
+      title: {{ kitchen_in_the_box_product.title | json }},
+      url: {{ kitchen_in_the_box_product.url | json }},
+      variants: [
+        {% for variant in kitchen_in_the_box_product.variants %}
+          {
+            id: {{ variant.id | json }},
+            title: {{ variant.title | json }},
+            price: {{ variant.price | money | json }},
+            raw_price: {{ variant.price | json }},
+            available: {{ variant.available | json }},
+            image: {% if variant.featured_media %}{{ variant.featured_media | image_url: width: 600 | json }}{% else %}{{ kitchen_in_the_box_product.featured_media | image_url: width: 600 | json }}{% endif %}
+          }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ]
+    }{% else %}null{% endif %},
+
+    hamilton_beach: {% if hamilton_beach_product != blank %}{
+      id: {{ hamilton_beach_product.id | json }},
+      title: {{ hamilton_beach_product.title | json }},
+      url: {{ hamilton_beach_product.url | json }},
+      variants: [
+        {% for variant in hamilton_beach_product.variants %}
+          {
+            id: {{ variant.id | json }},
+            title: {{ variant.title | json }},
+            price: {{ variant.price | money | json }},
+            raw_price: {{ variant.price | json }},
+            available: {{ variant.available | json }}
+          }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ]
+    }{% else %}null{% endif %}
+  };
+
+  let selectedProductKey = 'martha';
+  let selectedVariantIndex = 0;
+
+  function getColorHex(colorName) {
+    const name = colorName.toLowerCase();
+    if (name.includes('gunmetal')) return '#475569';
+    if (name.includes('champagne') || name.includes('bronze') || name.includes('gold')) return '#D4AF37';
+    if (name.includes('slate') || name.includes('blue')) return '#334155';
+    if (name.includes('black') || name.includes('onyx')) return '#0F172A';
+    if (name.includes('red')) return '#DC2626';
+    if (name.includes('silver') || name.includes('chrome')) return '#CBD5E1';
+    if (name.includes('white')) return '#F8FAFC';
+    if (name.includes('pink')) return '#F472B6';
+    if (name.includes('green')) return '#16A34A';
+    return '#64748B';
   }
 
-  function updateConfig(finish, details) {
-    currentFinish = finish;
-    renderSummary();
+  function renderCapacities() {
+    const container = document.querySelector('#KMH-CapacityContainer');
+    if (!container) return;
+
+    let html = '';
+    const keys = ['martha', 'kitchenaid', 'kitchen_in_the_box'];
+    
+    keys.forEach(key => {
+      const prod = configuratorProducts[key];
+      if (!prod) return;
+
+      const isChecked = selectedProductKey === key;
+      html += `
+        <label style="border: 2px solid ${isChecked ? 'var(--kmh-gold)' : 'var(--kmh-border)'}; border-radius: 8px; padding: 1rem; display: block; cursor: pointer; background: ${isChecked ? 'rgba(212, 175, 55, 0.04)' : '#FFFFFF'}; transition: all 0.2s ease;">
+          <input type="radio" name="capacity" ${isChecked ? 'checked' : ''} onchange="selectProduct('${key}')" style="accent-color: var(--kmh-gold);">
+          <strong style="display: block; margin-top: 6px; color: var(--kmh-navy);">${key === 'martha' ? 'Martha Stewart 5.3Qt' : key === 'kitchenaid' ? 'KitchenAid Classic 4.5Qt' : 'Kitchen in the box 3.2Qt'}</strong>
+          <div style="font-size: 0.8rem; color: #64748B; margin-top: 4px;">${prod.variants.length} variant(s)</div>
+        </label>
+      `;
+    });
+
+    container.innerHTML = html;
   }
 
-  function updateCapacity(capacity) {
-    currentCapacity = capacity;
-    renderSummary();
+  function renderFinishes() {
+    const container = document.querySelector('#KMH-FinishContainer');
+    if (!container) return;
+
+    const prod = configuratorProducts[selectedProductKey];
+    if (!prod) {
+      container.innerHTML = '<div style="color: #64748B;">No options available</div>';
+      return;
+    }
+
+    let html = '';
+    prod.variants.forEach((variant, index) => {
+      const isSelected = selectedVariantIndex === index;
+      const colorHex = getColorHex(variant.title);
+      
+      html += `
+        <button class="kmh-btn kmh-btn-secondary" style="justify-content: flex-start; text-align: left; font-size: 0.85rem; padding: 0.8rem 1rem; border-width: 2px; border-color: ${isSelected ? 'var(--kmh-gold)' : 'var(--kmh-border)'}; background: ${isSelected ? 'rgba(212, 175, 55, 0.04)' : '#FFFFFF'};" onclick="selectVariant(${index})">
+          <span style="width: 16px; height: 16px; border-radius: 50%; background: ${colorHex}; display: inline-block; border: 1px solid rgba(0,0,0,0.15); margin-right: 8px; flex-shrink: 0;"></span> 
+          ${variant.title}
+        </button>
+      `;
+    });
+
+    container.innerHTML = html;
   }
+
+  function selectProduct(key) {
+    selectedProductKey = key;
+    selectedVariantIndex = 0;
+    updatePage();
+  }
+
+  function selectVariant(index) {
+    selectedVariantIndex = index;
+    updatePage();
+  }
+
+  function updatePage() {
+    const prod = configuratorProducts[selectedProductKey];
+    if (!prod) return;
+
+    const variant = prod.variants[selectedVariantIndex];
+    if (!variant) return;
+
+    renderCapacities();
+    renderFinishes();
+
+    // Update Visual Preview Image
+    const previewContainer = document.querySelector('#KMH-PreviewContainer');
+    if (previewContainer) {
+      if (variant.image) {
+        previewContainer.innerHTML = `
+          <img src="${variant.image}" alt="${variant.title}" style="max-width: 100%; max-height: 200px; object-fit: contain; border-radius: 8px;">
+          <span class="kmh-badge kmh-badge--bestseller" style="position: absolute; top: 12px; left: 12px;">Active Catalog Build</span>
+        `;
+      } else {
+        previewContainer.innerHTML = `
+          <div style="text-align: center;">
+            <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="var(--kmh-gold)" stroke-width="1.2" style="margin: 0 auto 8px;">
+              <rect x="4" y="4" width="16" height="16" rx="4"/>
+              <circle cx="12" cy="12" r="4"/>
+            </svg>
+            <div style="font-family: var(--font-heading); color: var(--kmh-navy); font-size: 0.85rem; font-weight: 700;">kitchenmixhaven</div>
+          </div>
+          <span class="kmh-badge kmh-badge--bestseller" style="position: absolute; top: 12px; left: 12px;">Active Catalog Build</span>
+        `;
+      }
+    }
+
+    // Update Details and Price
+    document.querySelector('#KMH-ConfigSummaryTitle').textContent = prod.title;
+    document.querySelector('#KMH-ConfigSummarySpecs').innerHTML = `Selected Option: <strong>${variant.title}</strong>`;
+    
+    updatePrice();
+  }
+
+  function updatePrice() {
+    const prod = configuratorProducts[selectedProductKey];
+    const variant = prod?.variants[selectedVariantIndex];
+    if (!variant) return;
+
+    let totalPrice = variant.raw_price;
+    
+    const companionCheckbox = document.querySelector('#KMH-AddHandMixer');
+    const companionProd = configuratorProducts.hamilton_beach;
+    if (companionCheckbox && companionCheckbox.checked && companionProd && companionProd.variants[0]) {
+      totalPrice += companionProd.variants[0].raw_price;
+    }
+
+    const formattedPrice = themeFormatMoney(totalPrice);
+    document.querySelector('#KMH-ConfigPrice').textContent = formattedPrice;
+  }
+
+  function themeFormatMoney(cents) {
+    return '$' + (cents / 100).toFixed(2);
+  }
+
+  function handleAddToCart() {
+    const prod = configuratorProducts[selectedProductKey];
+    const variant = prod?.variants[selectedVariantIndex];
+    if (!variant) return;
+
+    const btn = document.querySelector('#KMH-AddToCartBtn');
+    btn.disabled = true;
+    btn.textContent = 'Adding to Cart...';
+
+    const itemsToAdd = [
+      {
+        id: variant.id,
+        quantity: 1
+      }
+    ];
+
+    const companionCheckbox = document.querySelector('#KMH-AddHandMixer');
+    const companionProd = configuratorProducts.hamilton_beach;
+    if (companionCheckbox && companionCheckbox.checked && companionProd && companionProd.variants[0]) {
+      itemsToAdd.push({
+        id: companionProd.variants[0].id,
+        quantity: 1
+      });
+    }
+
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ items: itemsToAdd })
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      btn.textContent = 'Added!';
+      sessionStorage.setItem('open_cart', 'true');
+      window.location.reload();
+    })
+    .catch(error => {
+      console.error('Error adding to cart:', error);
+      btn.disabled = false;
+      btn.textContent = 'Add Custom System to Cart';
+      alert('Could not add to cart. Please try again.');
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Setup listeners
+    const companionCheckbox = document.querySelector('#KMH-AddHandMixer');
+    if (companionCheckbox) {
+      companionCheckbox.addEventListener('change', updatePrice);
+    }
+
+    const addToCartBtn = document.querySelector('#KMH-AddToCartBtn');
+    if (addToCartBtn) {
+      addToCartBtn.addEventListener('click', handleAddToCart);
+    }
+
+    // Auto-open cart drawer check
+    if (sessionStorage.getItem('open_cart') === 'true') {
+      sessionStorage.removeItem('open_cart');
+      if (typeof window.KMH_OpenCart === 'function') {
+        window.KMH_OpenCart();
+      }
+    }
+
+    // Initial page load update
+    updatePage();
+  });
 </script>
 
 {% schema %}
