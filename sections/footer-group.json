@@ -13,8 +13,32 @@
   "sections": {
     "footer": {
       "type": "footer",
+      "blocks": {
+        "link_list_9TRxyM": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Quick Links",
+            "menu": "main-menu"
+          }
+        },
+        "link_list_4d9cXz": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Quick Links",
+            "menu": "footer"
+          }
+        }
+      },
+      "block_order": [
+        "link_list_9TRxyM",
+        "link_list_4d9cXz"
+      ],
       "disabled": true,
-      "settings": {}
+      "settings": {
+        "menu_categories": "footer",
+        "menu_support": "footer",
+        "menu_legal": "footer"
+      }
     }
   },
   "order": [
