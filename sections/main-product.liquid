@@ -67,26 +67,34 @@
           {{ product.description | strip_html | truncatewords: 40 | default: "Tilt-head electric kitchen mixer with stainless steel bowl, 12-speed precision control, and multi-accessory attachments." }}
         </p>
 
-        <!-- Quantity & Add Buttons -->
-        <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
-          <div style="display: flex; align-items: center; gap: 10px; border: 1px solid var(--kmh-border); border-radius: var(--radius-button); padding: 0 1rem; background: #FFFFFF;">
-            <button class="kmh-qty-btn kmh-qty-minus" style="border: none; background: none; font-size: 1.2rem; cursor: pointer;">-</button>
-            <input type="number" value="1" style="width: 40px; text-align: center; border: none; font-weight: 700; font-size: 1rem;" readonly>
-            <button class="kmh-qty-btn kmh-qty-plus" style="border: none; background: none; font-size: 1.2rem; cursor: pointer;">+</button>
+        <!-- Native Shopify Product Form (Add to Cart & Buy Now) -->
+        {% form 'product', product, class: 'kmh-product-form', id: 'KMH-ProductForm' %}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id | default: product.variants.first.id }}">
+
+          <!-- Quantity & Add Buttons -->
+          <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+            <div style="display: flex; align-items: center; gap: 10px; border: 1px solid var(--kmh-border); border-radius: var(--radius-button); padding: 0 1rem; background: #FFFFFF;">
+              <button type="button" class="kmh-qty-btn kmh-qty-minus" style="border: none; background: none; font-size: 1.2rem; cursor: pointer;">-</button>
+              <input type="number" name="quantity" value="1" min="1" style="width: 40px; text-align: center; border: none; font-weight: 700; font-size: 1rem;" readonly>
+              <button type="button" class="kmh-qty-btn kmh-qty-plus" style="border: none; background: none; font-size: 1.2rem; cursor: pointer;">+</button>
+            </div>
+
+            <button type="submit" name="add" class="kmh-btn kmh-btn-primary" style="flex-grow: 1;" data-add-to-cart-btn>
+              <span>Add to Cart &bull; {{ product.price | default: 29900 | money }}</span>
+            </button>
+            
+            <button type="button" class="kmh-icon-btn" data-wishlist-toggle data-product-id="{{ product.id | default: 'main-appliance' }}" style="width: 50px; height: 50px;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l8.72-8.72 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            </button>
           </div>
 
-          <button class="kmh-btn kmh-btn-primary" style="flex-grow: 1;" onclick="KMH_OpenCart()">
-            Add to Cart &bull; {{ product.price | default: 29900 | money }}
-          </button>
-          
-          <button class="kmh-icon-btn" data-wishlist-toggle data-product-id="{{ product.id | default: 'main-appliance' }}" style="width: 50px; height: 50px;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l8.72-8.72 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
-          </button>
-        </div>
+          <!-- Dynamic Accelerated Checkout (Buy Now / Shop Pay / Apple Pay) -->
+          {{ form | payment_button }}
 
-        <button class="kmh-btn kmh-btn-gold kmh-btn-full" style="margin-bottom: 1.5rem;">
-          Buy Now with Shop Pay / Apple Pay
-        </button>
+          <button type="submit" name="checkout" class="kmh-btn kmh-btn-gold kmh-btn-full" style="margin-bottom: 1.5rem; display: block; text-align: center; text-decoration: none;">
+            ⚡ Instant Checkout with Shop Pay / Card
+          </button>
+        {% endform %}
 
         <!-- Dynamic Shopify App Blocks Support -->
         {% for block in section.blocks %}

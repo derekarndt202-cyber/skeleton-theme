@@ -118,6 +118,58 @@ const KMHTheme = {
     overlay?.addEventListener('click', closeCart);
 
     window.KMH_OpenCart = openCart;
+
+    // AJAX Add to Cart Handler
+    document.addEventListener('submit', (e) => {
+      const form = e.target.closest('form[action*="/cart/add"]');
+      if (!form) return;
+
+      e.preventDefault();
+      const submitBtn = form.querySelector('[type="submit"]');
+      const originalText = submitBtn ? submitBtn.innerHTML : '';
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = '0.7';
+        submitBtn.innerHTML = 'Adding...';
+      }
+
+      const formData = new FormData(form);
+
+      fetch('/cart/add.js', {
+        method: 'POST',
+        body: formData
+      })
+      .then(res => res.json())
+      .then(item => {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.style.opacity = '1';
+          submitBtn.innerHTML = originalText;
+        }
+
+        // Fetch updated cart state
+        fetch('/cart.js')
+          .then(res => res.json())
+          .then(cart => {
+            // Update badge counts
+            document.querySelectorAll('[data-cart-trigger] .kmh-badge-count, .kmh-badge-count').forEach(badge => {
+              badge.textContent = cart.item_count;
+            });
+            openCart();
+          })
+          .catch(() => openCart());
+      })
+      .catch(err => {
+        console.error('Error adding to cart:', err);
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.style.opacity = '1';
+          submitBtn.innerHTML = originalText;
+        }
+        openCart();
+      });
+    });
   },
 
   // Live Predictive Search Overlay
