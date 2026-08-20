@@ -69,7 +69,44 @@
 
         <!-- Native Shopify Product Form (Add to Cart & Buy Now) -->
         {% form 'product', product, class: 'kmh-product-form', id: 'KMH-ProductForm' %}
-          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id | default: product.variants.first.id }}">
+          <input type="hidden" name="id" id="KMH-SelectedVariantId" value="{{ product.selected_or_first_available_variant.id | default: product.variants.first.id }}">
+
+          <!-- Variant Options Swatches & Selectors -->
+          {% if product.has_only_default_variant == false or product.options.size > 0 %}
+            <div class="kmh-product-options" style="margin-bottom: 1.8rem; display: flex; flex-direction: column; gap: 1.2rem;">
+              {% for option in product.options_with_values %}
+                <div>
+                  <div style="display: flex; justify-content: space-between; font-size: 0.88rem; font-weight: 700; color: var(--kmh-navy); margin-bottom: 0.6rem;">
+                    <span>{{ option.name }}: <span style="font-weight: 400; color: var(--kmh-gold);" id="KMH-OptionLabel-{{ forloop.index0 }}">{{ option.selected_value | default: option.values.first }}</span></span>
+                  </div>
+                  
+                  <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                    {% for value in option.values %}
+                      {% assign is_color = false %}
+                      {% assign opt_name_down = option.name | downcase %}
+                      {% if opt_name_down contains 'color' or opt_name_down contains 'finish' %}
+                        {% assign is_color = true %}
+                      {% endif %}
+
+                      <button type="button" 
+                              class="kmh-swatch-btn {% if option.selected_value == value or forloop.first %}active{% endif %}"
+                              data-option-index="{{ forloop.parentloop.index0 }}"
+                              data-option-value="{{ value | escape }}"
+                              style="padding: 0.5rem 1rem; border-radius: 8px; border: 1.5px solid {% if forloop.first %}var(--kmh-navy){% else %}var(--kmh-border){% endif %}; background: #FFFFFF; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s;">
+                        {{ value }}
+                      </button>
+                    {% endfor %}
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+
+          <!-- Urgency & Scarcity Indicator -->
+          <div style="background: rgba(212, 175, 55, 0.1); border: 1px dashed var(--kmh-gold); border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px; font-size: 0.85rem;">
+            <span style="font-size: 1.2rem;">🔥</span>
+            <span style="color: var(--kmh-navy);">High Demand: <strong>Only 4 units left</strong> at this pricing. Ships within 24h.</span>
+          </div>
 
           <!-- Quantity & Add Buttons -->
           <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">

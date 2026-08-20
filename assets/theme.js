@@ -118,8 +118,129 @@ const KMHTheme = {
     overlay?.addEventListener('click', closeCart);
 
     window.KMH_OpenCart = openCart;
+    window.KMH_CloseCart = closeCart;
 
-    // AJAX Add to Cart Handler
+    // Refresh Cart Items & Drawer UI
+    const refreshCart = () => {
+      fetch('/cart.js')
+        .then(res => res.json())
+        .then(cart => {
+          document.querySelectorAll('[data-cart-trigger] .kmh-badge-count, .kmh-badge-count').forEach(badge => {
+            badge.textContent = cart.item_count;
+          });
+          const subtotalEl = document.querySelector('#KMH-CartSubtotal');
+          if (subtotalEl) {
+            subtotalEl.textContent = `$${(cart.total_price / 100).toFixed(2)}`;
+          }
+        })
+        .catch(err => console.error(err));
+    };
+
+    // 1-Click Quick Add buttons from Collection Grid
+    document.addEventListener('click', (e) => {
+      const quickAddBtn = e.target.closest('[data-quick-add-variant]');
+      if (quickAddBtn) {
+        e.preventDefault();
+        const variantId = quickAddBtn.getAttribute('data-quick-add-variant');
+        if (!variantId) {
+          openCart();
+          return;
+        }
+        quickAddBtn.textContent = 'Adding...';
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: variantId, quantity: 1 })
+        })
+        .then(res => res.json())
+        .then(() => {
+          quickAddBtn.textContent = '✓ Added';
+          setTimeout(() => { quickAddBtn.textContent = '+ Quick Add'; }, 1500);
+          refreshCart();
+          openCart();
+        })
+        .catch(() => {
+          quickAddBtn.textContent = '+ Quick Add';
+          openCart();
+        });
+      }
+
+      // 1-Click Accessory Upsell in Cart
+      const accBtn = e.target.closest('[data-quick-add-accessory]');
+      if (accBtn) {
+        accBtn.textContent = '✓ Added to Order';
+        accBtn.disabled = true;
+        refreshCart();
+      }
+
+      // Cart Item Quantity Changer (+ / -)
+      const qtyChangeBtn = e.target.closest('[data-cart-change]');
+      if (qtyChangeBtn) {
+        const lineKey = qtyChangeBtn.getAttribute('data-key');
+        const change = parseInt(qtyChangeBtn.getAttribute('data-cart-change')) || 0;
+        const currentQty = parseInt(qtyChangeBtn.getAttribute('data-current-qty')) || 1;
+        const newQty = Math.max(0, currentQty + change);
+
+        fetch('/cart/change.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: lineKey, quantity: newQty })
+        })
+        .then(res => res.json())
+        .then(() => {
+          window.location.reload();
+        })
+        .catch(err => console.error(err));
+      }
+
+      // Cart Item Direct Removal
+      const removeBtn = e.target.closest('[data-cart-remove]');
+      if (removeBtn) {
+        const lineKey = removeBtn.getAttribute('data-cart-remove');
+        fetch('/cart/change.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: lineKey, quantity: 0 })
+        })
+        .then(res => res.json())
+        .then(() => {
+          window.location.reload();
+        })
+        .catch(err => console.error(err));
+      }
+    });
+
+    // Swatch / Variant Selection on Product Page
+    document.querySelectorAll('.kmh-swatch-btn').forEach(swatch => {
+      swatch.addEventListener('click', (e) => {
+        e.preventDefault();
+        const parentDiv = swatch.parentElement;
+        parentDiv.querySelectorAll('.kmh-swatch-btn').forEach(btn => {
+          btn.classList.remove('active');
+          btn.style.border = '1.5px solid var(--kmh-border)';
+          btn.style.background = '#FFFFFF';
+        });
+        swatch.classList.add('active');
+        swatch.style.border = '1.5px solid var(--kmh-navy)';
+        swatch.style.background = 'var(--kmh-bg-light)';
+
+        const optIdx = swatch.getAttribute('data-option-index');
+        const optVal = swatch.getAttribute('data-option-value');
+        const labelEl = document.querySelector(`#KMH-OptionLabel-${optIdx}`);
+        if (labelEl) labelEl.textContent = optVal;
+      });
+    });
+
+    // Dropdown hover support for Header Menu
+    document.querySelectorAll('.kmh-has-dropdown').forEach(item => {
+      const dropdown = item.querySelector('.kmh-dropdown');
+      if (dropdown) {
+        item.addEventListener('mouseenter', () => { dropdown.style.display = 'block'; });
+        item.addEventListener('mouseleave', () => { dropdown.style.display = 'none'; });
+      }
+    });
+
+    // AJAX Add to Cart Form Handler
     document.addEventListener('submit', (e) => {
       const form = e.target.closest('form[action*="/cart/add"]');
       if (!form) return;
@@ -147,18 +268,8 @@ const KMHTheme = {
           submitBtn.style.opacity = '1';
           submitBtn.innerHTML = originalText;
         }
-
-        // Fetch updated cart state
-        fetch('/cart.js')
-          .then(res => res.json())
-          .then(cart => {
-            // Update badge counts
-            document.querySelectorAll('[data-cart-trigger] .kmh-badge-count, .kmh-badge-count').forEach(badge => {
-              badge.textContent = cart.item_count;
-            });
-            openCart();
-          })
-          .catch(() => openCart());
+        refreshCart();
+        openCart();
       })
       .catch(err => {
         console.error('Error adding to cart:', err);

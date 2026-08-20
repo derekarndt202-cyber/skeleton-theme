@@ -16,14 +16,37 @@
       </a>
 
       <!-- Desktop Navigation & Mega Menu -->
-      <nav role="navigation">
+      <nav role="navigation" class="kmh-nav-wrapper">
         <ul class="kmh-nav">
-          <li><a href="/collections/all" class="kmh-nav__link">Appliances</a></li>
-          <li><a href="/collections/stand-mixers" class="kmh-nav__link">Stand Mixers</a></li>
-          <li><a href="/pages/configurator" class="kmh-nav__link" style="color: var(--kmh-gold); font-weight: 700;">★ Build Your Mixer</a></li>
-          <li><a href="/collections/coffee-espresso" class="kmh-nav__link">Coffee & Espresso</a></li>
-          <li><a href="/pages/recipes" class="kmh-nav__link">Recipes</a></li>
-          <li><a href="/pages/compare" class="kmh-nav__link">Compare Matrix</a></li>
+          {% assign header_menu = section.settings.menu | default: linklists.main-menu %}
+          {% if header_menu.links.size > 0 %}
+            {% for link in header_menu.links %}
+              <li style="position: relative;" class="{% if link.links.size > 0 %}kmh-has-dropdown{% endif %}">
+                <a href="{{ link.url }}" class="kmh-nav__link {% if link.active %}active{% endif %}">
+                  {{ link.title }}
+                  {% if link.links.size > 0 %}<span style="font-size: 0.7rem; margin-left: 3px;">▾</span>{% endif %}
+                </a>
+                {% if link.links.size > 0 %}
+                  <ul class="kmh-dropdown" style="display: none; position: absolute; top: 100%; left: 0; min-width: 220px; background: #FFFFFF; border: 1px solid var(--kmh-border); border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); padding: 0.75rem 0; z-index: 100; list-style: none;">
+                    {% for child in link.links %}
+                      <li>
+                        <a href="{{ child.url }}" style="display: block; padding: 0.5rem 1.2rem; color: var(--kmh-navy); text-decoration: none; font-size: 0.88rem; font-weight: 500;" onmouseover="this.style.background='var(--kmh-bg-light)'; this.style.color='var(--kmh-gold)';" onmouseout="this.style.background='none'; this.style.color='var(--kmh-navy)';">
+                          {{ child.title }}
+                        </a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              </li>
+            {% endfor %}
+          {% else %}
+            <li><a href="/collections/all" class="kmh-nav__link">Appliances</a></li>
+            <li><a href="/collections/stand-mixers" class="kmh-nav__link">Stand Mixers</a></li>
+            <li><a href="/pages/configurator" class="kmh-nav__link" style="color: var(--kmh-gold); font-weight: 700;">★ Build Your Mixer</a></li>
+            <li><a href="/collections/coffee-espresso" class="kmh-nav__link">Coffee & Espresso</a></li>
+            <li><a href="/pages/recipes" class="kmh-nav__link">Recipes</a></li>
+            <li><a href="/pages/compare" class="kmh-nav__link">Compare Matrix</a></li>
+          {% endif %}
         </ul>
       </nav>
 
@@ -64,6 +87,13 @@
 {% schema %}
 {
   "name": "Header",
-  "settings": []
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Main Navigation Menu",
+      "default": "main-menu"
+    }
+  ]
 }
 {% endschema %}

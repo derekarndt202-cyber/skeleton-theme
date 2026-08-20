@@ -77,9 +77,14 @@
                 </div>
               {% endif %}
 
-              <button class="kmh-btn kmh-btn-primary kmh-btn-sm" style="margin-top: 1rem; width: 100%;" onclick="KMH_OpenCart()">
-                View & Add to Cart
-              </button>
+              <div style="display: flex; gap: 8px; margin-top: 1rem;">
+                <a href="{{ product.url }}" class="kmh-btn kmh-btn-secondary kmh-btn-sm" style="flex: 1; text-align: center; text-decoration: none;">
+                  Details
+                </a>
+                <button type="button" class="kmh-btn kmh-btn-primary kmh-btn-sm" style="flex: 1.2;" data-quick-add-variant="{{ product.selected_or_first_available_variant.id }}">
+                  + Quick Add
+                </button>
+              </div>
             </div>
           </div>
         {% endfor %}
