@@ -58,8 +58,109 @@
 {%- endif -%}
 
 {%- if request.page_type == 'product' -%}
+  {%- assign product_image = product.featured_media | default: page_image -%}
+  {%- assign schema_description = product.description | strip_html | strip_newlines | strip -%}
+  {%- if schema_description == blank -%}
+    {%- assign schema_description = page_description | default: product.title -%}
+  {%- endif -%}
+
   <script type="application/ld+json">
-    {{ product | structured_data }}
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": {{ product.title | json }},
+    "url": {{ canonical_url | default: shop.url | append: product.url | json }},
+    {%- if product_image -%}
+      {%- assign product_image_url = product_image | image_url: width: 1200 -%}
+      {%- unless product_image_url contains 'http' -%}
+        {%- assign product_image_url = 'https:' | append: product_image_url -%}
+      {%- endunless -%}
+      "image": [
+        {{ product_image_url | json }}
+      ],
+    {%- endif -%}
+    "description": {{ schema_description | json }},
+    {%- if product.selected_or_first_available_variant.sku != blank -%}
+      "sku": {{ product.selected_or_first_available_variant.sku | json }},
+    {%- else -%}
+      "sku": {{ product.id | json }},
+    {%- endif -%}
+    "brand": {
+      "@type": "Brand",
+      "name": {{ product.vendor | default: shop.name | json }}
+    },
+    "offers": [
+      {%- for variant in product.variants -%}
+        {%- assign variant_price = variant.price | money_without_currency | remove: ',' | strip_html | strip -%}
+        {%- assign variant_url = variant.url | default: product.url -%}
+        {%- assign full_variant_url = shop.url | append: variant_url -%}
+        {
+          "@type": "Offer",
+          "name": {{ variant.title | json }},
+          "price": {{ variant_price | json }},
+          "priceCurrency": {{ cart.currency.iso_code | default: shop.currency | json }},
+          "priceValidUntil": "{{ 'now' | date: '%s' | plus: 31536000 | date: '%Y-%m-%d' }}",
+          "itemCondition": "https://schema.org/NewCondition",
+          "availability": "https://schema.org/{% if variant.available %}InStock{% else %}OutOfStock{% endif %}",
+          "url": {{ full_variant_url | json }},
+          {%- if variant.sku != blank -%}
+            "sku": {{ variant.sku | json }},
+          {%- else -%}
+            "sku": {{ variant.id | json }},
+          {%- endif -%}
+          {%- if variant.barcode != blank -%}
+            {%- assign barcode_len = variant.barcode | size -%}
+            {%- if barcode_len == 8 -%}
+              "gtin8": {{ variant.barcode | json }},
+            {%- elsif barcode_len == 12 -%}
+              "gtin12": {{ variant.barcode | json }},
+            {%- elsif barcode_len == 13 -%}
+              "gtin13": {{ variant.barcode | json }},
+            {%- elsif barcode_len == 14 -%}
+              "gtin14": {{ variant.barcode | json }},
+            {%- else -%}
+              "gtin": {{ variant.barcode | json }},
+            {%- endif -%}
+          {%- endif -%}
+          "hasMerchantReturnPolicy": {
+            "@type": "MerchantReturnPolicy",
+            "applicableCountry": "US",
+            "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+            "merchantReturnDays": 30,
+            "returnMethod": "https://schema.org/ReturnByMail",
+            "returnFees": "https://schema.org/FreeReturn"
+          },
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingRate": {
+              "@type": "MonetaryAmount",
+              "value": "0.00",
+              "currency": {{ cart.currency.iso_code | default: shop.currency | json }}
+            },
+            "shippingDestination": {
+              "@type": "DefinedRegion",
+              "addressCountry": "US"
+            },
+            "deliveryTime": {
+              "@type": "ShippingDeliveryTime",
+              "handlingTime": {
+                "@type": "QuantitativeValue",
+                "minValue": 0,
+                "maxValue": 1,
+                "unitCode": "DAY"
+              },
+              "transitTime": {
+                "@type": "QuantitativeValue",
+                "minValue": 2,
+                "maxValue": 3,
+                "unitCode": "DAY"
+              }
+            }
+          }
+        }{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    ]
+  }
   </script>
 
   <meta
