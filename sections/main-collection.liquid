@@ -4,9 +4,9 @@
   <div style="background: linear-gradient(135deg, #0F172A, #1E293B); color: #FFFFFF; padding: 4rem 0; text-align: center; border-bottom: 1px solid rgba(212,175,55,0.2);">
     <div class="kmh-container">
       <span style="color: var(--kmh-gold); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em;">Collection Showcase</span>
-      <h1 style="font-family: var(--font-heading); color: #FFFFFF; font-size: 3rem; margin: 0.5rem 0;">{{ collection.title | default: "All Luxury Kitchen Appliances" }}</h1>
+      <h1 style="font-family: var(--font-heading); color: #FFFFFF; font-size: 3rem; margin: 0.5rem 0;">{{ collection.title | default: "All Kitchen Appliances" }}</h1>
       <p style="color: #CBD5E1; max-width: 600px; margin: 0 auto; font-size: 1rem;">
-        {{ collection.description | default: "Browse our complete catalog of high-torque planetary stand mixers, precision espresso systems, and commercial kitchen gadgets." }}
+        {{ collection.description | default: "Browse our complete catalog of stand mixers, kitchen appliances, and cooking accessories." }}
       </p>
     </div>
   </div>
@@ -93,7 +93,7 @@
                   {% else %}
                     <div style="width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: radial-gradient(circle, var(--kmh-bg-light), #E2E8F0); padding: 1rem; text-align: center;">
                       <svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="var(--kmh-navy)" stroke-width="1.2"><rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="12" cy="12" r="4"/></svg>
-                      <div style="font-size: 0.75rem; font-weight: 700; color: var(--kmh-navy); margin-top: 8px;">kitchenmixhaven</div>
+                      <div style="font-size: 0.75rem; font-weight: 700; color: var(--kmh-navy); margin-top: 8px;">KitchenMixHaven</div>
                     </div>
                   {% endif %}
                   <div class="kmh-product-card__actions">
@@ -105,7 +105,9 @@
                 <div class="kmh-product-card__content">
                   <span class="kmh-product-card__brand">{{ product.vendor | default: 'KitchenMixHaven' }}</span>
                   <h3 class="kmh-product-card__title"><a href="{{ product.url }}">{{ product.title }}</a></h3>
-                  <div class="kmh-rating">★★★★★ <span style="color:#64748B; font-size:0.75rem;">(4.9)</span></div>
+                  {%- if product.metafields.reviews.rating.value != blank -%}
+                    <div class="kmh-rating"><span style="color:var(--kmh-gold);">★</span> {{ product.metafields.reviews.rating.value }}</div>
+                  {%- endif -%}
                   <div class="kmh-product-card__price-row">
                     <span class="kmh-price">{{ product.price | money }}</span>
                     {% if product.compare_at_price > product.price %}
@@ -135,8 +137,7 @@
 
                 <div class="kmh-product-card__content">
                   <span class="kmh-product-card__brand">KitchenMixHaven</span>
-                  <h3 class="kmh-product-card__title"><a href="/products/appliance">{{ item }}</a></h3>
-                  <div class="kmh-rating">★★★★★ <span style="color:#64748B; font-size:0.75rem;">(4.9)</span></div>
+                  <h3 class="kmh-product-card__title"><a href="/collections/all">{{ item }}</a></h3>
                   <div class="kmh-product-card__price-row">
                     <span class="kmh-price">{{ prices[idx] }}</span>
                   </div>

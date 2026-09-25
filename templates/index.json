@@ -12,42 +12,42 @@
     "hero": {
       "type": "hero-banner",
       "settings": {
-        "eyebrow": "KitchenMixHaven Official Catalog",
-        "headline": "Precision Stand & Hand Mixers for Every Kitchen.",
-        "subheadline": "Explore Martha Stewart 5.3Qt 12-Speed mixers, KitchenAid Classic Series 4.5Qt Onyx Black, Hamilton Beach 6-Speed Hand Mixers, and custom finishes in Gunmetal, Champagne Bronze, and Slate Blue.",
-        "primary_cta_text": "Shop All Mixers",
-        "primary_cta_link": "",
-        "secondary_cta_text": "Compare 5.3Qt vs 4.5Qt",
-        "secondary_cta_link": "",
+        "eyebrow": "Kitchen Appliances & Tools for Everyday Cooking",
+        "headline": "Better Tools for Better Cooking",
+        "subheadline": "Discover kitchen appliances designed to make everyday cooking, baking, and meal preparation easier.",
+        "primary_cta_text": "Shop Best Sellers",
+        "primary_cta_link": "/collections/all",
+        "secondary_cta_text": "Shop All Appliances",
+        "secondary_cta_link": "/collections/all",
         "hero_image": "shopify://shop_images/71Lgaahp4LL.jpg"
       }
     },
     "brands": {
       "type": "featured-brands",
       "settings": {
-        "eyebrow": "Authorized Luxury Retail Partner For",
+        "eyebrow": "Shop Popular Kitchen Appliance Brands",
         "background_color": "#ffffff"
       }
     },
     "categories": {
       "type": "featured-categories",
       "settings": {
-        "eyebrow": "Curated Categories",
-        "heading": "Explore Kitchen Appliances",
-        "description": "From high-torque dough mixing to precise barista espresso extraction.",
+        "eyebrow": "Shop by Category",
+        "heading": "Shop by Category",
+        "description": "Kitchen appliances designed for precision performance and daily reliability.",
         "background_color": "#f8fafc"
       }
     },
     "featured": {
       "type": "featured-collection",
       "settings": {
-        "eyebrow": "KitchenMixHaven Collection",
-        "heading": "Featured Stand & Hand Mixers",
+        "eyebrow": "Popular Appliances",
+        "heading": "Best Sellers",
         "collection": "all-products",
         "products_to_show": 8,
         "show_vendor": true,
         "show_rating": true,
-        "button_label": "View All Active Products",
+        "button_label": "View All Appliances",
         "button_link": "shopify://collections/all",
         "background_color": "#ffffff"
       }
@@ -55,22 +55,22 @@
     "why_us": {
       "type": "why-choose-us",
       "settings": {
-        "eyebrow": "The KitchenMixHaven Standard",
-        "heading": "Why Home Chefs Trust Us",
+        "eyebrow": "Why KitchenMixHaven",
+        "heading": "Why KitchenMixHaven",
         "background_color": "#0f172a"
       }
     },
     "lifestyle": {
       "type": "lifestyle-split-banner",
       "settings": {
-        "eyebrow": "High Performance Heritage",
+        "eyebrow": "KitchenMixHaven",
         "heading": "The Kitchen Starts Here.",
-        "text": "Whether you are kneading high-hydration sourdough bread, whipping silky Italian meringues, or grinding custom coffee roasts, KitchenMixHaven tools bring culinary precision into your home.",
-        "button_label": "Explore Flagship Mixers",
+        "text": "Whether you are kneading sourdough bread, whipping meringues, or grinding coffee roasts, KitchenMixHaven tools bring culinary reliability into your home.",
+        "button_label": "Explore Appliances",
         "button_link": "shopify://collections/all",
         "image": "shopify://shop_images/517hfKruAyL.jpg",
-        "overlay_eyebrow": "Design & Craftsmanship",
-        "overlay_heading": "Built for Generations of Bakers",
+        "overlay_eyebrow": "Design & Performance",
+        "overlay_heading": "Built for Every Kitchen",
         "image_position": "left",
         "background_color": "#f8fafc"
       }
@@ -78,9 +78,9 @@
     "comparison": {
       "type": "product-comparison",
       "settings": {
-        "eyebrow": "Store Appliance Comparison",
+        "eyebrow": "Appliance Comparison",
         "heading": "Capacity & Speed Comparison Matrix",
-        "description": "Compare motor speed levels, bowl capacity, and finish options across our primary catalog mixers.",
+        "description": "Compare speed settings, bowl capacity, and specifications across our primary catalog mixers.",
         "background_color": "#ffffff"
       }
     },
@@ -91,9 +91,9 @@
     "reviews": {
       "type": "customer-reviews",
       "settings": {
-        "eyebrow": "Verified Home Chefs",
-        "heading": "Loved by 100,000+ Kitchens",
-        "description": "Read genuine reviews from pastry chefs, sourdough enthusiasts, and home cooks.",
+        "eyebrow": "Reviews & Feedback",
+        "heading": "Customer Reviews",
+        "description": "Read genuine feedback from home bakers and kitchen cooks.",
         "background_color": "#ffffff"
       }
     },
@@ -103,17 +103,17 @@
       "settings": {
         "eyebrow": "#KitchenMixHaven",
         "heading": "Shop The Look",
-        "description": "Tag @KitchenMixHaven on Instagram to be featured on our luxury kitchen inspiration gallery.",
+        "description": "Tag @KitchenMixHaven on Instagram to be featured on our kitchen inspiration gallery.",
         "background_color": "#ffffff"
       }
     },
     "newsletter": {
       "type": "newsletter",
       "settings": {
-        "eyebrow": "VIP Culinary Access",
-        "heading": "Elevate Your Kitchen Today.",
-        "description": "Sign up to receive private invitations to limited-edition colorway releases, masterclass recipe guides, and $50 off your first mixer purchase.",
-        "button_label": "Unlock $50 Off",
+        "eyebrow": "Newsletter",
+        "heading": "Join the KitchenMixHaven Email List",
+        "description": "Subscribe to receive culinary recipes, kitchen guides, and notifications about new appliance arrivals.",
+        "button_label": "Subscribe",
         "background_color": "#0f172a"
       }
     }

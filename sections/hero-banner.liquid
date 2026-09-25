@@ -9,23 +9,23 @@
       <!-- Text & Call to Action -->
       <div>
         <span style="display: inline-block; padding: 6px 16px; background: rgba(212, 175, 55, 0.15); border: 1px solid rgba(212, 175, 55, 0.4); color: var(--kmh-gold); border-radius: 999px; font-weight: 700; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 1.5rem;">
-          {{ section.settings.eyebrow | default: "KitchenMixHaven Official Catalog" }}
+          {{ section.settings.eyebrow | default: "Kitchen Appliances & Tools for Everyday Cooking" }}
         </span>
 
         <h1 style="font-family: var(--font-heading); color: #FFFFFF; font-size: clamp(2.8rem, 5vw, 4.5rem); line-height: 1.1; margin-bottom: 1.5rem;">
-          {{ section.settings.headline | default: "Precision Stand & Hand Mixers for Every Kitchen." }}
+          {{ section.settings.headline | default: "Better Tools for Better Cooking" }}
         </h1>
 
         <p style="color: #CBD5E1; font-size: 1.15rem; line-height: 1.7; max-width: 540px; margin-bottom: 2.2rem;">
-          {{ section.settings.subheadline | default: "Explore Martha Stewart 5.3Qt 12-Speed mixers, KitchenAid Classic Series 4.5Qt Onyx Black, Hamilton Beach 6-Speed Hand Mixers, and custom finishes in Gunmetal, Champagne Bronze, and Slate Blue." }}
+          {{ section.settings.subheadline | default: "Discover kitchen appliances designed to make everyday cooking, baking, and meal preparation easier." }}
         </p>
 
         <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
           <a href="{{ section.settings.primary_cta_link | default: '/collections/all' }}" class="kmh-btn kmh-btn-gold">
-            {{ section.settings.primary_cta_text | default: "Shop All Mixers" }} &rarr;
+            {{ section.settings.primary_cta_text | default: "Shop Best Sellers" }} &rarr;
           </a>
-          <a href="{{ section.settings.secondary_cta_link | default: '/pages/compare' }}" class="kmh-btn" style="background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.3); color: #FFFFFF;">
-            {{ section.settings.secondary_cta_text | default: "Compare 5.3Qt vs 4.5Qt" }}
+          <a href="{{ section.settings.secondary_cta_link | default: '/collections/all' }}" class="kmh-btn" style="background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.3); color: #FFFFFF;">
+            {{ section.settings.secondary_cta_text | default: "Shop All Appliances" }}
           </a>
         </div>
 
@@ -82,12 +82,12 @@
 {
   "name": "Hero Banner",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "KitchenMixHaven Official Catalog" },
-    { "type": "text", "id": "headline", "label": "Headline", "default": "Precision Stand & Hand Mixers for Every Kitchen." },
-    { "type": "textarea", "id": "subheadline", "label": "Subheadline", "default": "Explore Martha Stewart 5.3Qt 12-Speed mixers, KitchenAid Classic Series 4.5Qt Onyx Black, Hamilton Beach 6-Speed Hand Mixers, and custom finishes in Gunmetal, Champagne Bronze, and Slate Blue." },
-    { "type": "text", "id": "primary_cta_text", "label": "Primary Button Text", "default": "Shop All Mixers" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Kitchen Appliances & Tools for Everyday Cooking" },
+    { "type": "text", "id": "headline", "label": "Headline", "default": "Better Tools for Better Cooking" },
+    { "type": "textarea", "id": "subheadline", "label": "Subheadline", "default": "Discover kitchen appliances designed to make everyday cooking, baking, and meal preparation easier." },
+    { "type": "text", "id": "primary_cta_text", "label": "Primary Button Text", "default": "Shop Best Sellers" },
     { "type": "url", "id": "primary_cta_link", "label": "Primary Button Link" },
-    { "type": "text", "id": "secondary_cta_text", "label": "Secondary Button Text", "default": "Compare 5.3Qt vs 4.5Qt" },
+    { "type": "text", "id": "secondary_cta_text", "label": "Secondary Button Text", "default": "Shop All Appliances" },
     { "type": "url", "id": "secondary_cta_link", "label": "Secondary Button Link" },
     { "type": "image_picker", "id": "hero_image", "label": "Hero Image" }
   ],

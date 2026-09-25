@@ -5,16 +5,16 @@
       <span style="color: var(--kmh-gold); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em;">{{ section.settings.eyebrow }}</span>
     {% endif %}
     <h2 style="font-family: var(--font-heading); color: #FFFFFF; font-size: clamp(2rem, 4vw, 3.2rem); margin: 0.5rem 0 1rem;">
-      {{ section.settings.heading | default: "Elevate Your Kitchen Today." }}
+      {{ section.settings.heading | default: "Join the KitchenMixHaven Email List" }}
     </h2>
     <p style="color: #94A3B8; font-size: 1.05rem; line-height: 1.7; margin-bottom: 2rem;">
-      {{ section.settings.description | default: "Sign up to receive private invitations to limited-edition colorway releases, masterclass recipe guides, and $50 off your first mixer purchase." }}
+      {{ section.settings.description | default: "Subscribe to receive culinary recipes, kitchen guides, and notifications about new appliance arrivals." }}
     </p>
 
-    <form onsubmit="event.preventDefault(); alert('Subscribed! Welcome to KitchenMixHaven.');" style="display: flex; flex-wrap: wrap; gap: 10px; max-width: 520px; margin: 0 auto;">
+    <form onsubmit="event.preventDefault(); alert('Thank you for subscribing to KitchenMixHaven!');" style="display: flex; flex-wrap: wrap; gap: 10px; max-width: 520px; margin: 0 auto;">
       <input type="email" placeholder="Enter your email address..." required style="flex: 1 1 280px; padding: 1rem 1.25rem; border-radius: var(--radius-button); border: 1px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.08); color: #FFFFFF; font-size: 0.95rem; outline: none;">
       <button type="submit" class="kmh-btn kmh-btn-gold" style="flex: 0 0 auto;">
-        {{ section.settings.button_label | default: "Unlock $50 Off" }} &rarr;
+        {{ section.settings.button_label | default: "Subscribe" }} &rarr;
       </button>
     </form>
     
@@ -26,10 +26,10 @@
 {
   "name": "Newsletter",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Section Eyebrow", "default": "VIP Culinary Access" },
-    { "type": "text", "id": "heading", "label": "Section Heading", "default": "Elevate Your Kitchen Today." },
-    { "type": "textarea", "id": "description", "label": "Section Description", "default": "Sign up to receive private invitations to limited-edition colorway releases, masterclass recipe guides, and $50 off your first mixer purchase." },
-    { "type": "text", "id": "button_label", "label": "Button Label", "default": "Unlock $50 Off" },
+    { "type": "text", "id": "eyebrow", "label": "Section Eyebrow", "default": "Newsletter" },
+    { "type": "text", "id": "heading", "label": "Section Heading", "default": "Join the KitchenMixHaven Email List" },
+    { "type": "textarea", "id": "description", "label": "Section Description", "default": "Subscribe to receive culinary recipes, kitchen guides, and notifications about new appliance arrivals." },
+    { "type": "text", "id": "button_label", "label": "Button Label", "default": "Subscribe" },
     { "type": "color", "id": "background_color", "label": "Background Color", "default": "#0F172A" }
   ],
   "presets": [

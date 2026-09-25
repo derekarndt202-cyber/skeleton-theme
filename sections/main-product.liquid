@@ -22,11 +22,6 @@
               <span class="kmh-badge kmh-badge--sale">Sale</span>
             {% endif %}
           </div>
-
-          <!-- AR Button Overlay -->
-          <button class="kmh-btn kmh-btn-secondary kmh-btn-sm" onclick="document.querySelector('#KMH-AROverlay').classList.add('active'); document.querySelector('#KMH-ARModal').classList.add('active');" style="position: absolute; bottom: 1rem; right: 1rem; background: rgba(255,255,255,0.9); backdrop-filter: blur(5px);">
-            📱 View in 3D AR
-          </button>
         </div>
 
         <!-- Gallery Thumbnail Bar -->
@@ -43,15 +38,13 @@
 
       <!-- Sticky Buy Box Column -->
       <div style="position: sticky; top: 100px;">
-        <span style="color: var(--kmh-gold); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;">{{ product.vendor | default: "kitchenmixhaven" }}</span>
+        <span style="color: var(--kmh-gold); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;">{{ product.vendor | default: "KitchenMixHaven" }}</span>
         <h1 style="font-family: var(--font-heading); font-size: 2.3rem; margin: 0.4rem 0 0.8rem; color: var(--kmh-navy);">
           {{ product.title | default: "Martha Stewart 5.3Qt Stand Mixer, 12-Speed Tilt-Head" }}
         </h1>
 
-        <!-- Rating & Stock Badge -->
+        <!-- Stock Badge -->
         <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
-          <div class="kmh-rating" style="font-size: 1.1rem;">★★★★★ <strong style="color: var(--kmh-navy); margin-left: 4px;">4.9</strong></div>
-          <span style="color: #64748B; font-size: 0.85rem;">(Verified Reviews)</span>
           <span class="kmh-badge" style="background: rgba(22,163,74,0.1); color: var(--kmh-success); border: 1px solid var(--kmh-success);">In Stock</span>
         </div>
 
@@ -102,12 +95,6 @@
             </div>
           {% endif %}
 
-          <!-- Urgency & Scarcity Indicator -->
-          <div style="background: rgba(212, 175, 55, 0.1); border: 1px dashed var(--kmh-gold); border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px; font-size: 0.85rem;">
-            <span style="font-size: 1.2rem;">🔥</span>
-            <span style="color: var(--kmh-navy);">High Demand: <strong>Only 4 units left</strong> at this pricing. Ships within 24h.</span>
-          </div>
-
           <!-- Quantity & Add Buttons -->
           <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
             <div style="display: flex; align-items: center; gap: 10px; border: 1px solid var(--kmh-border); border-radius: var(--radius-button); padding: 0 1rem; background: #FFFFFF;">
@@ -146,10 +133,10 @@
           {% render 'compatibility-finder' %}
         {% endif %}
 
-        <!-- Shipping Info Cards -->
+        <!-- Shipping & Details Info Cards -->
         <div style="background: var(--kmh-bg-light); border-radius: 10px; padding: 1rem; border: 1px solid var(--kmh-border); display: flex; justify-content: space-between; font-size: 0.85rem; color: #475569; margin-top: 1.5rem;">
-          <div>🚚 <strong>Free Express Shipping</strong> (2-3 Days)</div>
-          <div>🛡️ <strong>Warranty Included</strong></div>
+          <div>🚚 <strong>Free Shipping</strong> (Orders $150+)</div>
+          <div>🛡️ <strong>Warranty Information Available</strong></div>
         </div>
 
       </div>
@@ -195,7 +182,7 @@
               <li><strong>Bowl Volume:</strong> 5.3 Quarts Stainless Steel</li>
               <li><strong>Speeds:</strong> 12 Speed Control Settings</li>
               <li><strong>Head Mechanism:</strong> Lockable Tilt-Head</li>
-              <li><strong>Vendor:</strong> kitchenmixhaven</li>
+              <li><strong>Vendor:</strong> KitchenMixHaven</li>
             </ul>
           </div>
         </div>
