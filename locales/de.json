@@ -1,0 +1,58 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "404": {
+    "not_found": "Seite nicht gefunden.",
+    "back_to_shopping": "Zurück zum Einkauf"
+  },
+  "blog": {
+    "article_comments": "Kommentare",
+    "comment_form_body": "Kommentar",
+    "comment_form_email": "E-Mail",
+    "comment_form_name": "Name",
+    "comment_form_submit": "Beitrag",
+    "comment_form_title": "Kommentar hinzufügen"
+  },
+  "cart": {
+    "checkout": "Zur Kasse",
+    "title": "Warenkorb",
+    "update": "Aktualisieren",
+    "remove": "Entfernen"
+  },
+  "customers": {
+    "login": {
+      "email": "E-Mail",
+      "password": "Passwort",
+      "submit": "Anmelden",
+      "title": "Anmelden"
+    }
+  },
+  "collections": {
+    "title": "Sammlungen"
+  },
+  "gift_card": {
+    "add_to_apple_wallet": "Zu Apple Wallet hinzufügen",
+    "card": "Geschenkkarte",
+    "expired": "Diese Geschenkkarte ist abgelaufen",
+    "expires_on": "Läuft ab am {{ expires_on }}",
+    "use_at_checkout": "Diese Geschenkkarte an der Kasse verwenden"
+  },
+  "password": {
+    "title": "Dieser Shop ist privat",
+    "password": "Passwort",
+    "enter": "Eingeben"
+  },
+  "search": {
+    "title": "Suche",
+    "placeholder": "Artikel, Seiten oder Produkte durchsuchen",
+    "submit": "Suche",
+    "no_results_html": "Keine Ergebnisse gefunden für {{ terms }}"
+  }
+}
