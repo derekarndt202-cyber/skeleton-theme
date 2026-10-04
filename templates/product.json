@@ -11,16 +11,48 @@
   "sections": {
     "main": {
       "type": "main-product",
-      "settings": {}
+      "blocks": {
+        "hoppy_trust_badges_trust_badges_block_LJEbde": {
+          "type": "shopify://apps/hoppy-trust-badges/blocks/trust_badges_block/6e9703d9-56af-47d9-80bb-0abc8eb8c38b",
+          "settings": {
+            "badge-id": ""
+          }
+        }
+      },
+      "block_order": [
+        "hoppy_trust_badges_trust_badges_block_LJEbde"
+      ],
+      "settings": {
+        "show_fitment_finder": true
+      }
     },
     "recommendations": {
       "type": "featured-collection",
-      "settings": {}
+      "settings": {
+        "eyebrow": "KitchenMixHaven Collection",
+        "heading": "Best Sellers",
+        "collection": "",
+        "products_to_show": 8,
+        "show_vendor": true,
+        "show_rating": true,
+        "button_label": "View All Products",
+        "button_link": "shopify://collections/all",
+        "background_color": "#ffffff"
+      }
     },
     "reviews": {
       "type": "customer-reviews",
-      "settings": {}
+      "settings": {
+        "eyebrow": "Reviews & Feedback",
+        "heading": "Customer Reviews",
+        "description": "Read genuine feedback from home bakers and kitchen cooks.",
+        "background_color": "#ffffff"
+      }
     }
   },
-  "order": ["main", "recommendations", "reviews"]
+  "order": [
+    "main",
+    "recommendations",
+    "reviews"
+  ]
 }
