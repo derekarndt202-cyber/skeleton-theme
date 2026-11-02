@@ -166,7 +166,8 @@
               <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
               <polyline points="22,6 12,13 2,6"/>
             </svg>
-            <a href="mailto:support@kitchenmixhaven.example.com" class="kmh-footer__contact-link">support@kitchenmixhaven.example.com</a>
+            {% assign footer_contact_email = section.settings.contact_email | default: settings.contact_email | default: "contact@kitchenhavenmix.com" %}
+            <a href="mailto:{{ footer_contact_email }}" class="kmh-footer__contact-link">{{ footer_contact_email }}</a>
           </div>
           <div class="kmh-footer__contact-item">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--kmh-gold)" stroke-width="2">
@@ -1105,6 +1106,23 @@
       "type": "url",
       "id": "social_youtube",
       "label": "YouTube URL"
+    },
+    {
+      "type": "header",
+      "content": "Contact Information"
+    },
+    {
+      "type": "text",
+      "id": "contact_email",
+      "label": "Contact Email Address",
+      "default": "contact@kitchenhavenmix.com",
+      "info": "Displays in the footer brand column"
+    },
+    {
+      "type": "text",
+      "id": "contact_hours",
+      "label": "Support Hours",
+      "default": "Mon – Fri: 9:00 AM – 6:00 PM EST"
     },
     {
       "type": "header",

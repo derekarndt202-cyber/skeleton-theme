@@ -33,7 +33,9 @@
         "social_facebook": "",
         "social_pinterest": "",
         "social_youtube": "",
-        "show_payment_icons": true
+        "show_payment_icons": true,
+        "contact_email": "contact@kitchenhavenmix.com",
+        "contact_hours": "Mon – Fri: 9:00 AM – 6:00 PM EST"
       }
     }
   },

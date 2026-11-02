@@ -133,6 +133,24 @@
     ]
   },
   {
+    "name": "Store Contact Information",
+    "settings": [
+      {
+        "type": "text",
+        "id": "contact_email",
+        "label": "Store Contact Email",
+        "default": "contact@kitchenhavenmix.com",
+        "info": "Global contact email displayed across footer and contact pages"
+      },
+      {
+        "type": "text",
+        "id": "contact_phone",
+        "label": "Store Phone Number",
+        "default": "1-800-555-MIXER"
+      }
+    ]
+  },
+  {
     "name": "Free Shipping Threshold",
     "settings": [
       {

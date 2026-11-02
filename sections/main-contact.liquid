@@ -56,7 +56,8 @@
           </p>
 
           <p style="font-size: 0.9rem; color: #475569; margin-bottom: 0.5rem;">
-            ✉️ <strong>Email:</strong> support@kitchenmixhaven.example.com
+            {% assign contact_page_email = section.settings.contact_email | default: settings.contact_email | default: "contact@kitchenhavenmix.com" %}
+            ✉️ <strong>Email:</strong> <a href="mailto:{{ contact_page_email }}" style="color: inherit; text-decoration: underline;">{{ contact_page_email }}</a>
           </p>
           <p style="font-size: 0.9rem; color: #475569; margin-bottom: 1rem;">
             📞 <strong>Phone:</strong> 1-800-555-MIXER (Mon-Sun: 8am - 8pm CST)
@@ -80,6 +81,30 @@
 {% schema %}
 {
   "name": "Main Contact",
-  "settings": []
+  "settings": [
+    {
+      "type": "header",
+      "content": "Contact Information"
+    },
+    {
+      "type": "text",
+      "id": "contact_email",
+      "label": "Contact Email Address",
+      "default": "contact@kitchenhavenmix.com",
+      "info": "Recipient and display email for customer support"
+    },
+    {
+      "type": "text",
+      "id": "contact_phone",
+      "label": "Phone Number",
+      "default": "1-800-555-MIXER (Mon-Sun: 8am - 8pm CST)"
+    },
+    {
+      "type": "textarea",
+      "id": "contact_address",
+      "label": "Showroom / Office Address",
+      "default": "742 Culinary Boulevard, Suite 500\nChicago, IL 60611, United States"
+    }
+  ]
 }
 {% endschema %}
