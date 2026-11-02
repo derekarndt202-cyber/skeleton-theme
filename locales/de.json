@@ -54,5 +54,29 @@
     "placeholder": "Artikel, Seiten oder Produkte durchsuchen",
     "submit": "Suche",
     "no_results_html": "Keine Ergebnisse gefunden für {{ terms }}"
+  },
+  "shopify": {
+    "checkout": {
+      "local_pickup": {
+        "stock_details": {
+          "in_stock": "Auf Lager"
+        }
+      },
+      "split_delivery": {
+        "delivery_updated_toast": {
+          "shipping_only": "Ihre Lieferung wurde aktualisiert. {{shipping}}",
+          "removal_only": "Ihre Lieferung wurde aktualisiert. {{removal}}",
+          "shipping_and_removal": "Ihre Lieferung wurde aktualisiert. {{shipping}} {{removal}}",
+          "shipping": {
+            "one": "{{count}} Artikel wurde an den Versand übergeben.",
+            "other": "{{count}} Artikel wurden in den Versand verschoben."
+          },
+          "removal": {
+            "one": "{{count}} Element wurde entfernt.",
+            "other": "{{count}} Elemente wurden entfernt."
+          }
+        }
+      }
+    }
   }
 }
