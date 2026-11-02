@@ -1,173 +1,1073 @@
-<footer class="kmh-footer" style="background: linear-gradient(180deg, #0B132B 0%, #060A17 100%); color: #F8FAFC; padding-top: 5rem; padding-bottom: 2.5rem; margin-top: 5rem; border-top: 1px solid rgba(212, 175, 55, 0.25); position: relative; overflow: hidden;">
+{% comment %}
+  KitchenMixHaven - Premium Ecommerce Storefront Footer
+  Features:
+  - 4-Pillar Trust & Reassurance Strip with bespoke vector icons
+  - Integrated Customer Newsletter Subscription with Shopify native customer form
+  - Multi-column categorized navigation (Shop, Customer Care, Discover, Legal)
+  - Interactive Mobile Accordion navigation for clean mobile UX
+  - Direct Customer Support information & business hours
+  - Crisp Vector Social Media Channels
+  - Vector Payment Method badges (Visa, Mastercard, Amex, Discover, Apple Pay, Google Pay, Shop Pay, PayPal)
+  - Complete Schema Customizer settings & menu link_list controls
+{% endcomment %}
 
-  <!-- Ambient Decorative Glow -->
-  <div style="position: absolute; top: -100px; left: 50%; transform: translateX(-50%); width: 600px; height: 200px; background: radial-gradient(ellipse at center, rgba(212, 175, 55, 0.08) 0%, rgba(11, 19, 43, 0) 70%); pointer-events: none;"></div>
+<footer class="kmh-footer" role="contentinfo">
+  <!-- Subtle Ambient Glow -->
+  <div class="kmh-footer__ambient-glow" aria-hidden="true"></div>
 
   <div class="kmh-container">
 
-    <!-- Trust Badges & Guarantee Strip -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; padding-bottom: 3.5rem; margin-bottom: 3.5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
-      <div style="display: flex; align-items: center; gap: 1rem; background: rgba(255,255,255,0.03); padding: 1.2rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.06);">
-        <div style="font-size: 1.8rem; color: var(--kmh-gold);">🚚</div>
-        <div>
-          <h5 style="color: #FFFFFF; font-size: 0.95rem; font-weight: 700; margin-bottom: 0.2rem;">Shipping Available</h5>
-          <p style="color: #94A3B8; font-size: 0.8rem; margin: 0;">Free shipping on orders $150+</p>
-        </div>
-      </div>
+    {% if section.settings.show_trust_bar %}
+      <!-- 1. Trust & Reassurance Strip -->
+      <section class="kmh-footer__trust-strip" aria-label="Store Benefits & Guarantees">
+        <div class="kmh-footer__trust-grid">
+          
+          <div class="kmh-footer__trust-item">
+            <div class="kmh-footer__trust-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="1" y="3" width="15" height="13" rx="2" ry="2"/>
+                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                <circle cx="5.5" cy="18.5" r="2.5"/>
+                <circle cx="18.5" cy="18.5" r="2.5"/>
+              </svg>
+            </div>
+            <div class="kmh-footer__trust-content">
+              <h5 class="kmh-footer__trust-title">{{ section.settings.trust_1_title | default: "Free Shipping on Orders $150+" }}</h5>
+              <p class="kmh-footer__trust-desc">{{ section.settings.trust_1_desc | default: "Fast, reliable dispatch on all continental US orders." }}</p>
+            </div>
+          </div>
 
-      <div style="display: flex; align-items: center; gap: 1rem; background: rgba(255,255,255,0.03); padding: 1.2rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.06);">
-        <div style="font-size: 1.8rem; color: var(--kmh-gold);">🔒</div>
-        <div>
-          <h5 style="color: #FFFFFF; font-size: 0.95rem; font-weight: 700; margin-bottom: 0.2rem;">Secure Checkout</h5>
-          <p style="color: #94A3B8; font-size: 0.8rem; margin: 0;">Encrypted & protected payments</p>
-        </div>
-      </div>
+          <div class="kmh-footer__trust-item">
+            <div class="kmh-footer__trust-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <path d="M9 12l2 2 4-4"/>
+              </svg>
+            </div>
+            <div class="kmh-footer__trust-content">
+              <h5 class="kmh-footer__trust-title">{{ section.settings.trust_2_title | default: "100% Secure Checkout" }}</h5>
+              <p class="kmh-footer__trust-desc">{{ section.settings.trust_2_desc | default: "Bank-grade 256-bit encrypted SSL payment processing." }}</p>
+            </div>
+          </div>
 
-      <div style="display: flex; align-items: center; gap: 1rem; background: rgba(255,255,255,0.03); padding: 1.2rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.06);">
-        <div style="font-size: 1.8rem; color: var(--kmh-gold);">🔄</div>
-        <div>
-          <h5 style="color: #FFFFFF; font-size: 0.95rem; font-weight: 700; margin-bottom: 0.2rem;">Easy Returns</h5>
-          <p style="color: #94A3B8; font-size: 0.8rem; margin: 0;">Straightforward return policy</p>
-        </div>
-      </div>
+          <div class="kmh-footer__trust-item">
+            <div class="kmh-footer__trust-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+                <path d="M21 3v5h-5"/>
+                <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>
+                <path d="M8 16H3v5"/>
+              </svg>
+            </div>
+            <div class="kmh-footer__trust-content">
+              <h5 class="kmh-footer__trust-title">{{ section.settings.trust_3_title | default: "30-Day Easy Returns" }}</h5>
+              <p class="kmh-footer__trust-desc">{{ section.settings.trust_3_desc | default: "Straightforward, stress-free return and exchange policy." }}</p>
+            </div>
+          </div>
 
-      <div style="display: flex; align-items: center; gap: 1rem; background: rgba(255,255,255,0.03); padding: 1.2rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.06);">
-        <div style="font-size: 1.8rem; color: var(--kmh-gold);">💬</div>
-        <div>
-          <h5 style="color: #FFFFFF; font-size: 0.95rem; font-weight: 700; margin-bottom: 0.2rem;">Customer Support</h5>
-          <p style="color: #94A3B8; font-size: 0.8rem; margin: 0;">Assistance for your orders</p>
-        </div>
-      </div>
-    </div>
+          <div class="kmh-footer__trust-item">
+            <div class="kmh-footer__trust-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                <circle cx="9" cy="10" r="1"/>
+                <circle cx="12" cy="10" r="1"/>
+                <circle cx="15" cy="10" r="1"/>
+              </svg>
+            </div>
+            <div class="kmh-footer__trust-content">
+              <h5 class="kmh-footer__trust-title">{{ section.settings.trust_4_title | default: "Dedicated Customer Care" }}</h5>
+              <p class="kmh-footer__trust-desc">{{ section.settings.trust_4_desc | default: "Expert product advice & order support ready to help." }}</p>
+            </div>
+          </div>
 
-    <!-- Main Footer Grid -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2.5rem; margin-bottom: 4rem;">
+        </div>
+      </section>
+    {% endif %}
+
+    {% if section.settings.show_newsletter %}
+      <!-- 2. Newsletter Signup Banner -->
+      <section class="kmh-footer__newsletter-card" aria-label="Newsletter Signup">
+        <div class="kmh-footer__newsletter-inner">
+          <div class="kmh-footer__newsletter-info">
+            <span class="kmh-footer__newsletter-badge">Culinary Community</span>
+            <h3 class="kmh-footer__newsletter-heading">{{ section.settings.newsletter_heading | default: "Join the KitchenMixHaven Community" }}</h3>
+            <p class="kmh-footer__newsletter-subtext">{{ section.settings.newsletter_subtext | default: "Receive seasonal recipes, baking techniques, appliance guides, and new product announcements straight to your inbox." }}</p>
+          </div>
+
+          <div class="kmh-footer__newsletter-form-wrapper">
+            {% form 'customer', id: 'kmh-footer-newsletter-form' %}
+              <input type="hidden" name="contact[tags]" value="newsletter, footer_signup">
+              
+              {% if form.posted_successfully? %}
+                <div class="kmh-footer__form-success" role="alert">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                    <polyline points="22 4 12 14.01 9 11.01"/>
+                  </svg>
+                  <span>Thank you for subscribing! Check your inbox for your welcome guide.</span>
+                </div>
+              {% else %}
+                {% if form.errors %}
+                  <div class="kmh-footer__form-error" role="alert">
+                    <span>{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</span>
+                  </div>
+                {% endif %}
+
+                <div class="kmh-footer__input-row">
+                  <label for="kmh-footer-email-input" class="visually-hidden">Email Address</label>
+                  <input
+                    type="email"
+                    id="kmh-footer-email-input"
+                    name="contact[email]"
+                    class="kmh-footer__input"
+                    value="{% if customer %}{{ customer.email }}{% endif %}"
+                    placeholder="Enter your email address..."
+                    required
+                    autocomplete="email"
+                    autocapitalize="off"
+                    aria-label="Email address for newsletter"
+                  >
+                  <button type="submit" class="kmh-footer__submit-btn" aria-label="Subscribe to newsletter">
+                    <span>Subscribe</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  </button>
+                </div>
+                <span class="kmh-footer__privacy-note">We respect your privacy. No spam, ever. Unsubscribe at any time.</span>
+              {% endif %}
+            {% endform %}
+          </div>
+        </div>
+      </section>
+    {% endif %}
+
+    <!-- 3. Main Navigation Grid -->
+    <nav class="kmh-footer__nav-grid" aria-label="Footer Navigation">
       
-      <!-- Brand Column -->
-      <div style="grid-column: span 1.2;">
-        <a href="/" class="kmh-logo" style="display: inline-flex; align-items: center; gap: 10px; margin-bottom: 1.2rem; text-decoration: none;">
-          <img src="{{ 'favicon.jpg' | asset_url }}" alt="KitchenMixHaven Emblem" style="height: 42px; width: 42px; border-radius: 10px; box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2); border: 1.5px solid var(--kmh-gold); object-fit: cover;">
-          <span style="font-family: var(--font-heading); color: #FFFFFF; font-size: 1.5rem; font-weight: 800; letter-spacing: 0.05em;">
-            KitchenMixHaven
+      <!-- Brand & Contact Column -->
+      <div class="kmh-footer__col kmh-footer__col--brand">
+        <a href="/" class="kmh-footer__brand-link" aria-label="KitchenMixHaven Home">
+          <img src="{{ 'favicon.jpg' | asset_url }}" alt="KitchenMixHaven Emblem" class="kmh-footer__logo-img" width="40" height="40" loading="lazy">
+          <span class="kmh-footer__logo-text">
+            KITCHEN<span class="kmh-footer__logo-accent">MIX</span>HAVEN
           </span>
         </a>
-        <p style="color: #94A3B8; font-size: 0.88rem; line-height: 1.7; margin-bottom: 1.5rem; max-width: 300px;">
-          Kitchen appliances and tools designed to make everyday cooking, baking, and meal preparation easier.
+
+        <p class="kmh-footer__brand-desc">
+          Quality kitchen appliances and precision tools designed to make everyday cooking, baking, and meal preparation easier.
         </p>
 
+        <!-- Direct Contact Information -->
+        <div class="kmh-footer__contact-info">
+          <div class="kmh-footer__contact-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--kmh-gold)" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+            <a href="mailto:support@kitchenmixhaven.example.com" class="kmh-footer__contact-link">support@kitchenmixhaven.example.com</a>
+          </div>
+          <div class="kmh-footer__contact-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--kmh-gold)" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+            <span>Mon – Fri: 9:00 AM – 6:00 PM EST</span>
+          </div>
+        </div>
+
         <!-- Social Media Icons -->
-        <div style="display: flex; gap: 10px;">
-          <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram" class="kmh-icon-btn" style="background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); color: var(--kmh-gold); width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        <div class="kmh-footer__social-links">
+          <a href="{{ section.settings.social_instagram | default: 'https://instagram.com' }}" target="_blank" rel="noopener" aria-label="KitchenMixHaven on Instagram" class="kmh-footer__social-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
           </a>
-          <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook" class="kmh-icon-btn" style="background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); color: var(--kmh-gold); width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          <a href="{{ section.settings.social_facebook | default: 'https://facebook.com' }}" target="_blank" rel="noopener" aria-label="KitchenMixHaven on Facebook" class="kmh-footer__social-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
           </a>
-          <a href="https://pinterest.com" target="_blank" rel="noopener" aria-label="Pinterest" class="kmh-icon-btn" style="background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); color: var(--kmh-gold); width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.17 2.54 7.74 6.14 9.22-.08-.77-.16-1.97.03-2.82.18-.77 1.15-4.88 1.15-4.88s-.3-.59-.3-1.46c0-1.37.8-2.39 1.79-2.39.84 0 1.25.63 1.25 1.39 0 .85-.54 2.12-.82 3.3-.23.98.49 1.78 1.45 1.78 1.74 0 3.08-1.84 3.08-4.49 0-2.35-1.69-3.99-4.1-3.99-2.79 0-4.43 2.09-4.43 4.26 0 .84.32 1.74.73 2.24.08.1.09.19.07.29-.07.31-.24.97-.27 1.1-.04.18-.15.22-.34.13-1.28-.59-2.08-2.46-2.08-3.96 0-3.23 2.35-6.19 6.77-6.19 3.55 0 6.32 2.53 6.32 5.92 0 3.53-2.22 6.37-5.31 6.37-1.04 0-2.01-.54-2.35-1.18l-.64 2.44c-.23.89-.86 2.01-1.28 2.7C9.35 21.84 10.64 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
+          <a href="{{ section.settings.social_pinterest | default: 'https://pinterest.com' }}" target="_blank" rel="noopener" aria-label="KitchenMixHaven on Pinterest" class="kmh-footer__social-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2C6.48 2 2 6.48 2 12c0 4.17 2.54 7.74 6.14 9.22-.08-.77-.16-1.97.03-2.82.18-.77 1.15-4.88 1.15-4.88s-.3-.59-.3-1.46c0-1.37.8-2.39 1.79-2.39.84 0 1.25.63 1.25 1.39 0 .85-.54 2.12-.82 3.3-.23.98.49 1.78 1.45 1.78 1.74 0 3.08-1.84 3.08-4.49 0-2.35-1.69-3.99-4.1-3.99-2.79 0-4.43 2.09-4.43 4.26 0 .84.32 1.74.73 2.24.08.1.09.19.07.29-.07.31-.24.97-.27 1.1-.04.18-.15.22-.34.13-1.28-.59-2.08-2.46-2.08-3.96 0-3.23 2.35-6.19 6.77-6.19 3.55 0 6.32 2.53 6.32 5.92 0 3.53-2.22 6.37-5.31 6.37-1.04 0-2.01-.54-2.35-1.18l-.64 2.44c-.23.89-.86 2.01-1.28 2.7C9.35 21.84 10.64 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/>
+            </svg>
+          </a>
+          <a href="{{ section.settings.social_youtube | default: 'https://youtube.com' }}" target="_blank" rel="noopener" aria-label="KitchenMixHaven on YouTube" class="kmh-footer__social-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/>
+              <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/>
+            </svg>
           </a>
         </div>
       </div>
 
-      <!-- Group 1: SHOP -->
-      <div>
-        <h4 style="font-family: var(--font-heading); color: #FFFFFF; margin-bottom: 1.2rem; font-size: 1.1rem; letter-spacing: 0.03em; border-left: 3px solid var(--kmh-gold); padding-left: 10px;">
-          {{ section.settings.menu_categories.title | default: "Shop" }}
-        </h4>
-        <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; font-size: 0.88rem; color: #CBD5E1;">
-          {% if section.settings.menu_categories.links.size > 0 %}
-            {% for link in section.settings.menu_categories.links %}
-              <li><a href="{{ link.url }}" style="color: inherit; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--kmh-gold)'" onmouseout="this.style.color='inherit'">{{ link.title }}</a></li>
-            {% endfor %}
-          {% else %}
-            <li><a href="/collections/all" style="color: inherit; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--kmh-gold)'" onmouseout="this.style.color='inherit'">Shop All</a></li>
-            <li><a href="/collections/stand-mixers" style="color: inherit; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--kmh-gold)'" onmouseout="this.style.color='inherit'">Stand Mixers</a></li>
-            <li><a href="/collections/hand-mixers" style="color: inherit; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--kmh-gold)'" onmouseout="this.style.color='inherit'">Hand Mixers</a></li>
-            <li><a href="/collections/air-fryers" style="color: inherit; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--kmh-gold)'" onmouseout="this.style.color='inherit'">Air Fryers</a></li>
-            <li><a href="/collections/toasters" style="color: inherit; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--kmh-gold)'" onmouseout="this.style.color='inherit'">Toasters</a></li>
-          {% endif %}
-        </ul>
+      <!-- Column 2: SHOP -->
+      <div class="kmh-footer__col kmh-footer__accordion">
+        <button class="kmh-footer__accordion-trigger" aria-expanded="false">
+          <span class="kmh-footer__col-heading">Shop Appliances</span>
+          <svg class="kmh-footer__accordion-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="kmh-footer__accordion-content">
+          <ul class="kmh-footer__link-list">
+            {% if section.settings.menu_categories.links.size > 0 %}
+              {% for link in section.settings.menu_categories.links %}
+                <li><a href="{{ link.url }}" class="kmh-footer__link">{{ link.title }}</a></li>
+              {% endfor %}
+            {% else %}
+              <li><a href="/collections/all" class="kmh-footer__link">Shop All Appliances</a></li>
+              <li><a href="/collections/stand-mixers" class="kmh-footer__link">Stand Mixers</a></li>
+              <li><a href="/collections/hand-mixers" class="kmh-footer__link">Hand Mixers</a></li>
+              <li><a href="/collections/air-fryers" class="kmh-footer__link">Air Fryers & Ovens</a></li>
+              <li><a href="/collections/toasters" class="kmh-footer__link">Toasters</a></li>
+              <li><a href="/collections/kitchen-accessories" class="kmh-footer__link">Attachments & Accessories</a></li>
+              <li><a href="/pages/gift-guide" class="kmh-footer__link">Kitchen Gift Guide</a></li>
+            {% endif %}
+          </ul>
+        </div>
       </div>
 
-      <!-- Group 2: CUSTOMER SUPPORT -->
-      <div>
-        <h4 style="font-family: var(--font-heading); color: #FFFFFF; margin-bottom: 1.2rem; font-size: 1.1rem; letter-spacing: 0.03em; border-left: 3px solid var(--kmh-gold); padding-left: 10px;">
-          {{ section.settings.menu_support.title | default: "Customer Support" }}
-        </h4>
-        <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; font-size: 0.88rem; color: #CBD5E1;">
-          {% if section.settings.menu_support.links.size > 0 %}
-            {% for link in section.settings.menu_support.links %}
-              <li><a href="{{ link.url }}" style="color: inherit; text-decoration: none;" onmouseover="this.style.color='var(--kmh-gold)'" onmouseout="this.style.color='inherit'">{{ link.title }}</a></li>
-            {% endfor %}
-          {% else %}
-            <li><a href="/pages/contact" style="color: inherit; text-decoration: none;" onmouseover="this.style.color='var(--kmh-gold)'" onmouseout="this.style.color='inherit'">Contact Us</a></li>
-            <li><a href="/pages/faq" style="color: inherit; text-decoration: none;" onmouseover="this.style.color='var(--kmh-gold)'" onmouseout="this.style.color='inherit'">FAQ</a></li>
-            <li><a href="/policies/shipping-policy" style="color: inherit; text-decoration: none;" onmouseover="this.style.color='var(--kmh-gold)'" onmouseout="this.style.color='inherit'">Shipping & Delivery</a></li>
-            <li><a href="/policies/refund-policy" style="color: inherit; text-decoration: none;" onmouseover="this.style.color='var(--kmh-gold)'" onmouseout="this.style.color='inherit'">Returns & Refunds</a></li>
-            <li><a href="/pages/order-tracking" style="color: inherit; text-decoration: none;" onmouseover="this.style.color='var(--kmh-gold)'" onmouseout="this.style.color='inherit'">Order Tracking</a></li>
-          {% endif %}
-        </ul>
+      <!-- Column 3: CUSTOMER CARE -->
+      <div class="kmh-footer__col kmh-footer__accordion">
+        <button class="kmh-footer__accordion-trigger" aria-expanded="false">
+          <span class="kmh-footer__col-heading">Customer Care</span>
+          <svg class="kmh-footer__accordion-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="kmh-footer__accordion-content">
+          <ul class="kmh-footer__link-list">
+            {% if section.settings.menu_support.links.size > 0 %}
+              {% for link in section.settings.menu_support.links %}
+                <li><a href="{{ link.url }}" class="kmh-footer__link">{{ link.title }}</a></li>
+              {% endfor %}
+            {% else %}
+              <li><a href="/pages/contact" class="kmh-footer__link">Contact Support</a></li>
+              <li><a href="/pages/order-tracking" class="kmh-footer__link">Track Your Order</a></li>
+              <li><a href="/policies/shipping-policy" class="kmh-footer__link">Shipping & Delivery Rates</a></li>
+              <li><a href="/policies/refund-policy" class="kmh-footer__link">Returns & Refunds Policy</a></li>
+              <li><a href="/pages/faq" class="kmh-footer__link">Frequently Asked Questions</a></li>
+              <li><a href="/pages/compatibility" class="kmh-footer__link">Mixer Fitment Verification</a></li>
+            {% endif %}
+          </ul>
+        </div>
       </div>
 
-      <!-- Group 3: COMPANY -->
-      <div>
-        <h4 style="font-family: var(--font-heading); color: #FFFFFF; margin-bottom: 1.2rem; font-size: 1.1rem; letter-spacing: 0.03em; border-left: 3px solid var(--kmh-gold); padding-left: 10px;">
-          Company
-        </h4>
-        <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; font-size: 0.88rem; color: #CBD5E1;">
-          <li><a href="/pages/about" style="color: inherit; text-decoration: none;" onmouseover="this.style.color='var(--kmh-gold)'" onmouseout="this.style.color='inherit'">About Us</a></li>
-          <li><a href="/pages/recipes" style="color: inherit; text-decoration: none;" onmouseover="this.style.color='var(--kmh-gold)'" onmouseout="this.style.color='inherit'">Recipes</a></li>
-          <li><a href="/blogs/news" style="color: inherit; text-decoration: none;" onmouseover="this.style.color='var(--kmh-gold)'" onmouseout="this.style.color='inherit'">Kitchen Tips</a></li>
-        </ul>
+      <!-- Column 4: DISCOVER & INSPIRATION -->
+      <div class="kmh-footer__col kmh-footer__accordion">
+        <button class="kmh-footer__accordion-trigger" aria-expanded="false">
+          <span class="kmh-footer__col-heading">Discover</span>
+          <svg class="kmh-footer__accordion-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="kmh-footer__accordion-content">
+          <ul class="kmh-footer__link-list">
+            <li><a href="/pages/about" class="kmh-footer__link">About KitchenMixHaven</a></li>
+            <li><a href="/pages/recipes" class="kmh-footer__link">Recipes & Kitchen Tips</a></li>
+            <li><a href="/pages/compare" class="kmh-footer__link">Appliance Comparison Matrix</a></li>
+            <li><a href="/pages/configurator" class="kmh-footer__link">Mixer Studio Configurator</a></li>
+            <li><a href="/blogs/news" class="kmh-footer__link">Culinary Articles & News</a></li>
+          </ul>
+        </div>
       </div>
 
-      <!-- Group 4: LEGAL -->
-      <div>
-        <h4 style="font-family: var(--font-heading); color: #FFFFFF; margin-bottom: 1.2rem; font-size: 1.1rem; letter-spacing: 0.03em; border-left: 3px solid var(--kmh-gold); padding-left: 10px;">
-          {{ section.settings.menu_legal.title | default: "Legal" }}
-        </h4>
-        <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; font-size: 0.88rem; color: #CBD5E1;">
-          {% if section.settings.menu_legal.links.size > 0 %}
-            {% for link in section.settings.menu_legal.links %}
-              <li><a href="{{ link.url }}" style="color: inherit; text-decoration: none;" onmouseover="this.style.color='var(--kmh-gold)'" onmouseout="this.style.color='inherit'">{{ link.title }}</a></li>
-            {% endfor %}
-          {% else %}
-            <li><a href="/policies/privacy-policy" style="color: inherit; text-decoration: none;" onmouseover="this.style.color='var(--kmh-gold)'" onmouseout="this.style.color='inherit'">Privacy Policy</a></li>
-            <li><a href="/policies/terms-of-service" style="color: inherit; text-decoration: none;" onmouseover="this.style.color='var(--kmh-gold)'" onmouseout="this.style.color='inherit'">Terms of Service</a></li>
-            <li><a href="/pages/warranty" style="color: inherit; text-decoration: none;" onmouseover="this.style.color='var(--kmh-gold)'" onmouseout="this.style.color='inherit'">Warranty Details</a></li>
-          {% endif %}
-        </ul>
+      <!-- Column 5: LEGAL & POLICIES -->
+      <div class="kmh-footer__col kmh-footer__accordion">
+        <button class="kmh-footer__accordion-trigger" aria-expanded="false">
+          <span class="kmh-footer__col-heading">Legal & Policies</span>
+          <svg class="kmh-footer__accordion-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="kmh-footer__accordion-content">
+          <ul class="kmh-footer__link-list">
+            {% if section.settings.menu_legal.links.size > 0 %}
+              {% for link in section.settings.menu_legal.links %}
+                <li><a href="{{ link.url }}" class="kmh-footer__link">{{ link.title }}</a></li>
+              {% endfor %}
+            {% else %}
+              <li><a href="/policies/privacy-policy" class="kmh-footer__link">Privacy Policy</a></li>
+              <li><a href="/policies/terms-of-service" class="kmh-footer__link">Terms of Service</a></li>
+              <li><a href="/policies/refund-policy" class="kmh-footer__link">Refund Policy</a></li>
+              <li><a href="/policies/shipping-policy" class="kmh-footer__link">Shipping Policy</a></li>
+              <li><a href="/pages/warranty" class="kmh-footer__link">Product Warranty Information</a></li>
+            {% endif %}
+          </ul>
+        </div>
       </div>
 
-    </div>
+    </nav>
 
-    <!-- Bottom Bar & Copyright -->
-    <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.5rem; font-size: 0.82rem; color: #94A3B8;">
-      <div>
-        &copy; {{ 'now' | date: "%Y" }} <strong>KitchenMixHaven</strong>. All Rights Reserved.
+    <!-- 4. Bottom Meta, Payment Badges & Copyright Strip -->
+    <div class="kmh-footer__bottom">
+      
+      <div class="kmh-footer__copyright-group">
+        <p class="kmh-footer__copyright">
+          &copy; {{ 'now' | date: "%Y" }} <strong>KitchenMixHaven</strong>. All Rights Reserved.
+        </p>
+        <p class="kmh-footer__disclaimer">
+          All brand names, trademarks, and registered trademarks mentioned are the property of their respective owners.
+        </p>
       </div>
 
-      <!-- Accepted Payment Badges -->
-      <div style="display: flex; align-items: center; gap: 10px; font-size: 0.75rem; color: #64748B;">
-        <span style="background: rgba(255,255,255,0.08); padding: 4px 8px; border-radius: 4px; color: #CBD5E1; font-weight: 600;">VISA</span>
-        <span style="background: rgba(255,255,255,0.08); padding: 4px 8px; border-radius: 4px; color: #CBD5E1; font-weight: 600;">MC</span>
-        <span style="background: rgba(255,255,255,0.08); padding: 4px 8px; border-radius: 4px; color: #CBD5E1; font-weight: 600;">AMEX</span>
-        <span style="background: rgba(255,255,255,0.08); padding: 4px 8px; border-radius: 4px; color: #CBD5E1; font-weight: 600;">APPLE PAY</span>
-        <span style="background: rgba(255,255,255,0.08); padding: 4px 8px; border-radius: 4px; color: #CBD5E1; font-weight: 600;">SHOP PAY</span>
-      </div>
+      {% if section.settings.show_payment_icons %}
+        <!-- Payment Methods Vector Strip -->
+        <div class="kmh-footer__payments" aria-label="Accepted Payment Methods">
+          <span class="kmh-footer__payments-label">Payment Methods:</span>
+          <div class="kmh-footer__payment-icons">
+            
+            <!-- VISA -->
+            <span class="kmh-footer__payment-card" title="Visa">
+              <svg width="38" height="24" viewBox="0 0 38 24" fill="none" role="img" aria-label="Visa">
+                <rect width="38" height="24" rx="4" fill="#1A1F71"/>
+                <path d="M15.4 16.5H13.2L14.6 7.5H16.8L15.4 16.5ZM21.2 7.7C20.8 7.5 20.1 7.4 19.3 7.4C17.2 7.4 15.7 8.5 15.7 10.1C15.7 11.3 16.8 11.9 17.6 12.3C18.4 12.7 18.7 13 18.7 13.4C18.7 14 18 14.5 17.2 14.5C16.4 14.5 15.8 14.3 15.2 14L14.9 13.9L14.6 15.8C15.2 16.1 16.3 16.3 17.4 16.3C19.7 16.3 21.1 15.2 21.1 13.4C21.1 12 20.2 11.2 19.1 10.7C18.4 10.3 18 10.1 18 9.7C18 9.3 18.4 8.9 19.3 8.9C20 8.9 20.5 9 20.9 9.2L21.2 7.7ZM26.4 7.5H24.7C24.2 7.5 23.8 7.7 23.6 8.2L20.2 16.5H22.5L23 15.2H25.8L26 16.5H28L26.4 7.5ZM23.6 13.5L24.7 10.4C24.7 10.4 24.9 9.8 25.1 9.3L25.3 10.4L25.6 13.5H23.6ZM11.6 7.5L9.5 13.7L9.3 12.6C8.9 11.2 7.7 9.7 6.4 9L8.3 16.5H10.6L14 7.5H11.6Z" fill="#FFFFFF"/>
+                <path d="M7.7 7.5H4.2L4.1 7.7C6.8 8.4 8.6 10.2 9.3 12.6L8.5 8.3C8.4 7.8 8 7.5 7.7 7.5Z" fill="#F7B600"/>
+              </svg>
+            </span>
+
+            <!-- Mastercard -->
+            <span class="kmh-footer__payment-card" title="Mastercard">
+              <svg width="38" height="24" viewBox="0 0 38 24" fill="none" role="img" aria-label="Mastercard">
+                <rect width="38" height="24" rx="4" fill="#0A0A0A"/>
+                <circle cx="15" cy="12" r="7" fill="#EB001B"/>
+                <circle cx="23" cy="12" r="7" fill="#F79E1B"/>
+                <path d="M19 6.8a6.96 6.96 0 0 1 2.6 5.2A6.96 6.96 0 0 1 19 17.2a6.96 6.96 0 0 1-2.6-5.2c0-2.1 1-4 2.6-5.2z" fill="#FF5F00"/>
+              </svg>
+            </span>
+
+            <!-- American Express -->
+            <span class="kmh-footer__payment-card" title="American Express">
+              <svg width="38" height="24" viewBox="0 0 38 24" fill="none" role="img" aria-label="American Express">
+                <rect width="38" height="24" rx="4" fill="#006FCF"/>
+                <path d="M6 14.5L7.5 11.5L6 8.5H8.2L9.2 10.7L10.2 8.5H12.4L10.9 11.5L12.4 14.5H10.2L9.2 12.3L8.2 14.5H6ZM13.2 14.5V8.5H18.2C19.2 8.5 19.8 9.1 19.8 10.1V12.9C19.8 13.9 19.2 14.5 18.2 14.5H13.2ZM14.8 13H17.8C18.2 13 18.4 12.8 18.4 12.4V10.6C18.4 10.2 18.2 10 17.8 10H14.8V13ZM20.8 14.5V8.5H23.8C24.8 8.5 25.4 9.1 25.4 10.1V12.9C25.4 13.9 24.8 14.5 23.8 14.5H20.8ZM22.4 13H23.8C24.2 13 24.4 12.8 24.4 12.4V10.6C24.4 10.2 24.2 10 23.8 10H22.4V13Z" fill="#FFFFFF"/>
+              </svg>
+            </span>
+
+            <!-- Discover -->
+            <span class="kmh-footer__payment-card" title="Discover">
+              <svg width="38" height="24" viewBox="0 0 38 24" fill="none" role="img" aria-label="Discover">
+                <rect width="38" height="24" rx="4" fill="#FFFFFF"/>
+                <path d="M5 14.2V9.8H7.2C8.7 9.8 9.6 10.7 9.6 12C9.6 13.3 8.7 14.2 7.2 14.2H5ZM6.2 13.2H7.2C8.1 13.2 8.6 12.7 8.6 12C8.6 11.3 8.1 10.8 7.2 10.8H6.2V13.2ZM10.8 14.2V9.8H12V14.2H10.8ZM13 13.4L13.6 12.7C14.1 13.2 14.8 13.4 15.5 13.4C16.1 13.4 16.4 13.2 16.4 12.9C16.4 12 14.2 12.3 14.2 10.8C14.2 10.1 14.8 9.7 15.6 9.7C16.4 9.7 17 10 17.5 10.4L16.9 11.1C16.5 10.8 16 10.6 15.6 10.6C15.1 10.6 14.8 10.8 14.8 11.1C14.8 11.9 17 11.7 17 13.1C17 13.8 16.4 14.3 15.5 14.3C14.5 14.3 13.7 13.9 13 13.4Z" fill="#111827"/>
+                <circle cx="21" cy="12" r="4.2" fill="#F47216"/>
+              </svg>
+            </span>
+
+            <!-- Apple Pay -->
+            <span class="kmh-footer__payment-card" title="Apple Pay">
+              <svg width="38" height="24" viewBox="0 0 38 24" fill="none" role="img" aria-label="Apple Pay">
+                <rect width="38" height="24" rx="4" fill="#FFFFFF"/>
+                <path d="M14.6 12.3c0-1.8 1.5-2.7 1.6-2.7-0.9-1.2-2.2-1.4-2.6-1.4-1.1-0.1-2.2 0.7-2.7 0.7-0.6 0-1.5-0.6-2.4-0.6-1.2 0-2.4 0.7-3 1.8-1.3 2.2-0.3 5.5 0.9 7.3 0.6 0.9 1.3 1.8 2.2 1.8 0.9 0 1.3-0.6 2.3-0.6 1.1 0 1.4 0.6 2.3 0.6 1 0 1.6-0.8 2.2-1.7 0.7-1 1-2 1-2.1-0.1 0-1.8-0.7-1.8-2.7z" fill="#000000"/>
+                <path d="M13.2 7.5c0.5-0.6 0.8-1.4 0.7-2.2-0.7 0-1.5 0.5-2 1.1-0.4 0.5-0.8 1.3-0.7 2.1 0.8 0.1 1.5-0.4 2-1z" fill="#000000"/>
+                <path d="M19 9.2h1.6v6.8H19V9.2zm3.8 2.3h1.4v1h-1.4v2.5c0 0.5 0.2 0.7 0.7 0.7h0.7v1h-1.1c-1.1 0-1.7-0.6-1.7-1.7v-2.5h-1v-1h1V10h1.4v1.5zm5.7 4.5h-1.4v-0.9c-0.4 0.6-1.1 1-1.8 1-1.3 0-2.2-1-2.2-2.4 0-1.5 1.1-2.4 2.6-2.4h1.4v-0.4c0-0.7-0.5-1.1-1.3-1.1-0.6 0-1.3 0.2-1.7 0.5v-1.1c0.5-0.3 1.3-0.5 2-0.5 1.7 0 2.4 0.9 2.4 2.2v4.7zm-1.4-2.8h-1.2c-0.8 0-1.3 0.4-1.3 1.1 0 0.7 0.5 1.1 1.2 1.1 0.8 0 1.3-0.5 1.3-1.2v-1z" fill="#000000"/>
+              </svg>
+            </span>
+
+            <!-- Google Pay -->
+            <span class="kmh-footer__payment-card" title="Google Pay">
+              <svg width="38" height="24" viewBox="0 0 38 24" fill="none" role="img" aria-label="Google Pay">
+                <rect width="38" height="24" rx="4" fill="#FFFFFF"/>
+                <path d="M14.5 11.2c0-.2 0-.4-.1-.6H9.5v1.8h2.8c-.1.7-.5 1.3-1.1 1.7v1.4h1.8c1.1-1 1.7-2.5 1.7-4.3z" fill="#4285F4"/>
+                <path d="M9.5 15.6c1.6 0 2.9-.5 3.9-1.4l-1.8-1.4c-.5.4-1.2.6-2.1.6-1.6 0-2.9-1.1-3.4-2.6H4.2v1.5c1 2 3.1 3.3 5.3 3.3z" fill="#34A853"/>
+                <path d="M6.1 10.8c-.1-.4-.2-.8-.2-1.3s.1-.9.2-1.3V6.7H4.2C3.8 7.5 3.5 8.5 3.5 9.5s.3 2 0.7 2.8l1.9-1.5z" fill="#FBBC04"/>
+                <path d="M9.5 5.9c.9 0 1.6.3 2.2.9l1.6-1.6C12.4 4.3 11.1 3.7 9.5 3.7c-2.2 0-4.3 1.3-5.3 3.3l1.9 1.5c.5-1.5 1.8-2.6 3.4-2.6z" fill="#EA4335"/>
+                <path d="M18.8 8.5h-1.5v6.5h1.5V8.5zm5.5 2.1c-.2-.6-.7-1-1.4-1-.8 0-1.5.7-1.5 1.6 0 1 .7 1.7 1.6 1.7.5 0 1-.3 1.3-.7v.7c0 .9-.5 1.4-1.4 1.4-.7 0-1.1-.5-1.3-.9l-1.3.5c.4.9 1.4 1.7 2.6 1.7 1.6 0 2.9-1 2.9-2.9V9.7h-1.5v.9zm-1.3 2.1c-.5 0-.9-.4-.9-1 0-.6.4-1 .9-1 .5 0 .9.4.9 1 0 .6-.4 1-.9 1zm4.8-4.2h-3.6v6.5h1.5v-2.4h2.1c1.7 0 2.9-1.1 2.9-2.1 0-1-.9-2-2.9-2zm0 2.8h-2.1v-1.5h2.1c.9 0 1.4.3 1.4.7 0 .5-.5.8-1.4.8z" fill="#5F6368"/>
+              </svg>
+            </span>
+
+            <!-- Shop Pay -->
+            <span class="kmh-footer__payment-card" title="Shop Pay">
+              <svg width="38" height="24" viewBox="0 0 38 24" fill="none" role="img" aria-label="Shop Pay">
+                <rect width="38" height="24" rx="4" fill="#5A31F4"/>
+                <path d="M10.2 14.5c.3.5.8.8 1.4.8.8 0 1.3-.4 1.3-1.1 0-1.2-2.6-.8-2.6-2.8 0-1.1.9-1.9 2.2-1.9.9 0 1.5.3 1.9.8l-.6.7c-.3-.3-.7-.5-1.3-.5-.7 0-1.1.4-1.1.9 0 1.2 2.6.8 2.6 2.8 0 1.1-.9 2-2.4 2-.9 0-1.8-.4-2.2-1l.8-.8zm5.2-6.5h1.1v3.2c.4-.5 1-.8 1.7-.8 1.4 0 2.3 1.1 2.3 2.7 0 1.6-.9 2.7-2.3 2.7-.7 0-1.3-.3-1.7-.8v2.2h-1.1V8zm2.6 6.9c.9 0 1.5-.7 1.5-1.8s-.6-1.8-1.5-1.8-1.5.7-1.5 1.8.6 1.8 1.5 1.8zm6.4-3.5c-.8 0-1.5.7-1.5 1.8 0 1.1.7 1.8 1.5 1.8.9 0 1.5-.7 1.5-1.8 0-1.1-.6-1.8-1.5-1.8zm0-1c1.5 0 2.6 1.1 2.6 2.8s-1.1 2.8-2.6 2.8-2.6-1.1-2.6-2.8 1.1-2.8 2.6-2.8zm5.4 6.7v-4.5h1v.8c.4-.6 1-.9 1.7-.9 1.4 0 2.3 1.1 2.3 2.7 0 1.6-.9 2.7-2.3 2.7-.7 0-1.3-.3-1.7-.8v2h-1zm2.6-1.3c.9 0 1.5-.7 1.5-1.8s-.6-1.8-1.5-1.8-1.5.7-1.5 1.8.6 1.8 1.5 1.8z" fill="#FFFFFF"/>
+              </svg>
+            </span>
+
+            <!-- PayPal -->
+            <span class="kmh-footer__payment-card" title="PayPal">
+              <svg width="38" height="24" viewBox="0 0 38 24" fill="none" role="img" aria-label="PayPal">
+                <rect width="38" height="24" rx="4" fill="#003087"/>
+                <path d="M14.6 7h4.8c2.2 0 3.7 1.1 3.4 3.2-.3 2.3-2 3.6-4.2 3.6h-1.7l-.9 5.2h-2.3l2.2-12zm3.8 5c1.2 0 2-.7 2.2-1.8.2-1.1-.4-1.6-1.6-1.6h-2.3l-.6 3.4h2.3z" fill="#0079C1"/>
+                <path d="M12.6 9h4.8c2.2 0 3.7 1.1 3.4 3.2-.3 2.3-2 3.6-4.2 3.6h-1.7l-.9 5.2h-2.3l2.2-12zm3.8 5c1.2 0 2-.7 2.2-1.8.2-1.1-.4-1.6-1.6-1.6h-2.3l-.6 3.4h2.3z" fill="#00457C"/>
+                <path d="M14.6 9h4.8c2.2 0 3.7 1.1 3.4 3.2-.3 2.3-2 3.6-4.2 3.6h-1.7l-.9 5.2h-2.3l2.2-12zm3.8 5c1.2 0 2-.7 2.2-1.8.2-1.1-.4-1.6-1.6-1.6h-2.3l-.6 3.4h2.3z" fill="#0079C1"/>
+              </svg>
+            </span>
+
+          </div>
+        </div>
+      {% endif %}
+
     </div>
 
   </div>
 </footer>
+
+<style>
+  /* ==========================================================================
+     KitchenMixHaven - Proper Ecommerce Storefront Footer Styles
+     ========================================================================== */
+  .kmh-footer {
+    background: linear-gradient(180deg, #0B132B 0%, #060A17 100%);
+    color: #F8FAFC;
+    padding-top: 4.5rem;
+    padding-bottom: 2.5rem;
+    margin-top: 5rem;
+    border-top: 1px solid rgba(212, 175, 55, 0.28);
+    position: relative;
+    overflow: hidden;
+    font-family: var(--font-body);
+  }
+
+  .kmh-footer__ambient-glow {
+    position: absolute;
+    top: -120px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 700px;
+    height: 250px;
+    background: radial-gradient(ellipse at center, rgba(212, 175, 55, 0.12) 0%, rgba(11, 19, 43, 0) 70%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* 1. Trust & Reassurance Strip */
+  .kmh-footer__trust-strip {
+    position: relative;
+    z-index: 2;
+    padding-bottom: 3.5rem;
+    margin-bottom: 3.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .kmh-footer__trust-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+
+  .kmh-footer__trust-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.1rem;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 1.3rem;
+    border-radius: var(--radius-card);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: var(--kmh-transition);
+  }
+
+  .kmh-footer__trust-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(212, 175, 55, 0.35);
+    transform: translateY(-2px);
+  }
+
+  .kmh-footer__trust-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: rgba(212, 175, 55, 0.12);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    color: var(--kmh-gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .kmh-footer__trust-title {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin: 0 0 0.3rem 0;
+    line-height: 1.3;
+  }
+
+  .kmh-footer__trust-desc {
+    font-size: 0.82rem;
+    color: #94A3B8;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* 2. Newsletter Signup Card */
+  .kmh-footer__newsletter-card {
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+    border: 1px solid rgba(212, 175, 55, 0.22);
+    border-radius: var(--radius-card);
+    padding: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 4rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .kmh-footer__newsletter-inner {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .kmh-footer__newsletter-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background: rgba(212, 175, 55, 0.15);
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    color: var(--kmh-gold);
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.8rem;
+  }
+
+  .kmh-footer__newsletter-heading {
+    font-family: var(--font-heading);
+    font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+    color: #FFFFFF;
+    margin: 0 0 0.6rem 0;
+    line-height: 1.2;
+  }
+
+  .kmh-footer__newsletter-subtext {
+    color: #CBD5E1;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .kmh-footer__input-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 0.6rem;
+  }
+
+  .kmh-footer__input {
+    flex: 1;
+    padding: 0.85rem 1.2rem;
+    border-radius: var(--radius-button);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.07);
+    color: #FFFFFF;
+    font-size: 0.9rem;
+    outline: none;
+    transition: var(--kmh-transition);
+  }
+
+  .kmh-footer__input:focus {
+    border-color: var(--kmh-gold);
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+  }
+
+  .kmh-footer__submit-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0.85rem 1.6rem;
+    background: var(--kmh-gold);
+    color: #0F172A;
+    border: 1px solid var(--kmh-gold);
+    border-radius: var(--radius-button);
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--kmh-transition);
+    white-space: nowrap;
+  }
+
+  .kmh-footer__submit-btn:hover {
+    background: #E5C358;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(212, 175, 55, 0.35);
+  }
+
+  .kmh-footer__privacy-note {
+    font-size: 0.78rem;
+    color: #94A3B8;
+    display: block;
+  }
+
+  .kmh-footer__form-success {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(22, 163, 74, 0.15);
+    border: 1px solid rgba(22, 163, 74, 0.35);
+    color: #4ADE80;
+    padding: 1rem 1.2rem;
+    border-radius: var(--radius-button);
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .kmh-footer__form-error {
+    color: #F87171;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* 3. Navigation Grid */
+  .kmh-footer__nav-grid {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1.5fr repeat(4, 1fr);
+    gap: 2.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .kmh-footer__brand-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1.2rem;
+    text-decoration: none;
+  }
+
+  .kmh-footer__logo-img {
+    height: 40px;
+    width: 40px;
+    border-radius: 8px;
+    border: 1.5px solid var(--kmh-gold);
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.25);
+    object-fit: cover;
+  }
+
+  .kmh-footer__logo-text {
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    color: #FFFFFF;
+  }
+
+  .kmh-footer__logo-accent {
+    color: var(--kmh-gold);
+  }
+
+  .kmh-footer__brand-desc {
+    color: #94A3B8;
+    font-size: 0.88rem;
+    line-height: 1.7;
+    margin: 0 0 1.5rem 0;
+    max-width: 320px;
+  }
+
+  .kmh-footer__contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.85rem;
+    color: #CBD5E1;
+  }
+
+  .kmh-footer__contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .kmh-footer__contact-link {
+    color: #CBD5E1;
+    text-decoration: none;
+    transition: var(--kmh-transition);
+  }
+
+  .kmh-footer__contact-link:hover {
+    color: var(--kmh-gold);
+    text-decoration: underline;
+  }
+
+  .kmh-footer__social-links {
+    display: flex;
+    gap: 10px;
+  }
+
+  .kmh-footer__social-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--kmh-gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: var(--kmh-transition);
+  }
+
+  .kmh-footer__social-btn:hover {
+    background: var(--kmh-gold);
+    color: #0F172A;
+    border-color: var(--kmh-gold);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+  }
+
+  /* Navigation Columns */
+  .kmh-footer__col-heading {
+    font-family: var(--font-heading);
+    color: #FFFFFF;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    margin-bottom: 1.3rem;
+    display: inline-block;
+    position: relative;
+    padding-bottom: 6px;
+  }
+
+  .kmh-footer__col-heading::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 24px;
+    height: 2px;
+    background: var(--kmh-gold);
+    border-radius: 2px;
+  }
+
+  .kmh-footer__accordion-trigger {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    width: 100%;
+    cursor: default;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .kmh-footer__accordion-icon {
+    display: none; /* Only visible on mobile */
+  }
+
+  .kmh-footer__link-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    font-size: 0.88rem;
+  }
+
+  .kmh-footer__link {
+    color: #94A3B8;
+    text-decoration: none;
+    display: inline-block;
+    transition: var(--kmh-transition);
+  }
+
+  .kmh-footer__link:hover {
+    color: var(--kmh-gold);
+    transform: translateX(3px);
+  }
+
+  /* 4. Bottom Meta, Payments & Copyright */
+  .kmh-footer__bottom {
+    position: relative;
+    z-index: 2;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    font-size: 0.82rem;
+    color: #94A3B8;
+  }
+
+  .kmh-footer__copyright-group {
+    max-width: 520px;
+  }
+
+  .kmh-footer__copyright {
+    margin: 0 0 0.35rem 0;
+    color: #CBD5E1;
+  }
+
+  .kmh-footer__copyright strong {
+    color: #FFFFFF;
+  }
+
+  .kmh-footer__disclaimer {
+    margin: 0;
+    font-size: 0.76rem;
+    color: #64748B;
+    line-height: 1.5;
+  }
+
+  .kmh-footer__payments {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .kmh-footer__payments-label {
+    font-size: 0.76rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #64748B;
+    font-weight: 600;
+  }
+
+  .kmh-footer__payment-icons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .kmh-footer__payment-card {
+    display: inline-flex;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: var(--kmh-transition);
+  }
+
+  .kmh-footer__payment-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
+  }
+
+  /* ==========================================================================
+     Responsive Breakpoints
+     ========================================================================== */
+  @media (max-width: 1024px) {
+    .kmh-footer__trust-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+    }
+
+    .kmh-footer__newsletter-inner {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .kmh-footer__nav-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .kmh-footer__col--brand {
+      grid-column: span 3;
+      margin-bottom: 1rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .kmh-footer {
+      padding-top: 3.5rem;
+      margin-top: 3.5rem;
+    }
+
+    .kmh-footer__trust-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .kmh-footer__nav-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-bottom: 2.5rem;
+    }
+
+    .kmh-footer__col--brand {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    /* Accordion Behavior on Mobile */
+    .kmh-footer__accordion {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .kmh-footer__accordion-trigger {
+      cursor: pointer;
+      padding: 1.2rem 0;
+    }
+
+    .kmh-footer__accordion-trigger .kmh-footer__col-heading {
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .kmh-footer__accordion-trigger .kmh-footer__col-heading::after {
+      display: none;
+    }
+
+    .kmh-footer__accordion-icon {
+      display: block;
+      color: var(--kmh-gold);
+      transition: transform 0.3s ease;
+    }
+
+    .kmh-footer__accordion.is-open .kmh-footer__accordion-icon {
+      transform: rotate(180deg);
+    }
+
+    .kmh-footer__accordion-content {
+      display: none;
+      padding-bottom: 1.2rem;
+    }
+
+    .kmh-footer__accordion.is-open .kmh-footer__accordion-content {
+      display: block;
+    }
+
+    .kmh-footer__bottom {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.5rem;
+    }
+
+    .kmh-footer__input-row {
+      flex-direction: column;
+    }
+
+    .kmh-footer__submit-btn {
+      width: 100%;
+    }
+  }
+</style>
+
+<script>
+  // Mobile accordion functionality for footer columns
+  document.addEventListener('DOMContentLoaded', function() {
+    var triggers = document.querySelectorAll('.kmh-footer__accordion-trigger');
+    
+    triggers.forEach(function(trigger) {
+      trigger.addEventListener('click', function() {
+        if (window.innerWidth <= 768) {
+          var parent = this.closest('.kmh-footer__accordion');
+          var isExpanded = this.getAttribute('aria-expanded') === 'true';
+          
+          this.setAttribute('aria-expanded', !isExpanded);
+          parent.classList.toggle('is-open');
+        }
+      });
+    });
+
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 768) {
+        triggers.forEach(function(trigger) {
+          trigger.setAttribute('aria-expanded', 'false');
+          var parent = trigger.closest('.kmh-footer__accordion');
+          if (parent) {
+            parent.classList.remove('is-open');
+          }
+        });
+      }
+    });
+  });
+</script>
 
 {% schema %}
 {
   "name": "Footer",
   "settings": [
     {
+      "type": "header",
+      "content": "Trust & Reassurance Strip"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trust_bar",
+      "label": "Show Trust Bar",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "trust_1_title",
+      "label": "Benefit 1 Heading",
+      "default": "Free Shipping on Orders $150+"
+    },
+    {
+      "type": "text",
+      "id": "trust_1_desc",
+      "label": "Benefit 1 Description",
+      "default": "Fast, reliable dispatch on all continental US orders."
+    },
+    {
+      "type": "text",
+      "id": "trust_2_title",
+      "label": "Benefit 2 Heading",
+      "default": "100% Secure Checkout"
+    },
+    {
+      "type": "text",
+      "id": "trust_2_desc",
+      "label": "Benefit 2 Description",
+      "default": "Bank-grade 256-bit encrypted SSL payment processing."
+    },
+    {
+      "type": "text",
+      "id": "trust_3_title",
+      "label": "Benefit 3 Heading",
+      "default": "30-Day Easy Returns"
+    },
+    {
+      "type": "text",
+      "id": "trust_3_desc",
+      "label": "Benefit 3 Description",
+      "default": "Straightforward, stress-free return and exchange policy."
+    },
+    {
+      "type": "text",
+      "id": "trust_4_title",
+      "label": "Benefit 4 Heading",
+      "default": "Dedicated Customer Care"
+    },
+    {
+      "type": "text",
+      "id": "trust_4_desc",
+      "label": "Benefit 4 Description",
+      "default": "Expert product advice & order support ready to help."
+    },
+    {
+      "type": "header",
+      "content": "Newsletter Signup"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_newsletter",
+      "label": "Show Newsletter Signup",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "label": "Newsletter Heading",
+      "default": "Join the KitchenMixHaven Community"
+    },
+    {
+      "type": "textarea",
+      "id": "newsletter_subtext",
+      "label": "Newsletter Subtext",
+      "default": "Receive seasonal recipes, baking techniques, appliance guides, and new product announcements straight to your inbox."
+    },
+    {
+      "type": "header",
+      "content": "Navigation Menus"
+    },
+    {
       "type": "link_list",
       "id": "menu_categories",
-      "label": "Categories Menu",
+      "label": "Shop / Categories Menu",
       "default": "footer"
     },
     {
@@ -181,34 +1081,41 @@
       "id": "menu_legal",
       "label": "Legal & Policies Menu",
       "default": "footer"
-    }
-  ],
-  "blocks": [
+    },
     {
-      "type": "link_list",
-      "name": "Menu Column",
-      "settings": [
-        {
-          "type": "text",
-          "id": "heading",
-          "label": "Heading",
-          "default": "Quick Links"
-        },
-        {
-          "type": "link_list",
-          "id": "menu",
-          "label": "Menu",
-          "default": "footer"
-        }
-      ]
+      "type": "header",
+      "content": "Social Media Links"
+    },
+    {
+      "type": "url",
+      "id": "social_instagram",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "social_facebook",
+      "label": "Facebook URL"
+    },
+    {
+      "type": "url",
+      "id": "social_pinterest",
+      "label": "Pinterest URL"
+    },
+    {
+      "type": "url",
+      "id": "social_youtube",
+      "label": "YouTube URL"
+    },
+    {
+      "type": "header",
+      "content": "Payment Badges"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Show Payment Method Icons",
+      "default": true
     }
-  ],
-  "default": {
-    "blocks": [
-      {
-        "type": "link_list"
-      }
-    ]
-  }
+  ]
 }
 {% endschema %}

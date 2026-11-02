@@ -9,35 +9,27 @@
  */
 {
   "type": "footer",
-  "name": "t:general.footer",
+  "name": "Footer",
   "sections": {
     "footer": {
       "type": "footer",
-      "blocks": {
-        "link_list_9TRxyM": {
-          "type": "link_list",
-          "settings": {
-            "heading": "Quick Links",
-            "menu": "main-menu"
-          }
-        },
-        "link_list_4d9cXz": {
-          "type": "link_list",
-          "settings": {
-            "heading": "Quick Links",
-            "menu": "footer"
-          }
-        }
-      },
-      "block_order": [
-        "link_list_9TRxyM",
-        "link_list_4d9cXz"
-      ],
-      "disabled": true,
       "settings": {
+        "show_trust_bar": true,
+        "trust_1_title": "Free Shipping on Orders $150+",
+        "trust_1_desc": "Fast, reliable dispatch on all continental US orders.",
+        "trust_2_title": "100% Secure Checkout",
+        "trust_2_desc": "Bank-grade 256-bit encrypted SSL payment processing.",
+        "trust_3_title": "30-Day Easy Returns",
+        "trust_3_desc": "Straightforward, stress-free return and exchange policy.",
+        "trust_4_title": "Dedicated Customer Care",
+        "trust_4_desc": "Expert product advice & order support ready to help.",
+        "show_newsletter": true,
+        "newsletter_heading": "Join the KitchenMixHaven Community",
+        "newsletter_subtext": "Receive seasonal recipes, baking techniques, appliance guides, and new product announcements straight to your inbox.",
         "menu_categories": "footer",
         "menu_support": "footer",
-        "menu_legal": "footer"
+        "menu_legal": "footer",
+        "show_payment_icons": true
       }
     }
   },
