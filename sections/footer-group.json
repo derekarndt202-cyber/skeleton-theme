@@ -27,8 +27,12 @@
         "newsletter_heading": "Join the KitchenMixHaven Community",
         "newsletter_subtext": "Receive seasonal recipes, baking techniques, appliance guides, and new product announcements straight to your inbox.",
         "menu_categories": "footer",
-        "menu_support": "footer",
+        "menu_support": "main-menu",
         "menu_legal": "footer",
+        "social_instagram": "",
+        "social_facebook": "",
+        "social_pinterest": "",
+        "social_youtube": "",
         "show_payment_icons": true
       }
     }
